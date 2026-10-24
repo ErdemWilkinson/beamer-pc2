@@ -3141,7 +3141,7 @@ msgstr ""
 msgid "{status}. Beamer keeps trying to reconnect."
 msgstr ""
 
-#: mac_app/link_state.py
+#: mac_app/link_state.py win_app/launch_win.py
 #, python-brace-format
 msgid "From {name}"
 msgstr ""
@@ -4629,6 +4629,10 @@ msgid "Enter the passphrase again."
 msgstr ""
 
 #: win_app/kvm_bridge_win.py
+msgid "Beamer is not running, so nothing was sent. Start Beamer and try again."
+msgstr ""
+
+#: win_app/kvm_bridge_win.py
 msgid "With it off, closing the window quits Beamer. Open Beamer again to bring the window back."
 msgstr ""
 
@@ -4807,6 +4811,20 @@ msgstr ""
 #: win_app/kvm_bridge_win.py
 #, python-brace-format
 msgid "the change failed: {error}"
+msgstr ""
+
+#: win_app/launch_win.py win_app/send_win.py win_app/transfer_feature.py
+msgid "the other PC"
+msgstr ""
+
+#: win_app/launch_win.py
+#, python-brace-format
+msgid "Started for {name}"
+msgstr ""
+
+#: win_app/launch_win.py
+#, python-brace-format
+msgid "{items} (saved and shown, not opened)"
 msgstr ""
 
 #: win_app/machines_win.py
@@ -5238,6 +5256,74 @@ msgstr ""
 msgid "Beamer Portable"
 msgstr ""
 
+#: win_app/send_win.py
+#, python-brace-format
+msgid "Could not send to {name}: {error}"
+msgstr ""
+
+#: win_app/send_win.py
+msgid "No other PC to send to: pair one first, or choose one in transfer.json"
+msgstr ""
+
+#: win_app/send_win.py
+#, python-brace-format
+msgid "{name} does not let this PC drive it, so it takes nothing from it either"
+msgstr ""
+
+#: win_app/send_win.py
+#, python-brace-format
+msgid "{app} is not installed on {name}, or not in its allowed apps"
+msgstr ""
+
+#: win_app/send_win.py
+#, python-brace-format
+msgid "Too large for {name}'s limit (transfer.json, max_bytes)"
+msgstr ""
+
+#: win_app/send_win.py
+#, python-brace-format
+msgid "{name} does not have room for it"
+msgstr ""
+
+#: win_app/send_win.py
+#, python-brace-format
+msgid "{name} is not taking transfers"
+msgstr ""
+
+#: win_app/send_win.py
+msgid "Sending failed; see the log"
+msgstr ""
+
+#: win_app/send_win.py
+#, python-brace-format
+msgid "Starting {app} on {name}…"
+msgstr ""
+
+#: win_app/send_win.py
+#, python-brace-format
+msgid "Preparing {count} item(s) for {name}…"
+msgstr ""
+
+#: win_app/send_win.py
+#, python-brace-format
+msgid "Opened on {name}"
+msgstr ""
+
+#: win_app/send_win.py
+#, python-brace-format
+msgid "Sending to {name}: {sent} of {total}"
+msgstr ""
+
+#: win_app/send_win.py
+#, python-brace-format
+msgid "{name} could not start {app}"
+msgstr ""
+
+#: win_app/send_win.py
+#, python-brace-format
+msgid "{name} could not open what was sent"
+msgstr ""
+
 #: win_app/sender.py
 msgid "Not connected"
 msgstr ""
@@ -5289,6 +5375,38 @@ msgstr ""
 #: win_app/sender.py
 #, python-brace-format
 msgid "Cannot switch — the desktop did not let Beamer send input to {name}"
+msgstr ""
+
+#: win_app/transfer_feature.py
+msgid "Send files to the other PC…"
+msgstr ""
+
+#: win_app/transfer_feature.py
+msgid "Send a folder to the other PC…"
+msgstr ""
+
+#: win_app/transfer_feature.py
+msgid "Open received files"
+msgstr ""
+
+#: win_app/transfer_feature.py
+#, python-brace-format
+msgid "Drop to open on {name}"
+msgstr ""
+
+#: win_app/transfer_feature.py
+#, python-brace-format
+msgid "Open on {name}"
+msgstr ""
+
+#: win_app/transfer_feature.py
+#, python-brace-format
+msgid "Send to {name}"
+msgstr ""
+
+#: win_app/transfer_feature.py
+#, python-brace-format
+msgid "Another program is using port {port}: files cannot be sent to this PC"
 msgstr ""
 
 #: win_app/widgets.py

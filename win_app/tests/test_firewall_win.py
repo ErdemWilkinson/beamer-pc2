@@ -273,6 +273,7 @@ class RepairScriptTests(unittest.TestCase):
             name=firewall_win._quote(firewall_win.RULE_NAME), port=PORT,
             pairing_name=firewall_win._quote(firewall_win.PAIRING_RULE_NAME), pairing_port=firewall_win.PAIRING_PORT,
             pairing_tcp_name=firewall_win._quote(firewall_win.PAIRING_TCP_RULE_NAME),
+            transfer_name=firewall_win._quote(firewall_win.TRANSFER_RULE_NAME), transfer_port=firewall_win.TRANSFER_PORT,
             profiles="Private",
         )
         self.assertIn("-Profile Private ", rendered)
@@ -280,7 +281,8 @@ class RepairScriptTests(unittest.TestCase):
         self.assertIn(f"-Protocol TCP -LocalPort {PORT} ", rendered)
         self.assertIn(f"-Protocol UDP -LocalPort {firewall_win.PAIRING_PORT} ", rendered)
         self.assertIn(f"-DisplayName 'Beamer Pairing (TCP-In)' -Direction Inbound -Protocol TCP -LocalPort {firewall_win.PAIRING_PORT} ", rendered)
-        self.assertEqual(rendered.count("-Profile Private "), 3)
+        self.assertIn(f"-DisplayName 'Beamer Transfer (TCP-In)' -Direction Inbound -Protocol TCP -LocalPort {firewall_win.TRANSFER_PORT} ", rendered)
+        self.assertEqual(rendered.count("-Profile Private "), 4)
 
     def test_the_removal_never_runs_bare(self):
         # A bare Remove-NetFirewallRule deletes every rule on the machine.
@@ -289,6 +291,7 @@ class RepairScriptTests(unittest.TestCase):
             name=firewall_win._quote(firewall_win.RULE_NAME),
             pairing_name=firewall_win._quote(firewall_win.PAIRING_RULE_NAME),
             pairing_tcp_name=firewall_win._quote(firewall_win.PAIRING_TCP_RULE_NAME),
+            transfer_name=firewall_win._quote(firewall_win.TRANSFER_RULE_NAME),
         )
         self.assertNotIn("\nRemove-NetFirewallRule", rendered)
         self.assertIn("foreach ($rule in $stale)", rendered)
@@ -321,7 +324,7 @@ class RepairToleratesAbsentRulesTests(unittest.TestCase):
     def test_a_rule_already_gone_does_not_stop_the_new_rules_being_written(self):
         calls = self.run_repair(NOT_FOUND)
         self.assertEqual(sum("New-NetFirewallRule" in call for call in calls), 1)
-        self.assertEqual(calls[-1].count("New-NetFirewallRule"), 3)
+        self.assertEqual(calls[-1].count("New-NetFirewallRule"), 4)
 
     def test_any_other_removal_failure_still_fails_and_writes_nothing(self):
         calls = []
@@ -341,6 +344,7 @@ class RepairToleratesAbsentRulesTests(unittest.TestCase):
             name=firewall_win._quote(firewall_win.RULE_NAME),
             pairing_name=firewall_win._quote(firewall_win.PAIRING_RULE_NAME),
             pairing_tcp_name=firewall_win._quote(firewall_win.PAIRING_TCP_RULE_NAME),
+            transfer_name=firewall_win._quote(firewall_win.TRANSFER_RULE_NAME),
         )
         self.assertIn("Sort-Object Name -Unique", removal)
         self.assertIn("could not be found", removal)

@@ -106,6 +106,7 @@ from core.identify_screens import display_numbers
 from sender import OWN_PLATFORM, LinkSender
 from shake_stroke import shake_stroke
 import theme
+import transfer_feature
 import tray_glyph
 import tokens
 from core import updates
@@ -363,14 +364,17 @@ def _instance_server_name() -> str:
 
 
 def send_instance_activation(name: Optional[str] = None, activation_token: Optional[str] = None,
-                             timeout_ms: int = 2000) -> bool:
+                             timeout_ms: int = 2000, send: Optional[list] = None) -> bool:
+    """Wake the Beamer already running; with `send`, hand it those paths to send to the other PC
+    instead (Explorer's "Open on…", transfer_feature.py)."""
     name = name or _instance_server_name()
     deadline = time.monotonic() + timeout_ms / 1000
     while True:
         socket = QLocalSocket()
         socket.connectToServer(name)
         if socket.waitForConnected(100):
-            payload = json.dumps({"activation_token": activation_token or ""}).encode("utf-8") + b"\n"
+            request = {"send": list(send)} if send else {"activation_token": activation_token or ""}
+            payload = json.dumps(request).encode("utf-8") + b"\n"
             socket.write(payload)
             return socket.waitForBytesWritten(max(1, int((deadline - time.monotonic()) * 1000)))
         socket.abort()
@@ -380,10 +384,11 @@ def send_instance_activation(name: Optional[str] = None, activation_token: Optio
 
 
 class InstanceSignal(QObject):
-    def __init__(self, activate, name: Optional[str] = None, parent=None):
+    def __init__(self, activate, name: Optional[str] = None, parent=None, send=None):
         super().__init__(parent)
         self.name = name or _instance_server_name()
         self.activate = activate
+        self.send = send
         QLocalServer.removeServer(self.name)
         self.server = QLocalServer(self)
         self.server.setSocketOptions(QLocalServer.SocketOption.UserAccessOption)
@@ -397,12 +402,21 @@ class InstanceSignal(QObject):
 
     def _read(self, connection) -> None:
         if not connection.canReadLine():
+            # A request is one line of a few kilobytes; anything that never ends is dropped.
+            if connection.bytesAvailable() > 1024 * 1024:
+                connection.abort()
             return
         try:
             request = json.loads(bytes(connection.readLine()).decode("utf-8"))
         except (UnicodeDecodeError, json.JSONDecodeError):
             request = {}
-        self.activate(request.get("activation_token") or None)
+        if not isinstance(request, dict):
+            request = {}
+        paths = request.get("send")
+        if isinstance(paths, list) and self.send is not None:
+            self.send([path for path in paths if isinstance(path, str)])
+        else:
+            self.activate(request.get("activation_token") or None)
         connection.disconnectFromServer()
 
     def close(self) -> None:
@@ -699,6 +713,9 @@ class WindowsApplication(QWidget):
         self.server.edges_held = lambda: self.sender.edges_held
         self.sender.on_alert = self.bridge.alert.emit
         self.bridge.alert.connect(self._on_alert)
+        # Files and apps sent to the other PC and opened there (this fork's own, transfer_feature.py).
+        self.transfer = transfer_feature.TransferFeature(
+            self, button_down=lambda: getattr(platform_parts.desktop, "button_down", lambda _name: False)("left"))
         hook_callbacks = (self._on_hook_key, self._on_hook_mouse, self.sender.on_motion)
         if sys.platform.startswith("win"):
             self.hooks = capture_win.Hooks(*hook_callbacks, on_seam=self.sender.seam_clip_position)
@@ -1963,7 +1980,7 @@ class WindowsApplication(QWidget):
             "platform": OWN_PLATFORM,
             "app": VERSION[:32] if VERSION.isascii() and VERSION.isprintable() else "dev",
             # A swipe has no shortcut every Linux desktop shares, so Linux does not offer gestures.
-            "caps": [cap for cap in ("clipboard", "clipboard_image", "gestures", "media_keys", "text", "settings", "design_sync", "layout", "profiles", "displays", "identify_screens", "ping_rtt", "motion_path")
+            "caps": [cap for cap in ("clipboard", "clipboard_image", "gestures", "media_keys", "text", "settings", "design_sync", "layout", "profiles", "displays", "identify_screens", "ping_rtt", "motion_path", "xfer1")
                      if not (cap == "gestures" and OWN_PLATFORM == "linux")],
             "port": self._settings_port,
         }
@@ -4993,6 +5010,7 @@ class WindowsApplication(QWidget):
         menu.addSeparator()
         self.open_action = menu.addAction(tr("Settings…"))
         self.open_action.triggered.connect(lambda _checked=False: self.show_window())
+        self.transfer.add_to_tray(menu, self.open_action)
         menu.addAction(tr("Reload configuration")).triggered.connect(self.reload_config)
         menu.addAction(tr("Open log folder")).triggered.connect(self.open_log_folder)
         menu.addSeparator()
@@ -5140,6 +5158,9 @@ class WindowsApplication(QWidget):
         if self._config is not None and self._paired:
             self._start_receiver(self._config)
             self._start_sending(self._config)
+            transfers = getattr(self, "transfer", None)
+            if transfers is not None:
+                transfers.start()
             # Wayland's remote control session, opened now so the desktop asks while someone is at
             # this machine; the clipboard rides on it.
             start_injector = getattr(platform_parts.injector, "start", None)
@@ -5452,6 +5473,7 @@ class WindowsApplication(QWidget):
             self.pairing.cancel_nearby()
             self.pairing.stop()
         self.server.stop()
+        self.transfer.stop()
         self._stop_sending()
         shortcut = getattr(self, "global_shortcut", None)
         if shortcut is not None:
@@ -5752,6 +5774,8 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--hidden", action="store_true", help="start in the tray without showing the window")
     parser.add_argument("--relaunched", action="store_true", help=argparse.SUPPRESS)
     parser.add_argument("--identify-x11", help=argparse.SUPPRESS)
+    # Explorer's "Open on…" (transfer_feature.py): hand these to the running Beamer to send.
+    parser.add_argument(transfer_feature.SEND_ARGUMENT, nargs="+", dest="send_to_peer", metavar="PATH", help=argparse.SUPPRESS)
     return parser.parse_args()
 
 
@@ -5912,6 +5936,15 @@ def main() -> None:
         prepare_windows_startup()
     except OSError:
         LOGGER.exception("Could not migrate the previous Windows sign-in task; keeping it for another attempt")
+    if getattr(arguments, "send_to_peer", None):
+        # Never a second Beamer: only the running one holds the pairing and the link.
+        paths = [str(Path(path).resolve()) for path in arguments.send_to_peer]
+        if send_instance_activation(send=paths):
+            return
+        # Started by Explorer under pythonw or a windowed exe: no console, no log yet, so say it.
+        if sys.platform == "win32":
+            ctypes.windll.user32.MessageBoxW(None, tr("Beamer is not running, so nothing was sent. Start Beamer and try again."), "Beamer", 0x40)
+        return
     release = _claim_instance()
     if release is None and arguments.relaunched:
         release = _claim_instance_waiting(RELAUNCH_WAIT_SECONDS, claim=_claim_instance)
@@ -5960,7 +5993,8 @@ def main() -> None:
         application._input_controller_release = controller_release
         controller_release = None
         quit_signals = quit_signals_module.QuitSignals(application.quit, parent=app)
-        instance_signal = InstanceSignal(application.show_window, parent=app)
+        transfers = getattr(application, "transfer", None)
+        instance_signal = InstanceSignal(application.show_window, parent=app, send=transfers.send if transfers is not None else None)
         if not instance_signal.listening:
             LOGGER.warning("Could not start the second-launch listener: %s", instance_signal.server.errorString())
         if not arguments.hidden or not application.tray_shown():
@@ -6032,10 +6066,12 @@ def cleanup_for_uninstall() -> int:
     except OSError as exc:
         LOGGER.warning("Could not remove the legacy logon task: %s", exc)
         failed = True
+    transfer_feature.unregister_shell_menu()
     for rule in (
         "Beamer Receiver (TCP-In)",
         "Beamer Pairing (UDP-In)",
         "Beamer Pairing (TCP-In)",
+        "Beamer Transfer (TCP-In)",
     ):
         try:
             result = autostart_win._run(

@@ -9,6 +9,10 @@
 </p>
 <p align="center">Made by Toby George Read Kalkman, <a href="https://kalkmancode.co.uk">Kalkman Code</a>.</p>
 
+> **This is a fork.** It adds sending files, folders and app launches to the other PC, opened
+> there on its own hardware: drag onto the crossing edge, or right-click → "Open on …".
+> See [docs/PC2-AKTARIM.md](docs/PC2-AKTARIM.md) (Turkish). Everything else is upstream Beamer.
+
 ![The pointer is pushed against the right-hand edge of a Mac's screen, the edge lights up as the push builds, and the pointer carries on onto the Windows PC beside it at the same height](assets/beamer-crossing.gif)
 
 Push the pointer off the edge of the screen and it carries on onto the other machine, the way it

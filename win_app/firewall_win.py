@@ -15,7 +15,7 @@ import subprocess
 import sys
 from typing import Iterable, Optional, Sequence
 
-from core import protocol, windows_tools
+from core import protocol, transfer, windows_tools
 from core.i18n import tr
 
 LOGGER = logging.getLogger(__name__)
@@ -32,6 +32,10 @@ PAIRING_PORT = protocol.PAIRING_PORT
 # Pairing version 3 also hosts the pairing exchange over TCP on the same number while a code is
 # on screen. Judged on its own: without it another machine still finds this PC, then fails to finish pairing.
 PAIRING_TCP_RULE_NAME = "Beamer Pairing (TCP-In)"
+# Files and launches sent to this PC (core/transfer.py). Written by repair() with the others but not
+# judged by status(): without it everything but sending to this PC works.
+TRANSFER_RULE_NAME = "Beamer Transfer (TCP-In)"
+TRANSFER_PORT = transfer.TRANSFER_PORT
 _IS_WINDOWS = sys.platform == "win32"
 
 
@@ -302,6 +306,7 @@ $stale = @($({filters}) | Get-NetFirewallRule | Where-Object {{ [string]$_.Direc
 $stale += @(Get-NetFirewallRule -DisplayName {name} -ErrorAction SilentlyContinue)
 $stale += @(Get-NetFirewallRule -DisplayName {pairing_name} -ErrorAction SilentlyContinue)
 $stale += @(Get-NetFirewallRule -DisplayName {pairing_tcp_name} -ErrorAction SilentlyContinue)
+$stale += @(Get-NetFirewallRule -DisplayName {transfer_name} -ErrorAction SilentlyContinue)
 $stale = @($stale | Sort-Object Name -Unique)
 foreach ($rule in $stale) {{
     try {{ Remove-NetFirewallRule -Name $rule.Name }}
@@ -314,6 +319,7 @@ $exe = {exe}
 New-NetFirewallRule -DisplayName {name} -Direction Inbound -Protocol TCP -LocalPort {port} -Action Allow -Profile {profiles} -Program $exe | Out-Null
 New-NetFirewallRule -DisplayName {pairing_name} -Direction Inbound -Protocol UDP -LocalPort {pairing_port} -Action Allow -Profile {profiles} -Program $exe | Out-Null
 New-NetFirewallRule -DisplayName {pairing_tcp_name} -Direction Inbound -Protocol TCP -LocalPort {pairing_port} -Action Allow -Profile {profiles} -Program $exe | Out-Null
+New-NetFirewallRule -DisplayName {transfer_name} -Direction Inbound -Protocol TCP -LocalPort {transfer_port} -Action Allow -Profile {profiles} -Program $exe | Out-Null
 """
 
 _TRUST_SCRIPT = _PREAMBLE + """
@@ -353,6 +359,7 @@ def repair(exe: str, port: int, profiles: Sequence[str] = ("Private",)) -> None:
         name=_quote(RULE_NAME),
         pairing_name=_quote(PAIRING_RULE_NAME),
         pairing_tcp_name=_quote(PAIRING_TCP_RULE_NAME),
+        transfer_name=_quote(TRANSFER_RULE_NAME),
     )
     try:
         _powershell(_REMOVE_SCRIPT.format(filters=_RULES_FOR_LEAF, **names))
@@ -362,7 +369,7 @@ def repair(exe: str, port: int, profiles: Sequence[str] = ("Private",)) -> None:
         if "could not be found" not in str(exc):
             raise
         LOGGER.info("A firewall rule was already gone while repairing: %s", exc)
-    _powershell(_ADD_SCRIPT.format(port=int(port), pairing_port=PAIRING_PORT, profiles=",".join(wanted), **names))
+    _powershell(_ADD_SCRIPT.format(port=int(port), pairing_port=PAIRING_PORT, transfer_port=TRANSFER_PORT, profiles=",".join(wanted), **names))
 
 
 def trust_network(interface_indexes: Sequence[int]) -> None:

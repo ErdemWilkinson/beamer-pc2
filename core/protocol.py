@@ -550,17 +550,18 @@ def link_ikm(token: str, shared: bytes) -> bytes:
     return token.encode("ascii") + bytes(shared)
 
 
-def link_info(key_id_: bytes, prefix_i: bytes, prefix_r: bytes, share_i: bytes, share_r: bytes, direction: int) -> bytes:
-    """111 bytes: label, version, key id, both prefixes and both shares in role order, direction."""
+def link_info(key_id_: bytes, prefix_i: bytes, prefix_r: bytes, share_i: bytes, share_r: bytes, direction: int, label: bytes = KEY_INFO) -> bytes:
+    """111 bytes: label, version, key id, both prefixes and both shares in role order, direction.
+    `label` separates another channel's keys (core/transfer.py) from the link's."""
     parts = ((key_id_, KEY_ID_SIZE), (prefix_i, NONCE_PREFIX_SIZE), (prefix_r, NONCE_PREFIX_SIZE), (share_i, SHARE_SIZE), (share_r, SHARE_SIZE))
     if any(len(part) != size for part, size in parts) or direction not in (1, 2):
         raise ValueError("link_info takes fixed-size parts and a direction of 1 or 2")
-    return KEY_INFO + bytes([LINK_VERSION]) + b"".join(bytes(part) for part, _ in parts) + bytes([direction])
+    return label + bytes([LINK_VERSION]) + b"".join(bytes(part) for part, _ in parts) + bytes([direction])
 
 
-def link_key(token, shared, key_id, prefix_i, prefix_r, share_i, share_r, direction) -> bytes:
+def link_key(token, shared, key_id, prefix_i, prefix_r, share_i, share_r, direction, label: bytes = KEY_INFO) -> bytes:
     """The key for one direction of one link (WIRE.md section 2, the keys)."""
-    return hkdf_sha256(link_ikm(token, shared), LINK_SALT, link_info(key_id, prefix_i, prefix_r, share_i, share_r, direction))
+    return hkdf_sha256(link_ikm(token, shared), LINK_SALT, link_info(key_id, prefix_i, prefix_r, share_i, share_r, direction, label))
 
 
 def _x25519_shared(secret: bytes, share: bytes) -> bytes:
@@ -701,10 +702,11 @@ class LinkSession:
     write too, so counters are never reused and frames reach the wire in counter order; `open` is
     expected to run on a single reader thread per link."""
 
-    def __init__(self, token: str, role: str, prefix: bytes = None, secret: bytes = None):
+    def __init__(self, token: str, role: str, prefix: bytes = None, secret: bytes = None, label: bytes = KEY_INFO):
         if role not in _DIRECTION:
             raise ValueError(f"role must be {ROLE_INITIATOR!r} or {ROLE_RESPONDER!r}")
         self._token = token
+        self._label = bytes(label)
         self.prefix = os.urandom(NONCE_PREFIX_SIZE) if prefix is None else bytes(prefix)
         if len(self.prefix) != NONCE_PREFIX_SIZE:
             raise ValueError("nonce prefix must be 8 bytes")
@@ -750,8 +752,8 @@ class LinkSession:
             order = (peer_prefix, self.prefix, peer_share, self.share)
         sending = _DIRECTION[self.role]
         with self.send_lock:
-            self._send_key = link_key(self._token, shared, self.key_id, *order, sending)
-        self._recv_key = link_key(self._token, shared, self.key_id, *order, 3 - sending)
+            self._send_key = link_key(self._token, shared, self.key_id, *order, sending, self._label)
+        self._recv_key = link_key(self._token, shared, self.key_id, *order, 3 - sending, self._label)
         self.peer_share = peer_share
         self.peer_prefix = peer_prefix
 

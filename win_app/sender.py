@@ -191,6 +191,8 @@ class LinkSender:
         self._accepts: dict = {}        # peer id: whether it lets this PC drive it
         self._sent_names: dict = {}     # (peer, physical key): the name its press went out under
         self._buttons_held = set()
+        # Told when a drag pushes at an edge with a way out (_report_drag); None leaves drags alone.
+        self.drag_at_edge = None
         self._shake_detector = None
         self._shake_callback = None
         self._home_hold = None
@@ -830,6 +832,7 @@ class LinkSender:
             # as the Mac drops it, so letting go at the edge does not finish a crossing.
             for _peer, model in self._models:
                 model.reset()
+            self._report_drag(dx, dy)
             return
         try:
             desktop = self._desktop_module()
@@ -869,6 +872,24 @@ class LinkSender:
             # border, read from the other end. The display it leads to lands the pointer there, as
             # the Mac's own crossing does.
             self._go(target, outcome.edge, offset, outcome.display, outcome.side)
+
+    def _report_drag(self, dx, dy) -> None:
+        """A drag pushing at an edge that has a way out: tell `drag_at_edge(peer, edge, pointer)`,
+        so what is being dragged can be dropped there and sent (transfer_feature.py)."""
+        hook = self.drag_at_edge
+        if hook is None:
+            return
+        try:
+            bounds = return_edge.union(self._cached_monitors())
+            x, y = self._desktop_module().cursor_position()
+        except Exception:
+            return
+        pushing = {"left": dx < 0 and x <= bounds.x, "right": dx > 0 and x >= bounds.right,
+                   "top": dy < 0 and y <= bounds.y, "bottom": dy > 0 and y >= bounds.bottom}
+        for peer, model in list(self._models):
+            if pushing.get(model.edge):
+                hook(peer, model.edge, (x, y))
+                return
 
     def zone_models(self) -> list:
         """The models of this PC's ways out, where a desktop that captures input at barriers puts
