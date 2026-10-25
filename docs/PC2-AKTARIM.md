@@ -55,6 +55,8 @@ Bunun bedeli var, bilerek seçin:
 
 Geri almak için aynı komutu `'0'` ile çalıştırın, ardından kurulum komutunu bir kez çalıştırın.
 
+PC2'yi ana PC'nin gerçek ikinci ekranı yapacak **Uzat modu** için plan: [UZAT-MODU.md](UZAT-MODU.md).
+
 ## Nasıl kullanılır
 
 İki bilgisayara da bu fork kurulur ve normal Beamer gibi eşleştirilir (6 haneli kod). Sonra:
