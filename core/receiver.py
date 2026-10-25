@@ -1111,6 +1111,11 @@ class LinkResponder:
                         self._inject_timed_locked(link, read)
                 else:
                     samples = read.get("samples")
+                    if not samples and self.smoother is not None and read["type"] == protocol.MSG_MOUSEMOVE:
+                        # Only merged moves carry a path; a single move is a path of one, so it is
+                        # smoothed too (most moves are single while the link keeps up).
+                        read = dict(read, samples=[[read["dx"], read["dy"]]])
+                        samples = read["samples"]
                     if samples:
                         self._apply_motion_path_locked(link, read, after)
                     else:
@@ -1152,18 +1157,24 @@ class LinkResponder:
                     and (screen.y + radius_y < y < screen.bottom - radius_y if radius_y else screen.y <= y <= screen.bottom))
 
         safe = any(inside(screen) for screen in monitors)
+        why = "smoothed" if safe else "wall"
         if any(kind == "button" for kind, _name in link.held):
             # A straight axis-aligned drag retains the old fast path; bends and reversals
             # must reach the application as individual movements, even away from walls.
             safe = safe and (
                 all(dy == 0 and (dx == 0 or dx * read["dx"] > 0) for dx, dy in read["samples"])
                 or all(dx == 0 and (dy == 0 or dy * read["dy"] > 0) for dx, dy in read["samples"]))
+            why = why if safe or why != "smoothed" else "drag"
         for _peer, model in self._armed:
             if model.display:
                 screen = display_map.get(model.display) if isinstance(display_map, dict) else None
                 safe = safe and isinstance(screen, crossing.Rect) and inside(screen)
+                why = why if safe or why != "smoothed" else "edge display"
             if safe and model._at_edge(monitors, pointer, display_map):
                 safe = False
+                why = "at edge"
+        if smoother is not None:
+            smoother.note(why)
         if not safe and smoother is not None and smoother.pending() != (0, 0):
             # Near a wall or an edge every move is exact again: show the glide, read the pointer.
             smoother.flush()

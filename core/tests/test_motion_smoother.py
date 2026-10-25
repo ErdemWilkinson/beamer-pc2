@@ -152,6 +152,15 @@ class ReceiverSmoothingTests(unittest.TestCase):
         self.assertEqual([], self.moves(machine))
         self.assertEqual((5, 1), smooth.pending())
 
+    def test_a_single_move_is_smoothed_too(self):
+        # Only merged moves carry a path; while the link keeps up most moves are single ones, and
+        # leaving them out left most of the motion jumping (PC2's log, 26-10-2026).
+        machine, link, smooth = self.owner()
+        self.assertIsNotNone(link.acked(link.move(4, -2)))
+        self.assertEqual([], self.moves(machine))
+        self.assertEqual((4, -2), smooth.pending())
+        self.assertEqual({"smoothed": 1}, smooth._reasons)
+
     def test_a_click_lands_where_the_pointer_would_have_been(self):
         machine, link, smooth = self.owner()
         self.assertIsNotNone(link.acked(self.path(link, (3, 0), (2, 1))))

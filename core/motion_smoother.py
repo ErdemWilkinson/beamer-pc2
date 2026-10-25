@@ -92,6 +92,7 @@ class MotionSmoother:
         self._suspect = None                   # a gap while moving: a stall if its motion follows
         self._last_step = None
         self._stats = {"arrivals": 0, "steps": 0, "dry": 0, "longest_step": 0.0, "longest_stall": 0.0}
+        self._reasons = {}
         self._stats_at = None
 
     @property
@@ -126,6 +127,11 @@ class MotionSmoother:
             self._x += dx
             self._y += dy
         self._wake.set()
+
+    def note(self, why: str) -> None:
+        """What the receiver did with a motion message: "smoothed", or why it went straight in."""
+        with self._lock:
+            self._reasons[why] = self._reasons.get(why, 0) + 1
 
     def pending(self) -> Tuple[int, int]:
         """The whole pixels arrived but not yet moved."""
@@ -256,9 +262,11 @@ class MotionSmoother:
         if now - self._stats_at < STATS_EVERY:
             return
         with self._lock:
-            stats, self._stats_at = dict(self._stats), now
+            stats, reasons, self._stats_at = dict(self._stats), self._reasons, now
             self._stats.update(arrivals=0, steps=0, dry=0, longest_step=0.0, longest_stall=0.0)
-        if stats["steps"]:
+            self._reasons = {}
+        if stats["steps"] or reasons:
             LOGGER.info("Smoothed motion: %d arrivals (longest stall %.0f ms), %d steps (longest %.1f ms), "
-                        "%d dry, delay %.0f ms", stats["arrivals"], stats["longest_stall"] * 1000, stats["steps"],
-                        stats["longest_step"] * 1000, stats["dry"], self._delay * 1000)
+                        "%d dry, delay %.0f ms; messages: %s", stats["arrivals"], stats["longest_stall"] * 1000,
+                        stats["steps"], stats["longest_step"] * 1000, stats["dry"], self._delay * 1000,
+                        ", ".join(f"{why} {count}" for why, count in sorted(reasons.items())) or "none")
