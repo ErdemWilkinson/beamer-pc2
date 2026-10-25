@@ -402,7 +402,7 @@ class TransferFeature(QObject):
     def open_inbox(self):
         inbox = self.settings().inbox_path()
         os.makedirs(inbox, exist_ok=True)
-        os.startfile(inbox)
+        launch_win._startfile(inbox)
 
     def add_to_tray(self, menu, before):
         """The tray's transfer actions, inserted above `before`."""
@@ -520,7 +520,7 @@ class TransferFeature(QObject):
         for path in files:
             try:
                 if os.path.isdir(path) or not launch_win.runs_code(path):
-                    os.startfile(path)
+                    launch_win._startfile(path)
                 else:
                     # Never run code because another machine asked: show it, the user decides.
                     launch_win._spawn([launch_win.explorer_exe(), "/select,", path])

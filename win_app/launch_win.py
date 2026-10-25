@@ -10,6 +10,7 @@ The settings live in transfer.json beside settings.json, apart from the link's s
 update never has to know about them.
 """
 
+import ctypes
 import json
 import logging
 import os
@@ -204,16 +205,41 @@ def editor_exe(settings, find=find_app):
 
 # What the receiver does
 
+def is_elevated():
+    """Whether Beamer runs with administrator rights, as pc2-hizlandir.ps1 can arrange."""
+    if sys.platform != "win32":
+        return False
+    try:
+        return bool(ctypes.windll.shell32.IsUserAnAdmin())
+    except (AttributeError, OSError):
+        return False
+
+
+def deelevated(argv, elevated=None):
+    """`argv` as it should be started for another machine: unchanged normally, and through runas'
+    basic-user trust level when Beamer has administrator rights, so nothing a peer starts gets them."""
+    if not (is_elevated() if elevated is None else elevated):
+        return list(argv)
+    runas = os.path.join(os.environ.get("SystemRoot") or r"C:\Windows", "System32", "runas.exe")
+    # runas takes the program and its arguments as one command line. Every path is quoted (Windows
+    # paths hold no quotes, and Explorer would split an unquoted one at a comma); switches are not.
+    return [runas, "/trustlevel:0x20000", " ".join(part if part.startswith("/") else f'"{part}"' for part in argv)]
+
+
 def _spawn(argv):
     """Start `argv` detached from Beamer, so closing Beamer leaves it running."""
     flags = 0
     if sys.platform == "win32":
         flags = subprocess.DETACHED_PROCESS | subprocess.CREATE_NEW_PROCESS_GROUP
-    subprocess.Popen(argv, close_fds=True, creationflags=flags, stdin=subprocess.DEVNULL, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+    subprocess.Popen(deelevated(argv), close_fds=True, creationflags=flags, stdin=subprocess.DEVNULL, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
 
 
 def _startfile(path):
-    # The associated app, as a double-click would choose.
+    # The associated app, as a double-click would choose. With administrator rights, Explorer
+    # (itself started without them) opens it, so the app does not inherit them.
+    if is_elevated():
+        _spawn([explorer_exe(), path])
+        return
     os.startfile(path)
 
 

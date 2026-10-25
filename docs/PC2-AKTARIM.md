@@ -36,9 +36,24 @@ irm https://raw.githubusercontent.com/ErdemWilkinson/beamer-pc2/main/pc2-hizland
 
 - **Wi-Fi güç tasarrufunu kapatır.** Uyuklayan Wi-Fi kartı mouse hareketlerini onlarca milisaniyede bir
   toplu teslim eder ve imleç 20-30 fps gibi görünür.
-- **Beamer'ı oturum açılışında yönetici yetkisiyle başlatır.** Windows normal bir programın girdisini
-  yönetici pencerelerine (Görev Yöneticisi gibi) iletmez, bu yüzden imleç onların üstünde donar. Bedeli:
-  eşleşmiş PC o pencereleri de yönetebilir. UAC onay ekranı ve oturum açma ekranı yine erişilemez kalır.
+
+**İsteğe bağlı: Görev Yöneticisi gibi yönetici pencereleri.** Windows, normal bir programın girdisini
+yönetici pencerelerine iletmez; bu yüzden imleç onların üstünde donar. Beamer'ı oturum açılışında
+yönetici yetkisiyle başlatmak için:
+
+```powershell
+$env:BEAMER_YONETICI='1'; irm https://raw.githubusercontent.com/ErdemWilkinson/beamer-pc2/main/pc2-hizlandir.ps1 | iex
+```
+
+Bunun bedeli var, bilerek seçin:
+- **UAC zayıflar.** Beamer'ın kodu ve Python, bu kullanıcının yazabildiği klasörlerde duruyor. Bu
+  kullanıcı olarak çalışan herhangi bir program onları değiştirip yönetici yetkisini onay sormadan alabilir.
+- **Eşleşmiş PC yönetici pencerelerini de yönetebilir.** UAC onay ekranı ve oturum açma ekranı yine
+  erişilemez kalır.
+- Diğer PC'nin isteğiyle açılan dosya ve uygulamalar yönetici yetkisini **almaz**. Beamer onları
+  `runas /trustlevel:0x20000` ve Explorer üzerinden normal kullanıcı yetkisiyle başlatır.
+
+Geri almak için aynı komutu `'0'` ile çalıştırın, ardından kurulum komutunu bir kez çalıştırın.
 
 ## Nasıl kullanılır
 

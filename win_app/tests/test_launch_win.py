@@ -183,5 +183,21 @@ class SettingsTests(unittest.TestCase):
         self.assertEqual(launch_win.load_settings(self.config), settings)
 
 
+class DeelevatedTests(unittest.TestCase):
+    """With administrator rights (pc2-hizlandir.ps1), nothing a peer starts may inherit them."""
+
+    def test_a_normal_beamer_starts_things_as_they_are(self):
+        self.assertEqual(["C:/Code/Code.exe", "C:/In box/proj"],
+                         launch_win.deelevated(["C:/Code/Code.exe", "C:/In box/proj"], elevated=False))
+
+    def test_an_elevated_beamer_goes_through_runas_basic_user(self):
+        argv = launch_win.deelevated([r"C:\Windows\explorer.exe", "/select,", r"C:\In box\a,b.txt"], elevated=True)
+        self.assertTrue(argv[0].lower().endswith(r"system32\runas.exe"))
+        self.assertEqual("/trustlevel:0x20000", argv[1])
+        # Paths quoted, so a space or Explorer's comma cannot split them; the switch left bare.
+        self.assertEqual(r'"C:\Windows\explorer.exe" /select, "C:\In box\a,b.txt"', argv[2])
+        self.assertEqual(3, len(argv))
+
+
 if __name__ == "__main__":
     unittest.main()

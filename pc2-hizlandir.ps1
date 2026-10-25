@@ -4,20 +4,26 @@
 #
 # 1. Wi-Fi power saving off in the current power plan (on battery too). A dozing adapter delivers
 #    the mouse in bursts every few tens of milliseconds, which reads as a pointer at 20-30 fps.
-# 2. Beamer started at sign-in with administrator rights, by two scheduled tasks: "Beamer PC2"
-#    (sign-in, tray only) and "Beamer PC2 (Ac)" (the Desktop and Start menu shortcuts, opens the
-#    window). Windows lets a normal program's input reach only normal windows, so without this the
-#    pointer stops over Task Manager and other administrator windows. The cost: a paired machine
-#    can then drive those windows too. The secure desktop (UAC prompts, sign-in) stays out of reach.
+# 2. Only with $env:BEAMER_YONETICI = '1' set first: Beamer started at sign-in with administrator
+#    rights, by two scheduled tasks: "Beamer PC2" (sign-in, tray only) and "Beamer PC2 (Ac)" (the
+#    Desktop and Start menu shortcuts, opens the window). Windows lets a normal program's input reach
+#    only normal windows, so without this the pointer stops over Task Manager and other administrator
+#    windows. Opt-in, because it weakens UAC: the code and the Python the tasks run live in folders
+#    this user can write, so anything running as this user could change them and be started with
+#    administrator rights without a prompt. A paired machine can also drive administrator windows.
+#    $env:BEAMER_YONETICI = '0' removes the tasks again.
 #
 # Asks for administrator rights once. ASCII only, so it runs the same through iex or as a file.
 & {
     $ErrorActionPreference = 'Stop'
     $Url = 'https://raw.githubusercontent.com/ErdemWilkinson/beamer-pc2/main/pc2-hizlandir.ps1'
+    $Choice = [string]$env:BEAMER_YONETICI
     $principal = [Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()
     if (-not $principal.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) {
         Write-Host '==> Yonetici izni isteniyor...' -ForegroundColor Cyan
-        Start-Process powershell.exe -Verb RunAs -ArgumentList "-NoProfile -ExecutionPolicy Bypass -Command `"irm $Url | iex`""
+        # An elevated process does not inherit this window's variables: the choice goes along explicitly.
+        $carry = if ($Choice -in @('0', '1')) { "`$env:BEAMER_YONETICI='$Choice'; " } else { '' }
+        Start-Process powershell.exe -Verb RunAs -ArgumentList "-NoProfile -ExecutionPolicy Bypass -Command `"$carry irm $Url | iex`""
         return
     }
 
@@ -35,6 +41,22 @@
         powercfg /setacvalueindex SCHEME_CURRENT $wifi $saving 0
         powercfg /setdcvalueindex SCHEME_CURRENT $wifi $saving 0
         powercfg /setactive SCHEME_CURRENT
+
+        if ($Choice -eq '0') {
+            Say 'Yonetici gorevleri kaldiriliyor'
+            foreach ($task in @('Beamer PC2', 'Beamer PC2 (Ac)')) {
+                Unregister-ScheduledTask -TaskName $task -Confirm:$false -ErrorAction SilentlyContinue
+            }
+            Write-Host 'Tamam. Normal kisayollar icin kurulum komutunu (kur.ps1) bir kez calistirin.' -ForegroundColor Green
+            return
+        }
+        if ($Choice -ne '1') {
+            Write-Host ''
+            Write-Host 'Tamam: Wi-Fi artik uyuklamiyor.' -ForegroundColor Green
+            Write-Host 'Gorev Yoneticisi gibi yonetici pencerelerinde de mouse icin (UAC korumasini zayiflatir, bkz. docs\PC2-AKTARIM.md):'
+            Write-Host "  `$env:BEAMER_YONETICI='1'; irm $Url | iex"
+            return
+        }
 
         Say 'Beamer yonetici yetkisiyle baslayacak sekilde ayarlaniyor'
         $user = "$env:USERDOMAIN\$env:USERNAME"
