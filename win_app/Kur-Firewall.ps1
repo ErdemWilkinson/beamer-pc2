@@ -5,9 +5,17 @@ param([Parameter(Mandatory = $true)][string]$Exe)
 
 $ErrorActionPreference = 'Stop'
 try {
-    # Beamer Herkese Açık ağlarda bilerek kural açmaz; ev Wi-Fi'ı Özel olmalı.
-    Get-NetConnectionProfile | Where-Object { $_.NetworkCategory -eq 'Public' } |
-        Set-NetConnectionProfile -NetworkCategory Private
+    # Beamer Herkese Açık ağlarda bilerek kural açmaz; ev Wi-Fi'ı Özel olmalı. Bir ağı Özel yapmak
+    # onu güvenilir saymaktır, bu yüzden her ağ için ayrı ayrı sorulur, hiçbiri kendiliğinden değişmez.
+    foreach ($network in @(Get-NetConnectionProfile | Where-Object { $_.NetworkCategory -eq 'Public' })) {
+        $answer = Read-Host "'$($network.Name)' ağı Herkese Açık. Bu sizin ev/güvendiğiniz ağınız mı, Özel yapılsın mı? (E/H)"
+        if ($answer -match '^[EeYy]') {
+            $network | Set-NetConnectionProfile -NetworkCategory Private
+            Write-Host "'$($network.Name)' Özel yapıldı." -ForegroundColor Green
+        } else {
+            Write-Host "'$($network.Name)' Herkese Açık kaldı; Beamer bu ağda iki PC'yi bağlayamaz." -ForegroundColor Yellow
+        }
+    }
 
     $rules = @(
         @{ Name = 'Beamer Receiver (TCP-In)'; Protocol = 'TCP'; Port = 24820 },

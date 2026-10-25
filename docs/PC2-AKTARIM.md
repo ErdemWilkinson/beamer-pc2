@@ -21,7 +21,8 @@ irm https://raw.githubusercontent.com/ErdemWilkinson/beamer-pc2/main/kur.ps1 | i
 `kur.ps1` sırasıyla şunları yapar:
 1. Python 3.11 ve Git yoksa `winget` ile kurar.
 2. Repoyu `%USERPROFILE%\beamer-pc2` klasörüne indirir (zaten varsa günceller) ve bağımlılıkları kurar.
-3. Güvenlik duvarı kurallarını yazar ve Wi-Fi'ı Özel ağ yapar. Bu adım bir kez yönetici izni ister.
+3. Güvenlik duvarı kurallarını yazar (bir kez yönetici izni ister). Bağlı ağ Herkese Açık ise Özel
+   yapılıp yapılmayacağını sorar: sadece evinizin ya da güvendiğiniz ağ için "E" deyin.
 4. Masaüstü, Başlat menüsü ve oturum açılışı için kısayol ekler, sonra Beamer'ı başlatır.
 
 Güncellemek için aynı komutu tekrar çalıştırmanız yeterli.
