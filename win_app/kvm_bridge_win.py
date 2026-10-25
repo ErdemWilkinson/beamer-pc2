@@ -106,6 +106,7 @@ from core.identify_screens import display_numbers
 from sender import OWN_PLATFORM, LinkSender
 from shake_stroke import shake_stroke
 import fork_update_win
+import memory_trim_win
 import theme
 import transfer_feature
 import tray_glyph
@@ -718,8 +719,12 @@ class WindowsApplication(QWidget):
         self.sender.on_alert = self.bridge.alert.emit
         self.bridge.alert.connect(self._on_alert)
         # Files and apps sent to the other PC and opened there (this fork's own, transfer_feature.py).
+        # The hook's own record of the button, not Windows': while input is on another machine the
+        # hook swallows this PC's mouse, so Windows never hears the button let go.
         self.transfer = transfer_feature.TransferFeature(
-            self, button_down=lambda: getattr(platform_parts.desktop, "button_down", lambda _name: False)("left"))
+            self, button_down=lambda: "left" in self.sender._buttons_held)
+        self.memory_trim = memory_trim_win.Trimmer(
+            self, lambda: not self.isVisible() and not getattr(self.sender._owner, "away", False))
         hook_callbacks = (self._on_hook_key, self._on_hook_mouse, self.sender.on_motion)
         if sys.platform.startswith("win"):
             self.hooks = capture_win.Hooks(*hook_callbacks, on_seam=self.sender.seam_clip_position)

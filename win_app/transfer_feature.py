@@ -453,6 +453,7 @@ class TransferFeature(QObject):
             more_files, apps = send_win.plan([path])
             files.extend(more_files)
             launches.extend((path, app) for app in apps)
+        LOGGER.info("Carrying a drag across the %s edge: %d file(s), %d app(s)", edge, len(files), len(launches))
         for original, app in launches:
             # The other PC's own copy if it has one, else this PC's: cross only when it opened there.
             self.outbox.launch_there_or_here(
@@ -496,6 +497,7 @@ class TransferFeature(QObject):
         self._release_timer.stop()
         job, target_id = self._outgoing
         self._outgoing = None
+        LOGGER.info("Carried drag let go%s; telling the other PC", " (timed out)" if timed_out else "")
         self.outbox.send_notice(transfer.KIND_RELEASE, job, target_id)
 
     # Carrying a drag: the receiving side
@@ -544,6 +546,8 @@ class TransferFeature(QObject):
         job = offer["job"]
         driven = bool(getattr(self._app.server, "driven", False))
         if job in self._released or not driven or self._dragging is not None:
+            LOGGER.info("Carried files arrived but the drag cannot go on (let go already: %s, driven: %s, "
+                        "busy: %s); opening them instead", job in self._released, driven, self._dragging is not None)
             self._released.discard(job)
             self._open_fallback(entry, folder, offer)
             return
@@ -569,16 +573,19 @@ class TransferFeature(QObject):
         drag = QDrag(self)
         drag.setMimeData(mime)
         drag.setPixmap(_drag_pixmap(", ".join(offer["roots"])))
+        LOGGER.info("Carried drag goes on here with %d item(s)", len(paths))
         try:
             # Runs until the button is let go: by the release from the other PC, or the timeout.
             action = drag.exec(Qt.DropAction.CopyAction | Qt.DropAction.LinkAction, Qt.DropAction.CopyAction)
         finally:
             self._let_go(job)
+        LOGGER.info("Carried drag ended: %s", action.name)
         if action == Qt.DropAction.IgnoreAction:
             # Dropped where nothing takes files: open them, as a plain send would.
             self._open_fallback(entry, folder, offer)
 
     def _on_carry_released(self, job):
+        LOGGER.info("The other PC let go of the carried drag%s", "" if self._dragging == job else " before it began here")
         if self._dragging == job:
             self._let_go(job)
         else:
@@ -598,7 +605,10 @@ class TransferFeature(QObject):
             self._app.tray.setToolTip(text)
             return
         self._app.tray.setToolTip(self._app._drive_status())
+        if kind == "failed":
+            LOGGER.warning("Transfer failed: %s", text)
         if kind == "carried":
+            LOGGER.info("Carried files reached the other PC")
             return
         self._app._on_alert("Beamer", text)
         if kind == "done" and self.settings().follow:
