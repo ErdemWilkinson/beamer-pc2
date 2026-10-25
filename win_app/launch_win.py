@@ -89,6 +89,9 @@ class TransferSettings:
     # A drag that reaches the strip carries on over there, dropped wherever the button is let go
     # on the other PC; off, the strip is a drop target and what is dropped on it opens over there.
     carry: bool = True
+    # Pointer motion from the PC driving this one glides out instead of jumping in the bursts a
+    # jittery Wi-Fi link delivers (core/motion_smoother.py). Read at start.
+    smooth: bool = True
     # The machine sends go to, by id; the only paired one when unset.
     target: str = ""
 

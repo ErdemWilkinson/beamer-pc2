@@ -106,7 +106,9 @@ from core.identify_screens import display_numbers
 from sender import OWN_PLATFORM, LinkSender
 from shake_stroke import shake_stroke
 import fork_update_win
+import launch_win
 import memory_trim_win
+from core import motion_smoother
 import theme
 import transfer_feature
 import tray_glyph
@@ -667,6 +669,11 @@ class WindowsApplication(QWidget):
             desktop=platform_parts.desktop,
             injector=platform_parts.injector,
         )
+        if sys.platform == "win32" and launch_win.load_settings(config_path).smooth:
+            self.server.smoother = motion_smoother.MotionSmoother(
+                lambda dx, dy: platform_parts.injector.inject_mouse_move(dx, dy),
+                active=lambda: self.server.owner is not None)
+            self.server.smoother.start()
         # The links outwards: this PC's keyboard and mouse on its peers.
         self.sender = LinkSender(
             self.book,

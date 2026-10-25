@@ -550,6 +550,9 @@ class LinkResponder:
         self._identity = identity
         self._status_callback = status_callback
         self._injector = injector
+        # A core.motion_smoother.MotionSmoother the app may set: free-space motion glides out
+        # through it instead of jumping in the bursts a jittery link delivers.
+        self.smoother = None
         self._desktop = desktop
         self._clipboard = clipboard
         self._unlock = unlock
@@ -1111,6 +1114,8 @@ class LinkResponder:
                     if samples:
                         self._apply_motion_path_locked(link, read, after)
                     else:
+                        if self.smoother is not None:
+                            self.smoother.flush()
                         self._apply_input_locked(link, read, after)
         except Exception:
             LOGGER.exception("Input from %s could not be injected", link.name)
@@ -1124,6 +1129,11 @@ class LinkResponder:
     def _apply_motion_path_locked(self, link, read, after):
         desktop = self._desktop_module()
         pointer, monitors = desktop.cursor_position(), desktop.monitors()
+        smoother = self.smoother
+        if smoother is not None:
+            # Where the pointer will be once what is still gliding has been shown.
+            pending_x, pending_y = smoother.pending()
+            pointer = (pointer[0] + pending_x, pointer[1] + pending_y)
         display_map = getattr(desktop, "display_map", lambda: {})()
         geometry = (monitors, pointer, display_map)
         scale = max(1.0, self.input_scale.pointer if self.input_scale is not None else 1.0)
@@ -1154,6 +1164,11 @@ class LinkResponder:
                 safe = safe and isinstance(screen, crossing.Rect) and inside(screen)
             if safe and model._at_edge(monitors, pointer, display_map):
                 safe = False
+        if not safe and smoother is not None and smoother.pending() != (0, 0):
+            # Near a wall or an edge every move is exact again: show the glide, read the pointer.
+            smoother.flush()
+            pointer = desktop.cursor_position()
+            geometry = (monitors, pointer, display_map)
         if not safe and len(read["samples"]) > MOTION_REPLAY_SAMPLES:
             self._apply_collapsed_locked(link, read, after, geometry)
             return
@@ -1177,7 +1192,12 @@ class LinkResponder:
             if was_live and not self._zones_live:
                 return
         if safe:
-            if self.input_scale is not None:
+            if smoother is not None:
+                if self.input_scale is not None:
+                    smoother.add(scaled_dx, scaled_dy)
+                else:
+                    smoother.add(read["dx"], read["dy"])
+            elif self.input_scale is not None:
                 self._inject_timed_locked(link, dict(read, dx=scaled_dx, dy=scaled_dy), scaled=True)
             else:
                 self._inject_timed_locked(link, read)
@@ -1301,6 +1321,9 @@ class LinkResponder:
     def _inject_locked(self, link: _Link, read: dict, *, scaled=False) -> None:
         injector = self._injector_module()
         kind = read["type"]
+        if self.smoother is not None:
+            # Whatever is still gliding goes first, so a click or a key lands where it belongs.
+            self.smoother.flush()
         if kind in (protocol.MSG_KEYDOWN, protocol.MSG_KEYUP):
             down = kind == protocol.MSG_KEYDOWN
             if down:
