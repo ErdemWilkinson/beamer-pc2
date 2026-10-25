@@ -4,7 +4,7 @@ Most of what Beamer holds is Qt and the settings window, built at start and seld
 minutes, while the window is hidden and input is on this PC, the garbage collector runs and the
 working set is emptied: Windows takes the pages back and faults in only those used again, so the
 figure Task Manager shows drops from about 170 MB to about 30 MB. Nothing is trimmed while another
-machine is driven from here, so input never waits on a page coming back.
+machine is driven from here or drives this one, so input never waits on a page coming back.
 """
 
 from __future__ import annotations

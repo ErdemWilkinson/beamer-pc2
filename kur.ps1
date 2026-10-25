@@ -52,6 +52,15 @@
             throw "$Dir kurulum klasoru degil ($Home2); icindeki calismayi silmemek icin guncellenmedi."
         }
 
+        # pc2-hizlandir.ps1 runs Beamer with administrator rights from scheduled tasks; then Beamer
+        # is stopped and started through them, which works without being administrator here.
+        $Elevated = [bool](Get-ScheduledTask -TaskName 'Beamer PC2' -ErrorAction SilentlyContinue)
+        if ($Elevated) {
+            foreach ($task in @('Beamer PC2', 'Beamer PC2 (Ac)')) {
+                try { Stop-ScheduledTask -TaskName $task -ErrorAction Stop } catch { Write-Host "  ($task durdurulamadi: $_)" }
+            }
+        }
+
         # Stop a Beamer started from this folder, so its files can be updated.
         Get-CimInstance Win32_Process -Filter "Name='pythonw.exe'" |
             Where-Object { $_.CommandLine -like "*$Dir*kvm_bridge_win.py*" } |
@@ -95,9 +104,18 @@
         $Script = Join-Path $Dir 'win_app\kvm_bridge_win.py'
         if ($Updating) {
             Say 'Beamer yeniden baslatiliyor'
-            Start-Process $Pythonw -ArgumentList "`"$Script`"" -WorkingDirectory $Dir
+            if ($Elevated) { Start-ScheduledTask -TaskName 'Beamer PC2 (Ac)' }
+            else { Start-Process $Pythonw -ArgumentList "`"$Script`"" -WorkingDirectory $Dir }
             Write-Host 'Guncelleme tamam. Bu pencere kendiliginden kapanacak.' -ForegroundColor Green
             Start-Sleep -Seconds 4
+            return
+        }
+        if ($Elevated) {
+            # The shortcuts already run the tasks; rewriting them would start a normal Beamer.
+            Say 'Beamer baslatiliyor (yonetici yetkisiyle, gorev uzerinden)'
+            Start-ScheduledTask -TaskName 'Beamer PC2 (Ac)'
+            Write-Host ''
+            Write-Host 'Guncelleme tamam.' -ForegroundColor Green
             return
         }
 

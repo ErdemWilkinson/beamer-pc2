@@ -723,8 +723,10 @@ class WindowsApplication(QWidget):
         # hook swallows this PC's mouse, so Windows never hears the button let go.
         self.transfer = transfer_feature.TransferFeature(
             self, button_down=lambda: "left" in self.sender._buttons_held)
+        # Idle: the window hidden, and input neither sent from here nor injected here by a peer.
         self.memory_trim = memory_trim_win.Trimmer(
-            self, lambda: not self.isVisible() and not getattr(self.sender._owner, "away", False))
+            self, lambda: not self.isVisible() and not getattr(self.sender._owner, "away", False)
+            and not getattr(self.server, "driven", False))
         hook_callbacks = (self._on_hook_key, self._on_hook_mouse, self.sender.on_motion)
         if sys.platform.startswith("win"):
             self.hooks = capture_win.Hooks(*hook_callbacks, on_seam=self.sender.seam_clip_position)

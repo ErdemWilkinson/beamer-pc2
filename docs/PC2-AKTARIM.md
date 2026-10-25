@@ -25,7 +25,20 @@ irm https://raw.githubusercontent.com/ErdemWilkinson/beamer-pc2/main/kur.ps1 | i
    yapılıp yapılmayacağını sorar: sadece evinizin ya da güvendiğiniz ağ için "E" deyin.
 4. Masaüstü, Başlat menüsü ve oturum açılışı için kısayol ekler, sonra Beamer'ı başlatır.
 
-Güncellemek için aynı komutu tekrar çalıştırmanız yeterli.
+Güncellemek için tepsideki Beamer simgesine sağ tıklayıp **Güncellemeleri denetle** → **Güncelle ve
+yeniden başlat** demeniz yeterli (ya da aynı komutu tekrar çalıştırın).
+
+### Yönetilen PC'yi akıcı yapmak (PC2'de bir kez)
+
+```powershell
+irm https://raw.githubusercontent.com/ErdemWilkinson/beamer-pc2/main/pc2-hizlandir.ps1 | iex
+```
+
+- **Wi-Fi güç tasarrufunu kapatır.** Uyuklayan Wi-Fi kartı mouse hareketlerini onlarca milisaniyede bir
+  toplu teslim eder ve imleç 20-30 fps gibi görünür.
+- **Beamer'ı oturum açılışında yönetici yetkisiyle başlatır.** Windows normal bir programın girdisini
+  yönetici pencerelerine (Görev Yöneticisi gibi) iletmez, bu yüzden imleç onların üstünde donar. Bedeli:
+  eşleşmiş PC o pencereleri de yönetebilir. UAC onay ekranı ve oturum açma ekranı yine erişilemez kalır.
 
 ## Nasıl kullanılır
 
