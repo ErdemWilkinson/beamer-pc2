@@ -103,8 +103,10 @@ class OutboxTests(unittest.TestCase):
             handle.write(b"x")
         box = self.outbox()
         box.send_now([note], carry="JOB1")
-        self.assertEqual(box.sent_files("JOB1"), [note])
-        self.assertIsNone(box.sent_files("OTHER"))
+        self.assertIsNone(box.take_sent_files("JOB1", "SOME-OTHER-PC"))
+        self.assertIsNone(box.take_sent_files("OTHER", self.peer["id"]))
+        self.assertEqual(box.take_sent_files("JOB1", self.peer["id"]), [note])
+        self.assertIsNone(box.take_sent_files("JOB1", self.peer["id"]))
         self.assertTrue(self.sent[0]["carry"])
         self.assertEqual(self.reports[-1][0], "carried")
 

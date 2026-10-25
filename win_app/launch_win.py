@@ -39,6 +39,15 @@ OPENABLE_SUFFIXES = frozenset({
     ".mp3", ".wav", ".mp4", ".mkv", ".mov",
     ".pdf", ".docx", ".xlsx", ".pptx", ".zip",
 })
+# Kinds that run code when opened. This PC never runs one because another PC asked it to (an
+# open_back of its own files): they are selected in Explorer instead, for the user to decide.
+RUNS_CODE_SUFFIXES = frozenset({
+    ".exe", ".com", ".scr", ".pif", ".cpl", ".msc", ".msi", ".msp", ".msix", ".appx", ".appxbundle", ".msixbundle",
+    ".appinstaller", ".appref-ms", ".application", ".bat", ".cmd", ".ps1", ".psm1", ".vbs", ".vbe", ".js", ".jse",
+    ".wsf", ".wsh", ".wsc", ".hta", ".jar", ".jnlp", ".lnk", ".url", ".website", ".reg", ".inf", ".scf", ".sct",
+    ".py", ".pyw", ".pyz", ".vsto", ".xbap", ".rdp", ".theme", ".themepack", ".diagcab", ".settingcontent-ms",
+    ".library-ms", ".search-ms",
+})
 # Marks what arrived as from the internet (Mark of the Web), so Office's Protected View and
 # SmartScreen treat it as they would a download.
 ZONE_IDENTIFIER = "[ZoneTransfer]\r\nZoneId=3\r\n"
@@ -210,6 +219,10 @@ def _startfile(path):
 
 def openable(path):
     return Path(path).suffix.lower() in OPENABLE_SUFFIXES
+
+
+def runs_code(path):
+    return Path(path).suffix.lower() in RUNS_CODE_SUFFIXES
 
 
 def explorer_exe():

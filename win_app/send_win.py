@@ -140,14 +140,19 @@ class Outbox:
         if paths:
             self._jobs.put((target_id or "", paths, carry))
 
-    def sent_files(self, job):
-        """The local files of job `job` sent from here, or None for a job this PC did not send."""
+    def take_sent_files(self, job, peer_id):
+        """The local files of job `job`, when this PC sent it to `peer_id`; None otherwise. Each
+        job is given out once, so an open_back cannot be repeated."""
         with self._sent_lock:
-            return list(self._sent[job]) if job in self._sent else None
+            target, files = self._sent.get(job, (None, None))
+            if files is None or target != peer_id:
+                return None
+            del self._sent[job]
+            return list(files)
 
-    def _remember(self, job, files):
+    def _remember(self, job, files, peer_id):
         with self._sent_lock:
-            self._sent[job] = list(files)
+            self._sent[job] = (peer_id, list(files))
             while len(self._sent) > 64:
                 self._sent.pop(next(iter(self._sent)))
 
@@ -287,7 +292,7 @@ class Outbox:
                 self._report("progress", tr("Sending to {name}: {sent} of {total}").format(name=name, sent=_size(sent), total=_size(whole)), peer["id"])
 
             job = carry or new_job()
-            self._remember(job, files)
+            self._remember(job, files, peer["id"])
             try:
                 result = self._send(peer, own_id, manifest=manifest, progress=progress if total else None, cancelled=cancelled,
                                     carry=carry is not None, job=job)

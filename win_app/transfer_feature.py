@@ -510,13 +510,18 @@ class TransferFeature(QObject):
         if offer["kind"] == transfer.KIND_RELEASE:
             self.carry_released.emit(offer["ref"])
             return True, ""
-        files = self.outbox.sent_files(offer["ref"])
+        # Only a job this PC sent to that very machine, and only once.
+        files = self.outbox.take_sent_files(offer["ref"], entry.get("id"))
         if files is None:
-            return False, "no such job was sent from this PC"
+            return False, "no such job was sent from this PC to that one"
         problems = []
         for path in files:
             try:
-                os.startfile(path)
+                if os.path.isdir(path) or not launch_win.runs_code(path):
+                    os.startfile(path)
+                else:
+                    # Never run code because another machine asked: show it, the user decides.
+                    launch_win._spawn([launch_win.explorer_exe(), "/select,", path])
             except OSError as exc:
                 problems.append(f"{os.path.basename(path)}: {exc}")
         self.notice.emit("Beamer", tr("{items}: no app for it on {name}, so it opened here").format(

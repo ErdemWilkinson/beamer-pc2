@@ -78,8 +78,9 @@ class FakeOutbox:
     def launch_there_or_here(self, original, app, target_id, done=None):
         self.launches.append((original, app, target_id, done))
 
-    def sent_files(self, job):
-        return self.files.get(job)
+    def take_sent_files(self, job, peer_id):
+        target, files = self.files.pop(job, (None, None))
+        return files if target == peer_id else None
 
     def start(self):
         pass
@@ -162,13 +163,20 @@ class CarryTests(unittest.TestCase):
         self.feature._let_go("J1")
         self.assertEqual(len(self.injector.calls), 2)
 
-    def test_open_back_opens_only_what_this_pc_sent(self):
-        self.assertFalse(self.feature._notice_from_server({"name": "PC2"}, {"kind": transfer.KIND_OPEN_BACK, "ref": "nope"})[0])
-        self.outbox.files["J9"] = [os.path.join(self.folder, "a.psd")]
-        with mock.patch.object(transfer_feature.os, "startfile", create=True) as startfile:
-            ok, _ = self.feature._notice_from_server({"name": "PC2"}, {"kind": transfer.KIND_OPEN_BACK, "ref": "J9"})
+    def test_open_back_opens_only_what_this_pc_sent_to_that_pc(self):
+        pc2 = {"name": "PC2", "id": PEER_ID}
+        self.assertFalse(self.feature._notice_from_server(pc2, {"kind": transfer.KIND_OPEN_BACK, "ref": "nope"})[0])
+        self.outbox.files["J8"] = ("ANOTHER-PC", [os.path.join(self.folder, "a.psd")])
+        self.assertFalse(self.feature._notice_from_server(pc2, {"kind": transfer.KIND_OPEN_BACK, "ref": "J8"})[0])
+        design, script = os.path.join(self.folder, "a.psd"), os.path.join(self.folder, "run.bat")
+        self.outbox.files["J9"] = (PEER_ID, [design, script])
+        with mock.patch.object(transfer_feature.os, "startfile", create=True) as startfile, \
+                mock.patch.object(transfer_feature.launch_win, "_spawn") as spawn:
+            ok, _ = self.feature._notice_from_server(pc2, {"kind": transfer.KIND_OPEN_BACK, "ref": "J9"})
         self.assertTrue(ok)
-        startfile.assert_called_once_with(os.path.join(self.folder, "a.psd"))
+        startfile.assert_called_once_with(design)
+        self.assertEqual(spawn.call_args[0][0][1:], ["/select,", script])
+        self.assertFalse(self.feature._notice_from_server(pc2, {"kind": transfer.KIND_OPEN_BACK, "ref": "J9"})[0])
 
 
 if __name__ == "__main__":
