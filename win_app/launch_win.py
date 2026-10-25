@@ -92,6 +92,9 @@ class TransferSettings:
     # Pointer motion from the PC driving this one glides out instead of jumping in the bursts a
     # jittery Wi-Fi link delivers (core/motion_smoother.py). Read at start.
     smooth: bool = True
+    # The most the smoother holds motion back, in ms: longer rides out longer Wi-Fi stalls but
+    # the pointer trails the hand further. Read at start.
+    smooth_max_ms: int = 60
     # The machine sends go to, by id; the only paired one when unset.
     target: str = ""
 

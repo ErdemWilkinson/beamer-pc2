@@ -669,7 +669,8 @@ class WindowsApplication(QWidget):
             desktop=platform_parts.desktop,
             injector=platform_parts.injector,
         )
-        if sys.platform == "win32" and launch_win.load_settings(config_path).smooth:
+        transfer_settings = launch_win.load_settings(config_path)
+        if sys.platform == "win32" and transfer_settings.smooth:
             def glide(dx, dy):
                 # Placed, not moved: Windows' pointer acceleration would scale the smoother's small
                 # steps differently from the bursts they replace, so speed would vary with the link.
@@ -679,7 +680,8 @@ class WindowsApplication(QWidget):
                     platform_parts.injector.inject_mouse_move(dx, dy)
 
             self.server.smoother = motion_smoother.MotionSmoother(
-                glide, active=lambda: self.server.owner is not None)
+                glide, active=lambda: self.server.owner is not None,
+                max_delay=min(250, max(20, transfer_settings.smooth_max_ms)) / 1000)
             self.server.smoother.start()
         # The links outwards: this PC's keyboard and mouse on its peers.
         self.sender = LinkSender(

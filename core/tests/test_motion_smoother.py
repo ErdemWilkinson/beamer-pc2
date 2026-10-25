@@ -65,13 +65,19 @@ class SmootherTests(unittest.TestCase):
         frames = per_frame(made, 0.8, 2.0)
         # 16.7 px a 60 Hz frame; applied as it arrived, every third frame took the whole 50.
         self.assertGreaterEqual(min(frames), 12)
-        self.assertLessEqual(max(frames), 24)
+        self.assertLessEqual(max(frames), 26)
 
     def test_a_stall_while_the_hand_moves_lengthens_the_delay(self):
         smooth, _moves, clock = smoother()
         play(smooth, clock, deliveries(lambda sent: 0.002 if sent < 0.5 else 0.06 - sent % 0.06, 1.0), until=1.0)
         self.assertGreater(smooth.delay, 0.05)
         self.assertLessEqual(smooth.delay, motion_smoother.MAX_DELAY)
+
+    def test_the_longest_delay_can_be_chosen(self):
+        smooth = motion_smoother.MotionSmoother(lambda dx, dy: None, clock=Clock(), max_delay=0.03)
+        clock = smooth._clock
+        play(smooth, clock, deliveries(lambda sent: 0.06 - sent % 0.06, 1.0), until=1.0)
+        self.assertLessEqual(smooth.delay, 0.03)
 
     def test_an_even_link_adds_only_the_least_delay(self):
         smooth, _moves, clock = smoother()

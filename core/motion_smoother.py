@@ -31,12 +31,15 @@ from typing import Callable, Tuple
 
 LOGGER = logging.getLogger(__name__)
 TICK = 0.004
-SPEED_WINDOW = 0.25
-EASE = 0.10
-CORRECTION = 0.15
+# Tuned in simulation against PC2's link (a hand moving at 1000 px/s in bursts, 50 ms stalls):
+# the first values here (0.25, 0.10, 0.15, 90 ms, 1.2) were smooth but left the pointer 82 ms
+# behind the hand, "as if carrying twenty kilos"; these keep it 56 ms behind, about as smooth.
+SPEED_WINDOW = 0.16
+EASE = 0.04
+CORRECTION = 0.08
 MIN_DELAY = 0.020
-MAX_DELAY = 0.090
-DELAY_MARGIN = 1.2
+MAX_DELAY = 0.060
+DELAY_MARGIN = 0.9
 HALF_LIFE = 1.0
 # A gap longer than STALL while the hand moves was a stall of the link if, soon after the arrival
 # that ends it (half the gap, at most BURST), at least half the motion the hand would have made
@@ -72,8 +75,11 @@ class MotionSmoother:
     this machine (pending motion is dropped when not). `clock` and `sleep` are injected by tests."""
 
     def __init__(self, move: Callable[[int, int], None], active: Callable[[], bool] = lambda: True,
-                 clock=time.perf_counter, sleep=time.sleep, tick: float = TICK) -> None:
+                 clock=time.perf_counter, sleep=time.sleep, tick: float = TICK,
+                 max_delay: float = MAX_DELAY) -> None:
         self._move = move
+        # The most motion held back to ride out a stall: smoother when longer, quicker when shorter.
+        self._max_delay = max(MIN_DELAY, max_delay)
         self._active = active
         self._clock = clock
         self._sleep = sleep
@@ -108,7 +114,7 @@ class MotionSmoother:
             if self._last_add is not None:
                 gap = now - self._last_add
                 delay = self._delay * 0.5 ** (gap / HALF_LIFE)
-                if gap > STALL and self._speed > MOVING and gap < 4 * MAX_DELAY:
+                if gap > STALL and self._speed > MOVING and gap < 4 * self._max_delay:
                     # [the gap, the motion it should have held, what has come since, until when]
                     self._suspect = [gap, self._speed * gap, 0.0, now + min(BURST, gap / 2)]
                 if self._suspect is not None:
@@ -120,7 +126,7 @@ class MotionSmoother:
                             self._stats["longest_stall"] = max(self._stats["longest_stall"], self._suspect[0])
                             delay = max(delay, self._suspect[0] * DELAY_MARGIN)
                             self._suspect = None
-                self._delay = min(MAX_DELAY, max(MIN_DELAY, delay))
+                self._delay = min(self._max_delay, max(MIN_DELAY, delay))
             self._last_add = now
             self._queue.append([float(dx), float(dy)])
             self._arrived.append((now, length))
