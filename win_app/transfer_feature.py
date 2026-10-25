@@ -43,6 +43,8 @@ DRAG_EVERY = 0.25
 CARRY_POLL_MS = 25
 CARRY_PRESS_MS = 60
 CARRY_TIMEOUT_MS = 120_000
+# More than this is not carried in the hand: over Wi-Fi it takes longer than a drag lasts.
+CARRY_MAX_BYTES = 256 * 1024 * 1024
 
 
 def send_command():
@@ -85,6 +87,31 @@ def unregister_shell_menu(winreg=None):
                 winreg.DeleteKey(winreg.HKEY_CURRENT_USER, sub)
             except OSError:
                 pass
+
+
+def bulky(paths, excludes=(), limit=CARRY_MAX_BYTES):
+    """Whether `paths` hold more than `limit` bytes, the folders `excludes` names left out as a
+    send leaves them. Stops counting as soon as the answer is known, so a big tree is not walked."""
+    total, skip = 0, set(excludes)
+    for path in paths:
+        if os.path.isdir(path):
+            for root, dirs, names in os.walk(path):
+                dirs[:] = [name for name in dirs if name not in skip]
+                for name in names:
+                    try:
+                        total += os.path.getsize(os.path.join(root, name))
+                    except OSError:
+                        continue
+                    if total > limit:
+                        return True
+        else:
+            try:
+                total += os.path.getsize(path)
+            except OSError:
+                continue
+        if total > limit:
+            return True
+    return False
 
 
 def native_geometry(screen):
@@ -460,6 +487,14 @@ class TransferFeature(QObject):
                 original, app, target_id,
                 done=lambda where, peer=peer, edge=edge: self.cross_to.emit(peer, edge) if where == "there" and not files else None)
         if not files:
+            return
+        if bulky(files, self.settings().excludes):
+            # Too much to arrive while the button is still held: sent like a plain drop instead,
+            # opened over there when it is all there.
+            LOGGER.info("Too large to carry in the hand; sending it in the background instead")
+            name = (send_win.pick_target(self._peers(), target_id) or {}).get("name") or tr("the other PC")
+            self._app._on_alert("Beamer", tr("Too large to carry across: sending it to {name} in the background; it opens there when it arrives").format(name=name))
+            self.outbox.submit(files, target_id)
             return
         job = send_win.new_job()
         self._outgoing = (job, target_id)

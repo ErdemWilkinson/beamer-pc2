@@ -179,5 +179,33 @@ class CarryTests(unittest.TestCase):
         self.assertFalse(self.feature._notice_from_server(pc2, {"kind": transfer.KIND_OPEN_BACK, "ref": "J9"})[0])
 
 
+class BulkyTests(unittest.TestCase):
+    """Only what can arrive while the button is held is carried in the hand."""
+
+    def setUp(self):
+        self.root = tempfile.mkdtemp()
+        self.addCleanup(shutil.rmtree, self.root, True)
+
+    def write(self, *parts, size):
+        path = Path(self.root, *parts)
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_bytes(b"x" * size)
+        return str(path)
+
+    def test_a_small_file_is_carried(self):
+        self.assertFalse(transfer_feature.bulky([self.write("a.txt", size=10)], limit=100))
+
+    def test_a_big_file_or_folder_is_not(self):
+        self.assertTrue(transfer_feature.bulky([self.write("big.bin", size=101)], limit=100))
+        self.write("proj", "one.bin", size=60)
+        self.write("proj", "sub", "two.bin", size=60)
+        self.assertTrue(transfer_feature.bulky([str(Path(self.root, "proj"))], limit=100))
+
+    def test_excluded_folders_do_not_count(self):
+        self.write("proj", "main.py", size=10)
+        self.write("proj", "node_modules", "dep.js", size=500)
+        self.assertFalse(transfer_feature.bulky([str(Path(self.root, "proj"))], ["node_modules"], limit=100))
+
+
 if __name__ == "__main__":
     unittest.main()

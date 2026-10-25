@@ -5450,6 +5450,11 @@ msgstr "{items}: {name} üzerinde açacak uygulama yok, bu yüzden burada açıl
 
 #: win_app/transfer_feature.py
 #, python-brace-format
+msgid "Too large to carry across: sending it to {name} in the background; it opens there when it arrives"
+msgstr "Elde taşımak için çok büyük: arka planda {name} makinesine gönderiliyor; varınca orada açılacak"
+
+#: win_app/transfer_feature.py
+#, python-brace-format
 msgid "Another program is using port {port}: files cannot be sent to this PC"
 msgstr "{port} portunu başka bir program kullanıyor: bu PC'ye dosya gönderilemez"
 

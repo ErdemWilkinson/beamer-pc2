@@ -5444,6 +5444,11 @@ msgstr ""
 
 #: win_app/transfer_feature.py
 #, python-brace-format
+msgid "Too large to carry across: sending it to {name} in the background; it opens there when it arrives"
+msgstr ""
+
+#: win_app/transfer_feature.py
+#, python-brace-format
 msgid "Another program is using port {port}: files cannot be sent to this PC"
 msgstr ""
 
