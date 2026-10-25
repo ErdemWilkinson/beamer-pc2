@@ -36,6 +36,7 @@ HALF_LIFE = 2.0
 # A pause longer than this is the hand at rest, not the link: it is not spread over, and it does
 # not lengthen the delay.
 REST = 0.25
+STATS_EVERY = 10.0
 
 
 def _whole(value: float) -> int:
@@ -92,6 +93,11 @@ class MotionSmoother:
         self._delay = MIN_DELAY
         self._last_add = None
         self._played_to = float("-inf")
+        # For the log, every STATS_EVERY seconds of play: what arrived, how evenly the steps ran,
+        # and how often the buffer ran dry while motion was still owed.
+        self._stats = {"arrivals": 0, "steps": 0, "dry": 0, "longest_step": 0.0, "longest_gap": 0.0}
+        self._stats_at = None
+        self._last_step_at = None
 
     @property
     def delay(self) -> float:
@@ -103,6 +109,9 @@ class MotionSmoother:
         with self._lock:
             gap = now - self._last_add if self._last_add is not None else REST
             spread = min(gap, MAX_DELAY) if gap < REST else self._tick
+            self._stats["arrivals"] += 1
+            if gap < REST:
+                self._stats["longest_gap"] = max(self._stats["longest_gap"], gap)
             self._delay = min(MAX_DELAY, max(MIN_DELAY, self._delay * 0.5 ** (gap / HALF_LIFE),
                                              spread * DELAY_MARGIN))
             self._last_add = now
@@ -143,8 +152,16 @@ class MotionSmoother:
                 return False
             if not self._stretches:
                 return False
+            if self._last_step_at is not None and now - self._last_step_at < REST:
+                self._stats["longest_step"] = max(self._stats["longest_step"], now - self._last_step_at)
+            self._last_step_at = now
+            self._stats["steps"] += 1
             until = max(self._played_to, now - self._delay)
             self._played_to = until
+            if until <= self._stretches[0].start and now - self._stretches[-1].end > self._delay:
+                # Owed motion, none of it due yet, and nothing new for longer than the delay:
+                # the link stalled past what the buffer covers.
+                self._stats["dry"] += 1
             for stretch in self._stretches:
                 if stretch.start >= until:
                     break
@@ -187,8 +204,25 @@ class MotionSmoother:
                 LOGGER.exception("Smoothed motion could not be injected")
                 self.drop()
                 busy = False
+            self._report()
             if busy:
                 self._sleep(self._tick)
             else:
+                self._last_step_at = None
                 self._wake.wait(REST)
                 self._wake.clear()
+
+    def _report(self) -> None:
+        now = self._clock()
+        if self._stats_at is None:
+            self._stats_at = now
+            return
+        if now - self._stats_at < STATS_EVERY:
+            return
+        with self._lock:
+            stats, self._stats_at = dict(self._stats), now
+            self._stats.update(arrivals=0, steps=0, dry=0, longest_step=0.0, longest_gap=0.0)
+        if stats["steps"]:
+            LOGGER.info("Smoothed motion: %d arrivals (longest gap %.0f ms), %d steps (longest %.1f ms), "
+                        "%d dry, delay %.0f ms", stats["arrivals"], stats["longest_gap"] * 1000, stats["steps"],
+                        stats["longest_step"] * 1000, stats["dry"], self._delay * 1000)
