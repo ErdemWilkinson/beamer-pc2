@@ -1,37 +1,74 @@
-"""Pointer motion from a peer, spread over a short glide instead of applied the moment it arrives.
+"""Pointer motion from a peer, played out on the hand's own timeline instead of as it arrives.
 
 Over a jittery Wi-Fi link the moves of a steadily moving mouse arrive in bursts: nothing for
-20-60 ms, then everything at once. The receiver applied each burst as one jump, so the pointer
-moved like 20 fps however smooth the mouse. The smoother keeps what has arrived but not yet been
-shown, and its own thread hands a share of it to the injector every TICK seconds, so a burst
-drains over about the gap it followed. The window follows the gaps: it rises at once to a long
-one and falls back with a half-life of HALF_LIFE seconds, so an even link adds only MIN_WINDOW.
+20-80 ms, then everything at once. The receiver applied each burst as one jump, so the pointer
+moved like 20 fps however smooth the mouse.
 
-The receiver smooths only motion away from every wall and armed edge, and flushes what is pending
-before anything else it injects (a click, a key, a move near an edge), so those land where the
-pointer would have been without smoothing.
+This is a jitter buffer. Motion that arrives after a gap was made during that gap, so each
+arrival is spread evenly over the gap before it (at most MAX_DELAY; after a rest of the hand,
+over one TICK). That rebuilds the hand's timeline, and the pointer follows it `delay` seconds
+behind, moved every TICK seconds by whatever of the timeline that stretch covers. A stall
+shorter than the delay is played straight through at the hand's speed. The delay follows the
+link: it rises at once to the longest recent gap (with a margin) and falls back with a half-life
+of HALF_LIFE seconds, between MIN_DELAY and MAX_DELAY.
+
+The receiver smooths only motion away from every wall and armed edge, and flushes what is
+pending before anything else it injects (a click, a key, a move near an edge), so those land
+where the pointer would have been without smoothing.
 """
 
 from __future__ import annotations
 
+import collections
 import logging
 import math
+import sys
 import threading
 import time
 from typing import Callable, Tuple
 
 LOGGER = logging.getLogger(__name__)
 TICK = 0.004
-MIN_WINDOW = 0.008
-MAX_WINDOW = 0.060
-HALF_LIFE = 1.0
-# A pause longer than this is the mouse at rest, not the link: it does not widen the window.
+MIN_DELAY = 0.020
+MAX_DELAY = 0.100
+DELAY_MARGIN = 1.2
+HALF_LIFE = 2.0
+# A pause longer than this is the hand at rest, not the link: it is not spread over, and it does
+# not lengthen the delay.
 REST = 0.25
 
 
 def _whole(value: float) -> int:
     """The whole pixels of `value`, toward zero, so the fraction stays pending."""
     return math.trunc(value)
+
+
+def _fine_timer(enable: bool) -> None:
+    """Ask Windows for 1 ms timer ticks while motion plays, so each TICK is a TICK."""
+    if sys.platform != "win32":
+        return
+    try:
+        import ctypes
+
+        winmm = ctypes.windll.winmm
+        (winmm.timeBeginPeriod if enable else winmm.timeEndPeriod)(1)
+    except (AttributeError, OSError):
+        LOGGER.debug("Could not change the timer resolution", exc_info=True)
+
+
+class _Stretch:
+    """Motion (dx, dy) made evenly over [start, end] on the hand's timeline; `done` is the share
+    already moved."""
+
+    __slots__ = ("start", "end", "dx", "dy", "done")
+
+    def __init__(self, start, end, dx, dy):
+        self.start, self.end, self.dx, self.dy, self.done = start, end, dx, dy, 0.0
+
+    def share(self, until):
+        if until >= self.end:
+            return 1.0
+        return max(0.0, (until - self.start) / (self.end - self.start))
 
 
 class MotionSmoother:
@@ -49,24 +86,27 @@ class MotionSmoother:
         self._wake = threading.Event()
         self._stop = threading.Event()
         self._thread = None
+        self._stretches = collections.deque()
         self._x = self._y = 0.0
-        self._window = MIN_WINDOW
+        self._out_x = self._out_y = 0.0
+        self._delay = MIN_DELAY
         self._last_add = None
+        self._played_to = float("-inf")
 
     @property
-    def window(self) -> float:
-        return self._window
+    def delay(self) -> float:
+        return self._delay
 
     def add(self, dx: float, dy: float) -> None:
         """Motion that has arrived, in the pixels the injector moves."""
         now = self._clock()
         with self._lock:
-            if self._last_add is not None:
-                gap = now - self._last_add
-                decayed = self._window * 0.5 ** (gap / HALF_LIFE)
-                widened = gap if gap < REST else 0.0
-                self._window = min(MAX_WINDOW, max(MIN_WINDOW, decayed, widened))
+            gap = now - self._last_add if self._last_add is not None else REST
+            spread = min(gap, MAX_DELAY) if gap < REST else self._tick
+            self._delay = min(MAX_DELAY, max(MIN_DELAY, self._delay * 0.5 ** (gap / HALF_LIFE),
+                                             spread * DELAY_MARGIN))
             self._last_add = now
+            self._stretches.append(_Stretch(now - spread, now, dx, dy))
             self._x += dx
             self._y += dy
         self._wake.set()
@@ -82,39 +122,59 @@ class MotionSmoother:
             dx, dy = _whole(self._x), _whole(self._y)
             self._x -= dx
             self._y -= dy
+            self._out_x = self._out_y = 0.0
+            self._stretches.clear()
+            self._played_to = self._clock() - self._delay
             if dx or dy:
                 self._move(dx, dy)
 
     def drop(self) -> None:
         with self._lock:
-            self._x = self._y = 0.0
+            self._x = self._y = self._out_x = self._out_y = 0.0
+            self._stretches.clear()
 
     def step(self) -> bool:
-        """One tick: inject a share of what is pending. False when nothing is."""
+        """Move the pointer along the timeline up to `delay` ago. False when nothing is pending."""
+        now = self._clock()
         with self._lock:
             if not self._active():
-                self._x = self._y = 0.0
+                self._x = self._y = self._out_x = self._out_y = 0.0
+                self._stretches.clear()
                 return False
-            if abs(self._x) < 1 and abs(self._y) < 1:
+            if not self._stretches:
                 return False
-            share = min(1.0, self._tick / self._window)
-            dx, dy = _whole(self._x * share), _whole(self._y * share)
-            # At least a pixel on any axis with one pending, so a backlog always finishes.
-            if dx == 0 and abs(self._x) >= 1:
-                dx = 1 if self._x > 0 else -1
-            if dy == 0 and abs(self._y) >= 1:
-                dy = 1 if self._y > 0 else -1
+            until = max(self._played_to, now - self._delay)
+            self._played_to = until
+            for stretch in self._stretches:
+                if stretch.start >= until:
+                    break
+                share = stretch.share(until)
+                self._out_x += stretch.dx * (share - stretch.done)
+                self._out_y += stretch.dy * (share - stretch.done)
+                stretch.done = share
+            while self._stretches and self._stretches[0].done >= 1.0:
+                self._stretches.popleft()
+            dx, dy = _whole(self._out_x), _whole(self._out_y)
+            self._out_x -= dx
+            self._out_y -= dy
             self._x -= dx
             self._y -= dy
-            self._move(dx, dy)
+            if not self._stretches:
+                # The last of it: the fraction left over goes with the next motion.
+                self._out_x = self._out_y = 0.0
+            if dx or dy:
+                self._move(dx, dy)
             return True
 
     def start(self) -> None:
         if self._thread is None:
+            _fine_timer(True)
             self._thread = threading.Thread(target=self._run, name="Beamer-smoother", daemon=True)
             self._thread.start()
 
     def stop(self) -> None:
+        if self._thread is not None and not self._stop.is_set():
+            _fine_timer(False)
         self._stop.set()
         self._wake.set()
 

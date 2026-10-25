@@ -21,42 +21,68 @@ def smoother(active=lambda: True):
     return smooth, moves, clock
 
 
+def play(smooth, clock, arrivals, until, tick=0.004):
+    """Run `smooth` on `clock` until `until`, adding each (time, dx) of `arrivals` when due;
+    the moves made, as (time, dx)."""
+    made, arrivals, now = [], list(arrivals), 0.0
+    smooth._move = lambda dx, dy: made.append((clock.now, dx))
+    while now <= until:
+        clock.now = now
+        due = sum(dx for at, dx in arrivals if at <= now)
+        arrivals = [(at, dx) for at, dx in arrivals if at > now]
+        if due:
+            smooth.add(due, 0)
+        smooth.step()
+        now = round(now + tick, 6)
+    return made
+
+
 class SmootherTests(unittest.TestCase):
-    def test_a_burst_glides_out_instead_of_jumping(self):
-        smooth, moves, clock = smoother()
+    def test_bursts_play_out_at_the_hand_s_steady_speed(self):
+        # A hand at 1000 px/s whose motion arrives in a burst every 50 ms, as over PC2's Wi-Fi.
+        smooth, _moves, clock = smoother()
+        arrivals = [(0.05 * (k + 1), 50) for k in range(40)]
+        made = play(smooth, clock, arrivals, until=2.3)
+        self.assertEqual(2000, sum(dx for _at, dx in made))
+        frames = {}
+        for at, dx in made:
+            if 0.5 <= at < 1.9:
+                frames[int(at * 60)] = frames.get(int(at * 60), 0) + dx
+        per_frame = [frames.get(frame, 0) for frame in range(31, 113)]
+        # 16.7 px a 60 Hz frame; applied as it arrived, every third frame took the whole 50.
+        self.assertGreaterEqual(min(per_frame), 12)
+        self.assertLessEqual(max(per_frame), 22)
+
+    def test_the_delay_covers_the_longest_recent_gap(self):
+        smooth, _moves, clock = smoother()
         smooth.add(0, 0)
-        clock.now = 0.050  # the link was quiet for 50 ms, then everything came at once
+        clock.now = 0.050
         smooth.add(100, 0)
-        self.assertAlmostEqual(0.050, smooth.window)
-        while smooth.step():
-            pass
-        self.assertGreater(len(moves), 10)
-        self.assertLess(max(dx for dx, _dy in moves), 20)
-        self.assertEqual(100, sum(dx for dx, _dy in moves))
+        self.assertAlmostEqual(0.050 * motion_smoother.DELAY_MARGIN, smooth.delay)
 
     def test_an_even_link_adds_only_the_least_delay(self):
-        smooth, moves, clock = smoother()
+        smooth, _moves, clock = smoother()
         for step in range(100):
             clock.now = step * 0.002
             smooth.add(2, 1)
-        self.assertEqual(motion_smoother.MIN_WINDOW, smooth.window)
+        self.assertEqual(motion_smoother.MIN_DELAY, smooth.delay)
 
-    def test_the_window_falls_back_once_the_link_is_even_again(self):
+    def test_the_delay_falls_back_once_the_link_is_even_again(self):
         smooth, _moves, clock = smoother()
         smooth.add(0, 0)
-        clock.now = 0.060
+        clock.now = 0.080
         smooth.add(1, 0)
-        for step in range(1, 1500):
-            clock.now = 0.060 + step * 0.002
+        for step in range(1, 5000):
+            clock.now = 0.080 + step * 0.002
             smooth.add(1, 0)
-        self.assertLess(smooth.window, 0.020)
+        self.assertLess(smooth.delay, 0.030)
 
     def test_a_pause_of_the_hand_is_not_a_stall_of_the_link(self):
         smooth, _moves, clock = smoother()
         smooth.add(1, 0)
         clock.now = 2.0
         smooth.add(1, 0)
-        self.assertEqual(motion_smoother.MIN_WINDOW, smooth.window)
+        self.assertEqual(motion_smoother.MIN_DELAY, smooth.delay)
 
     def test_flush_shows_everything_at_once_and_keeps_the_fraction(self):
         smooth, moves, _clock = smoother()
