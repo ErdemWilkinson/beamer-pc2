@@ -33,9 +33,9 @@ Güncellemek için aynı komutu tekrar çalıştırmanız yeterli.
 
 | Ne yaparsın | Ne olur |
 |---|---|
-| Bir klasörü **sağ kenara sürükle**, kenarda beliren mavi şeride bırak | Klasör PC2'ye kopyalanır, PC2'de VS Code (ya da Antigravity) o klasörle açılır. Klavye ve mouse da PC2'ye geçer. |
-| Bir dosyayı sürükle-bırak | PC2'de, o dosya türünün varsayılan uygulamasıyla açılır. |
-| VS Code / Antigravity **kısayolunu** sürükle-bırak | Exe kopyalanmaz. PC2 **kendi** kurulu VS Code'unu başlatır. |
+| Bir dosyayı/klasörü tutup **sağ kenardan dışarı sürükle** | Mouse PC2'ye geçer ve sürükleme **elinde devam eder**: PC2'de masaüstüne, bir klasöre ya da bir program penceresine (ör. VS Code) bırakırsın. Boş bir yere bırakırsan PC2'de açılır. |
+| PC2'de o dosyayı açacak program yoksa | Dosya **ana PC'de** açılır. |
+| VS Code / Antigravity **kısayolunu** sürükle | Exe kopyalanmaz. PC2 **kendi** kurulu kopyasını başlatır ve mouse oraya geçer. PC2'de kurulu değilse uygulama **ana PC'de** açılır. |
 | Dosya/klasöre sağ tık → **"Open on &lt;PC2'nin adı&gt;"** | Sürükle-bırakla aynısı. (Windows 11'de "Daha fazla seçenek göster" altında.) |
 | Tray simgesi → "Send files / Send a folder to the other PC…" | Dosya seçici açılır, seçilenler gönderilir. |
 | Tray → "Open received files" | PC2'de gelenlerin durduğu klasörü açar. |
@@ -59,7 +59,8 @@ varsayılanlar kullanılır. Bozuk ya da yanlış tipte olan alan sessizce varsa
   "follow": true,
   "target": "",
   "menu": true,
-  "drop_zone": true
+  "drop_zone": true,
+  "carry": true
 }
 ```
 
@@ -72,7 +73,10 @@ varsayılanlar kullanılır. Bozuk ya da yanlış tipte olan alan sessizce varsa
 | `max_bytes` | Bu PC'nin kabul edeceği en büyük gönderim (varsayılan 2 GB) |
 | `follow` | Gönderim bitince klavye ve mouse karşı PC'ye geçsin mi |
 | `target` | Birden fazla eşleşmiş PC varsa hangisine gönderilsin (makine id'si) |
-| `menu` / `drop_zone` | Explorer sağ tık girdisi / kenardaki bırakma şeridi açık mı |
+| `menu` / `drop_zone` | Explorer sağ tık girdisi / kenardaki şerit açık mı |
+| `carry` | `true`: kenara gelen sürükleme PC2'de elinde devam eder. `false`: şerit bir bırakma alanı olur, bıraktığın şey PC2'de açılır |
+
+İki PC'de de aynı sürümün olması gerekir. Eski sürümdeki bir PC, sürüklenerek gelen dosyayı sadece açar.
 
 ## Güvenlik
 

@@ -1,6 +1,12 @@
 """Sending files and apps to the other PC, wired into the app: the transfer listener
-(core/transfer.py), the outbox (send_win.py), what arrives (launch_win.py), the drop zone a drag
-at a crossing edge shows, and Explorer's "Open on <the other PC>" entry.
+(core/transfer.py), the outbox (send_win.py), what arrives (launch_win.py), the strip a drag at a
+crossing edge shows, and Explorer's "Open on <the other PC>" entry.
+
+A drag that reaches a crossing edge carries on over there (`carry`, the default): this PC cancels
+its own drag, the pointer crosses at the same height, the files go across, and the other PC starts
+the same drag under its pointer, so they are dropped wherever the button is let go there. An app
+shortcut dragged across starts the other PC's own copy, or this PC's when the other has none.
+With `carry` off the strip is a drop target instead: what is dropped on it opens over there.
 
 Kept apart from kvm_bridge_win.py, which only creates a TransferFeature and calls start(), stop(),
 add_to_tray() and send(), so the fork stays easy to bring up to date with Beamer itself.
@@ -12,13 +18,13 @@ import sys
 import time
 from pathlib import Path
 
-from PySide6.QtCore import QObject, QPoint, QRect, Qt, QTimer, Signal
-from PySide6.QtGui import QColor, QFont, QGuiApplication, QPainter, QPen
+from PySide6.QtCore import QMimeData, QObject, QPoint, QRect, Qt, QTimer, QUrl, Signal
+from PySide6.QtGui import QColor, QDrag, QFont, QFontMetrics, QGuiApplication, QPainter, QPen, QPixmap
 from PySide6.QtWidgets import QFileDialog, QWidget
 
 import launch_win
 import send_win
-from core import protocol, transfer
+from core import protocol, return_edge, transfer
 from core.i18n import tr
 
 LOGGER = logging.getLogger("Beamer")
@@ -31,6 +37,12 @@ ZONE_WIDTH = 56
 ZONE_POLL_MS = 120
 # The least time between two reports of a drag at the same edge reaching the GUI thread.
 DRAG_EVERY = 0.25
+# A carried drag: how often this PC checks for the button being let go, how long the other PC
+# waits after pressing its button before starting the drag, and how long a drag may last before
+# its button is let go regardless (a lost release must not leave the other PC's button down).
+CARRY_POLL_MS = 25
+CARRY_PRESS_MS = 60
+CARRY_TIMEOUT_MS = 120_000
 
 
 def send_command():
@@ -93,6 +105,26 @@ def zone_rect(geometry, edge, width=ZONE_WIDTH):
     return QRect(geometry.x(), geometry.y() + geometry.height() - width, geometry.width(), width)
 
 
+def _drag_pixmap(text):
+    """What a carried drag shows under the pointer: the names it carries, on a small card."""
+    font = QFont()
+    font.setBold(True)
+    metrics = QFontMetrics(font)
+    label = metrics.elidedText(text, Qt.TextElideMode.ElideMiddle, 320)
+    pixmap = QPixmap(metrics.horizontalAdvance(label) + 24, metrics.height() + 14)
+    pixmap.fill(Qt.GlobalColor.transparent)
+    painter = QPainter(pixmap)
+    painter.setRenderHint(QPainter.RenderHint.Antialiasing)
+    painter.setBrush(QColor(46, 125, 255, 220))
+    painter.setPen(Qt.PenStyle.NoPen)
+    painter.drawRoundedRect(pixmap.rect(), 8, 8)
+    painter.setPen(QColor(255, 255, 255))
+    painter.setFont(font)
+    painter.drawText(pixmap.rect(), Qt.AlignmentFlag.AlignCenter, label)
+    painter.end()
+    return pixmap
+
+
 def local_paths(mime):
     if mime is None or not mime.hasUrls():
         return []
@@ -105,6 +137,8 @@ class DropZone(QWidget):
     away as soon as the mouse button is up."""
 
     dropped = Signal(list, object)
+    # (paths, peer, edge): a drag of files entered the strip and is to be carried across.
+    entered = Signal(list, object, str)
 
     def __init__(self, button_down):
         flags = (Qt.WindowType.FramelessWindowHint | Qt.WindowType.Tool | Qt.WindowType.WindowStaysOnTopHint
@@ -118,6 +152,8 @@ class DropZone(QWidget):
         self._edge = "right"
         self._name = ""
         self._hover = False
+        # Carry the drag across rather than wait for a drop (TransferSettings.carry).
+        self.carry = True
         self._timer = QTimer(self)
         self._timer.setInterval(ZONE_POLL_MS)
         self._timer.timeout.connect(self._check)
@@ -155,7 +191,15 @@ class DropZone(QWidget):
             self.withdraw()
 
     def dragEnterEvent(self, event):
-        if local_paths(event.mimeData()):
+        paths = local_paths(event.mimeData())
+        if paths and self.carry:
+            # Not a drop target: the drag is ended here and carried on over there.
+            event.ignore()
+            peer, edge = self._peer, self._edge
+            self.withdraw()
+            self.entered.emit(paths, peer, edge)
+            return
+        if paths:
             event.setDropAction(Qt.DropAction.CopyAction)
             event.accept()
             self._hover = True
@@ -194,7 +238,8 @@ class DropZone(QWidget):
         font = QFont(self.font())
         font.setBold(True)
         painter.setFont(font)
-        text = tr("Drop to open on {name}").format(name=self._name)
+        text = (tr("To {name}").format(name=self._name) if self.carry
+                else tr("Drop to open on {name}").format(name=self._name))
         if self._edge in ("left", "right"):
             painter.translate(self.width() / 2, self.height() / 2)
             painter.rotate(-90 if self._edge == "right" else 90)
@@ -211,30 +256,55 @@ class TransferFeature(QObject):
     report = Signal(str, str, str)
     notice = Signal(str, str)
     drag = Signal(object, str, int, int)
+    # Carrying a drag: files dragged here arrived (entry, folder, offer); the button that drags
+    # them was let go on the other PC (job id); an app launched over there, so cross (peer, edge).
+    carry_arrived = Signal(object, str, object)
+    carry_released = Signal(str)
+    cross_to = Signal(object, str)
 
-    def __init__(self, app, button_down=None):
+    def __init__(self, app, button_down=None, injector=None, desktop=None):
         super().__init__(app)
         self._app = app
-        if button_down is None:
-            import desktop_win
-            button_down = lambda: desktop_win.button_down("left")
-        self.receiver = launch_win.Receiver(self.settings, notify=self.notice.emit)
+        if button_down is None or injector is None or desktop is None:
+            import platform_parts
+            injector = injector or platform_parts.injector
+            desktop = desktop or platform_parts.desktop
+            if button_down is None:
+                button_down = lambda: getattr(desktop, "button_down", lambda _name: False)("left")
+        self._button_down = button_down
+        self._injector = injector
+        self._desktop = desktop
+        self.receiver = launch_win.Receiver(self.settings, notify=self.notice.emit, carry=self._carry_from_server,
+                                            notice=self._notice_from_server, ask_back=self._ask_back)
         self.server = transfer.TransferServer(app.book, app._identity, self.receiver.inbox, self.receiver.decide,
-                                              self.receiver.received, self.receiver.launch)
+                                              self.receiver.received, self.receiver.launch, notice=self.receiver.notice)
         self.outbox = send_win.Outbox(self._peers, self.settings, lambda: bytes(app._identity()["id"]), self.report.emit)
         self.zone = DropZone(button_down)
         self.zone.dropped.connect(self._on_dropped)
+        self.zone.entered.connect(self._on_entered)
         self.report.connect(self._on_report)
         # Bound methods of this QObject, so emits from the serving and hook threads are queued
         # onto the GUI thread.
         self.notice.connect(self._on_notice)
         self.drag.connect(self._on_drag)
+        self.carry_arrived.connect(self._on_carry_arrived)
+        self.carry_released.connect(self._on_carry_released)
+        self.cross_to.connect(self._cross)
         app.sender.drag_at_edge = self._drag_from_hook
         self._last_drag = (None, None, 0.0)
         self._listening = False
         self._port_failed = False
         self._announced = None
         self._settings_cache = (None, None)
+        # Sending side of a carry: the job whose button is being watched, and for whom.
+        self._release_timer = QTimer(self)
+        self._release_timer.setInterval(CARRY_POLL_MS)
+        self._release_timer.timeout.connect(self._poll_release)
+        self._outgoing = None
+        self._release_started = 0.0
+        # Receiving side: the job being dragged here, and jobs whose button was let go first.
+        self._dragging = None
+        self._released = set()
 
     def settings(self):
         """transfer.json as it is now, read again only when the file changes: this is asked on
@@ -352,21 +422,179 @@ class TransferFeature(QObject):
         self.outbox.submit(paths, protocol.id_text(peer) if isinstance(peer, bytes) else "")
 
     def _on_drag(self, peer, edge, x, y):
-        if self.zone.showing(peer, edge) or not self.settings().drop_zone or not isinstance(peer, bytes):
+        settings = self.settings()
+        if self.zone.showing(peer, edge) or not settings.drop_zone or not isinstance(peer, bytes):
             return
         target = send_win.pick_target(self._peers(), protocol.id_text(peer))
         if target is None:
             return
+        self.zone.carry = settings.carry
         for screen in QGuiApplication.screens():
             if native_geometry(screen).contains(QPoint(x, y)):
                 self.zone.offer(peer, edge, target.get("name") or tr("the other PC"), screen, zone_rect(screen.geometry(), edge))
                 return
+
+    # Carrying a drag: the sending side
+
+    def _on_entered(self, paths, peer, edge):
+        """A drag of `paths` reached the strip at `edge`: end it here, and carry it to `peer`."""
+        if not isinstance(peer, bytes):
+            return
+        target_id = protocol.id_text(peer)
+        # Cancel this PC's own drag (Explorer's) before the pointer leaves, so letting the button
+        # go later drops nothing here. Injected input carries Beamer's mark: the hook passes it.
+        try:
+            self._injector.inject_key("esc", True)
+            self._injector.inject_key("esc", False)
+        except Exception:
+            LOGGER.exception("Could not cancel this PC's own drag")
+        files, launches = [], []
+        for path in paths:
+            more_files, apps = send_win.plan([path])
+            files.extend(more_files)
+            launches.extend((path, app) for app in apps)
+        for original, app in launches:
+            # The other PC's own copy if it has one, else this PC's: cross only when it opened there.
+            self.outbox.launch_there_or_here(
+                original, app, target_id,
+                done=lambda where, peer=peer, edge=edge: self.cross_to.emit(peer, edge) if where == "there" and not files else None)
+        if not files:
+            return
+        job = send_win.new_job()
+        self._outgoing = (job, target_id)
+        self._cross(peer, edge)
+        self.outbox.submit(files, target_id, carry=job)
+        self._release_started = time.monotonic()
+        self._release_timer.start()
+
+    def _cross(self, peer, edge):
+        """Move the keyboard and mouse to `peer` across `edge`, at the height the pointer is at."""
+        offset = None
+        try:
+            bounds = return_edge.union(self._desktop.monitors())
+            offset = return_edge.edge_offset(bounds, edge, self._desktop.cursor_position())
+        except Exception:
+            LOGGER.info("Crossing with a carried drag at the edge's middle", exc_info=True)
+        try:
+            self._app.sender.go(peer, return_edge.OPPOSITE[edge], offset)
+        except Exception:
+            LOGGER.exception("Could not cross with a carried drag")
+
+    def _poll_release(self):
+        """Watch this PC's button while its drag is carried: the moment it is let go, tell the
+        other PC, which lets its own drag drop where its pointer is."""
+        if self._outgoing is None:
+            self._release_timer.stop()
+            return
+        timed_out = time.monotonic() - self._release_started > CARRY_TIMEOUT_MS / 1000
+        try:
+            down = self._button_down()
+        except Exception:
+            down = False
+        if down and not timed_out:
+            return
+        self._release_timer.stop()
+        job, target_id = self._outgoing
+        self._outgoing = None
+        self.outbox.send_notice(transfer.KIND_RELEASE, job, target_id)
+
+    # Carrying a drag: the receiving side
+
+    def _carry_from_server(self, entry, folder, offer):
+        """On the serving thread: files dragged here arrived; the drag goes on in the GUI."""
+        self.carry_arrived.emit(entry, folder, offer)
+        return True, ""
+
+    def _notice_from_server(self, entry, offer):
+        """On the serving thread: a release for a drag here, or an open_back for a job sent from here."""
+        if offer["kind"] == transfer.KIND_RELEASE:
+            self.carry_released.emit(offer["ref"])
+            return True, ""
+        files = self.outbox.sent_files(offer["ref"])
+        if files is None:
+            return False, "no such job was sent from this PC"
+        problems = []
+        for path in files:
+            try:
+                os.startfile(path)
+            except OSError as exc:
+                problems.append(f"{os.path.basename(path)}: {exc}")
+        self.notice.emit("Beamer", tr("{items}: no app for it on {name}, so it opened here").format(
+            items=", ".join(os.path.basename(path) for path in files), name=entry.get("name") or tr("the other PC")))
+        return (False, "; ".join(problems)) if problems else (True, "")
+
+    def _ask_back(self, entry, offer):
+        """Nothing here opens the job's files: ask the PC they came from to open its own copies."""
+        self.outbox.send_notice(transfer.KIND_OPEN_BACK, offer["job"], entry.get("id") or "")
+        return True, ""
+
+    def _open_fallback(self, entry, folder, offer):
+        """Open a carried job as a plain one would be (it was let go before it arrived, or dropped
+        where nothing took it), off the GUI thread since it may ask the other PC to open it."""
+        import threading
+        threading.Thread(target=self.receiver.open_received, args=(entry, folder, offer),
+                         name="Beamer-carry-open", daemon=True).start()
+
+    def _on_carry_arrived(self, entry, folder, offer):
+        job = offer["job"]
+        driven = bool(getattr(self._app.server, "driven", False))
+        if job in self._released or not driven or self._dragging is not None:
+            self._released.discard(job)
+            self._open_fallback(entry, folder, offer)
+            return
+        paths = [os.path.join(folder, root) for root in offer["roots"]]
+        self._dragging = job
+        try:
+            self._injector.inject_mouse_button("left", True)
+        except Exception:
+            LOGGER.exception("Could not press the button for a carried drag")
+            self._dragging = None
+            self._open_fallback(entry, folder, offer)
+            return
+        QTimer.singleShot(CARRY_TIMEOUT_MS, lambda job=job: self._let_go(job))
+        QTimer.singleShot(CARRY_PRESS_MS, lambda: self._run_drag(entry, folder, offer, paths))
+
+    def _run_drag(self, entry, folder, offer, paths):
+        job = offer["job"]
+        if self._dragging != job:
+            self._open_fallback(entry, folder, offer)
+            return
+        mime = QMimeData()
+        mime.setUrls([QUrl.fromLocalFile(path) for path in paths])
+        drag = QDrag(self)
+        drag.setMimeData(mime)
+        drag.setPixmap(_drag_pixmap(", ".join(offer["roots"])))
+        try:
+            # Runs until the button is let go: by the release from the other PC, or the timeout.
+            action = drag.exec(Qt.DropAction.CopyAction | Qt.DropAction.LinkAction, Qt.DropAction.CopyAction)
+        finally:
+            self._let_go(job)
+        if action == Qt.DropAction.IgnoreAction:
+            # Dropped where nothing takes files: open them, as a plain send would.
+            self._open_fallback(entry, folder, offer)
+
+    def _on_carry_released(self, job):
+        if self._dragging == job:
+            self._let_go(job)
+        else:
+            self._released.add(job)
+
+    def _let_go(self, job):
+        if self._dragging != job:
+            return
+        self._dragging = None
+        try:
+            self._injector.inject_mouse_button("left", False)
+        except Exception:
+            LOGGER.exception("Could not let go of the button of a carried drag")
 
     def _on_report(self, kind, text, peer_id):
         if kind == "progress":
             self._app.tray.setToolTip(text)
             return
         self._app.tray.setToolTip(self._app._drive_status())
+        if kind == "carried":
+            return
         self._app._on_alert("Beamer", text)
         if kind == "done" and self.settings().follow:
             peer = protocol.read_id(peer_id)

@@ -55,6 +55,12 @@ MSG_RESULT = "result"
 
 KIND_FILES = "files"
 KIND_LAUNCH = "launch"
+# Notices about an earlier job, named by its id in `ref`: the button that was dragging it was let
+# go (release), or the machine it went to has nothing to open it with, so the sender should open
+# its own copy (open_back). Neither carries a path: each side acts only on what it already holds.
+KIND_RELEASE = "release"
+KIND_OPEN_BACK = "open_back"
+NOTICE_KINDS = (KIND_RELEASE, KIND_OPEN_BACK)
 
 CONNECT_SECONDS = 2.0
 HANDSHAKE_SECONDS = 5.0
@@ -228,12 +234,19 @@ def _msg(message_type, /, **data):
     return {"type": message_type, "data": data}
 
 
-def offer_files(job, manifest):
-    return _msg(MSG_OFFER, job=job, kind=KIND_FILES, roots=list(manifest.roots), dirs=list(manifest.dirs), items=list(manifest.items))
+def offer_files(job, manifest, carry=False):
+    """`carry`: the files were dragged across and the drag goes on over there, so the receiver
+    hands them to the drag rather than opening them."""
+    return _msg(MSG_OFFER, job=job, kind=KIND_FILES, roots=list(manifest.roots), dirs=list(manifest.dirs),
+                items=list(manifest.items), carry=bool(carry))
 
 
 def offer_launch(job, app, args=()):
     return _msg(MSG_OFFER, job=job, kind=KIND_LAUNCH, app=app, args=list(args))
+
+
+def offer_notice(job, kind, ref):
+    return _msg(MSG_OFFER, job=job, kind=kind, ref=ref)
 
 
 def read_offer(message):
@@ -254,7 +267,15 @@ def read_offer(message):
         if not isinstance(args, list) or len(args) > 16 or not all(isinstance(arg, str) and len(arg) <= 1024 for arg in args):
             return None
         return {"job": job, "kind": kind, "app": app, "args": list(args)}
+    if kind in NOTICE_KINDS:
+        ref = data.get("ref")
+        if not isinstance(ref, str) or not _JOB_SHAPE.fullmatch(ref):
+            return None
+        return {"job": job, "kind": kind, "ref": ref}
     if kind != KIND_FILES:
+        return None
+    carry = data.get("carry", False)
+    if not isinstance(carry, bool):
         return None
     roots, dirs, items = data.get("roots"), data.get("dirs"), data.get("items")
     if not isinstance(roots, list) or not 1 <= len(roots) <= MAX_ROOTS:
@@ -296,7 +317,7 @@ def read_offer(message):
         seen.add(path.lower())
         checked_items.append({"path": path, "size": size, "sha256": digest})
     return {"job": job, "kind": kind, "roots": list(roots), "dirs": checked_dirs, "items": checked_items,
-            "total": sum(item["size"] for item in checked_items)}
+            "total": sum(item["size"] for item in checked_items), "carry": carry}
 
 
 def _reason(text):
@@ -311,13 +332,15 @@ def _expect(message, kind):
 
 # The sending side
 
-def send(entry, own_id, *, manifest=None, launch=None, host=None, port=TRANSFER_PORT, job=None, progress=None,
-         connect=socket.create_connection, cancelled=None):
-    """Send `manifest` (files and folders) or `launch` (an (app, args) pair) to the paired machine
-    `entry`, and return the receiver's `result` data. Blocks; the app runs it on its own thread.
+def send(entry, own_id, *, manifest=None, launch=None, notice=None, carry=False, host=None, port=TRANSFER_PORT,
+         job=None, progress=None, connect=socket.create_connection, cancelled=None):
+    """Send `manifest` (files and folders), `launch` (an (app, args) pair) or `notice` (a
+    (KIND_RELEASE or KIND_OPEN_BACK, job id) pair) to the paired machine `entry`, and return the
+    receiver's `result` data. `carry` marks a manifest as dragged across (offer_files). Blocks; the
+    app runs it on its own thread.
     `progress(sent, total)` is called as chunks go. Raises TransferError on any failure."""
-    if (manifest is None) == (launch is None):
-        raise ValueError("send takes a manifest or a launch")
+    if sum(item is not None for item in (manifest, launch, notice)) != 1:
+        raise ValueError("send takes one of a manifest, a launch or a notice")
     if not protocol.linkable(entry):
         raise TransferError("this machine is not paired in a way that can send files")
     host = host or entry.get("host")
@@ -340,7 +363,12 @@ def send(entry, own_id, *, manifest=None, launch=None, host=None, port=TRANSFER_
         if welcome.get("id") != entry.get("id"):
             raise TransferError("a different machine answered at that address")
         sock.settimeout(IDLE_SECONDS)
-        offer = offer_files(job, manifest) if manifest is not None else offer_launch(job, *launch)
+        if manifest is not None:
+            offer = offer_files(job, manifest, carry)
+        elif launch is not None:
+            offer = offer_launch(job, *launch)
+        else:
+            offer = offer_notice(job, *notice)
         protocol.send_msg(sock, session, offer)
         answer = protocol.recv_msg(sock, session, FRAME_LIMIT)
         if isinstance(answer, dict) and answer.get("type") == MSG_REFUSE:
@@ -394,10 +422,11 @@ class TransferServer:
     accept or a REFUSE_* reason; `received(entry, folder, offer)` and `launch(entry, offer)` do the
     opening and return (ok, error). The callbacks run on the serving thread."""
 
-    def __init__(self, book, identity, inbox, decide, received, launch, port=TRANSFER_PORT):
+    def __init__(self, book, identity, inbox, decide, received, launch, port=TRANSFER_PORT, notice=None):
         self._book = book
         self._identity = identity
         self._inbox = inbox
+        self._notice = notice or (lambda entry, offer: (False, "notices are not handled here"))
         self._decide = decide
         self._received = received
         self._launch = launch
@@ -536,7 +565,10 @@ class TransferServer:
         if not admitted:
             protocol.send_msg(connection, session, _msg(MSG_REFUSE, reason=REFUSE_BUSY))
             return
-        if entry.get("in_use", True) is not True or entry.get("allow_drive") is not True:
+        # open_back only asks this machine to open files it sent itself (the receiver's decide
+        # checks the job), so the machine it went to need not be allowed to drive this one.
+        driving_needed = offer is None or offer["kind"] != KIND_OPEN_BACK
+        if entry.get("in_use", True) is not True or (driving_needed and entry.get("allow_drive") is not True):
             protocol.send_msg(connection, session, _msg(MSG_REFUSE, reason=REFUSE_NOT_ALLOWED))
             LOGGER.info("Refused a transfer from %s: it may not drive this machine", entry.get("name") or host)
             return
@@ -555,6 +587,8 @@ class TransferServer:
             protocol.send_msg(connection, session, _msg(MSG_ACCEPT))
             if offer["kind"] == KIND_LAUNCH:
                 ok, error = self._launch(entry, offer)
+            elif offer["kind"] in NOTICE_KINDS:
+                ok, error = self._notice(entry, offer)
             else:
                 folder = self._receive_files(connection, session, offer)
                 ok, error = self._received(entry, folder, offer)

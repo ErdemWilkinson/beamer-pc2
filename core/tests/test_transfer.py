@@ -31,13 +31,14 @@ class Rig:
         self.inbox = tempfile.mkdtemp()
         test.addCleanup(shutil.rmtree, self.inbox, True)
         self.book = receiver.PeerBook(lambda: {"peers": [entry(SENDER_ID, tok, **sender_entry)], "zones": []}, lambda s: None)
-        self.received, self.launched = [], []
+        self.received, self.launched, self.notices = [], [], []
         self.server = transfer.TransferServer(
             self.book, lambda: {"id": RECEIVER_ID}, lambda: self.inbox,
             decide or (lambda e, offer: None),
             lambda e, folder, offer: (self.received.append((folder, offer)) or (True, "")),
             lambda e, offer: (self.launched.append(offer) or (True, "")),
             port=0,
+            notice=lambda e, offer: (self.notices.append(offer) or (True, "")),
         )
         self.server.start()
         test.addCleanup(self.server.stop)
@@ -90,6 +91,18 @@ class OfferTests(unittest.TestCase):
         self.assertIsNone(transfer.read_offer(self.offer(items=[{"path": "p/a.txt", "size": -1, "sha256": "0" * 64}])))
         self.assertIsNone(transfer.read_offer(self.offer(items=[{"path": "p/a.txt", "size": 1.0, "sha256": "0" * 64}])))
         self.assertIsNone(transfer.read_offer(self.offer(items=[{"path": "p/a.txt", "size": 1, "sha256": "zz"}])))
+
+    def test_carry_is_a_flag_and_off_unless_given(self):
+        self.assertFalse(transfer.read_offer(self.offer())["carry"])
+        self.assertTrue(transfer.read_offer(self.offer(carry=True))["carry"])
+        self.assertIsNone(transfer.read_offer(self.offer(carry="yes")))
+
+    def test_notices_name_a_job_and_nothing_else(self):
+        read = transfer.read_offer(protocol.Message({"type": "offer", "data": {"job": "j2", "kind": "release", "ref": "job1"}}))
+        self.assertEqual(read, {"job": "j2", "kind": "release", "ref": "job1"})
+        for ref in ("", "../x", "a b", None, 5, "x" * 33):
+            with self.subTest(ref=ref):
+                self.assertIsNone(transfer.read_offer(protocol.Message({"type": "offer", "data": {"job": "j", "kind": "open_back", "ref": ref}})))
 
     def test_launch_offers_name_an_app_and_nothing_that_looks_like_a_path(self):
         read = transfer.read_offer(protocol.Message({"type": "offer", "data": {"job": "j", "kind": "launch", "app": "Code.exe"}}))
@@ -167,6 +180,27 @@ class EndToEndTests(unittest.TestCase):
         self.assertTrue(result["ok"])
         self.assertEqual(rig.launched[0]["app"], "Code.exe")
         self.assertEqual(rig.received, [])
+
+    def test_a_carried_drag_arrives_marked_and_its_release_follows(self):
+        rig = Rig(self, self.tok)
+        manifest = transfer.build_manifest([self.make_project()])
+        transfer.send(self.sender_entry(), SENDER_ID, manifest=manifest, port=rig.port, carry=True, job="JOB1")
+        _folder, offer = rig.received[0]
+        self.assertTrue(offer["carry"])
+        self.assertEqual(offer["job"], "JOB1")
+        result = transfer.send(self.sender_entry(), SENDER_ID, notice=(transfer.KIND_RELEASE, "JOB1"), port=rig.port)
+        self.assertTrue(result["ok"])
+        self.assertEqual(rig.notices[0]["kind"], transfer.KIND_RELEASE)
+        self.assertEqual(rig.notices[0]["ref"], "JOB1")
+
+    def test_open_back_needs_no_driving_but_everything_else_does(self):
+        rig = Rig(self, self.tok, allow_drive=False)
+        result = transfer.send(self.sender_entry(), SENDER_ID, notice=(transfer.KIND_OPEN_BACK, "JOB1"), port=rig.port)
+        self.assertTrue(result["ok"])
+        with self.assertRaises(transfer.TransferError) as caught:
+            transfer.send(self.sender_entry(), SENDER_ID, notice=(transfer.KIND_RELEASE, "JOB1"), port=rig.port)
+        self.assertEqual(caught.exception.reason, transfer.REFUSE_NOT_ALLOWED)
+        self.assertEqual([offer["kind"] for offer in rig.notices], [transfer.KIND_OPEN_BACK])
 
     def test_a_machine_that_may_not_drive_this_one_is_refused(self):
         rig = Rig(self, self.tok, allow_drive=False)

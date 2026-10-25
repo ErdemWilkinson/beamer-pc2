@@ -55,7 +55,7 @@ class TargetTests(unittest.TestCase):
 class OutboxTests(unittest.TestCase):
     def setUp(self):
         self.peer = peer()
-        self.sent, self.reports = [], []
+        self.sent, self.reports, self.opened = [], [], []
         self.settings = launch_win.TransferSettings()
 
     def outbox(self, send=None):
@@ -65,7 +65,7 @@ class OutboxTests(unittest.TestCase):
 
         return send_win.Outbox(lambda: [self.peer], lambda: self.settings, lambda: b"\x01" * 16,
                                lambda kind, text, peer_id: self.reports.append((kind, text, peer_id)),
-                               send=send or record)
+                               send=send or record, open_local=self.opened.append)
 
     def test_a_folder_is_sent_and_reported_done_for_its_peer(self):
         folder = tempfile.mkdtemp()
@@ -77,13 +77,36 @@ class OutboxTests(unittest.TestCase):
         self.assertEqual(self.sent[0]["manifest"].roots, [os.path.basename(folder)])
         self.assertEqual(self.reports[-1], ("done", "Opened on PC2", self.peer["id"]))
 
-    def test_a_refusal_is_reported_in_words(self):
+    def test_an_app_the_other_pc_lacks_opens_here(self):
         def refuse(entry, own_id, **kwargs):
             raise transfer.TransferError("refused", reason=transfer.REFUSE_UNKNOWN_APP)
 
         self.outbox(refuse).send_now([r"C:\Tools\Antigravity.exe"])
+        self.assertEqual(self.opened, [r"C:\Tools\Antigravity.exe"])
+        self.assertEqual(self.reports[-1][0], "note")
+        self.assertIn("Antigravity.exe is not on PC2", self.reports[-1][1])
+
+    def test_other_refusals_are_reported_in_words_and_open_nothing(self):
+        def refuse(entry, own_id, **kwargs):
+            raise transfer.TransferError("refused", reason=transfer.REFUSE_NOT_ALLOWED)
+
+        self.outbox(refuse).send_now([r"C:\Tools\Antigravity.exe"])
+        self.assertEqual(self.opened, [])
         self.assertEqual(self.reports[-1][0], "failed")
-        self.assertIn("Antigravity.exe is not installed on PC2", self.reports[-1][1])
+        self.assertIn("does not let this PC drive it", self.reports[-1][1])
+
+    def test_sent_files_are_remembered_by_job_for_open_back(self):
+        folder = tempfile.mkdtemp()
+        self.addCleanup(shutil.rmtree, folder, True)
+        note = os.path.join(folder, "a.psd")
+        with open(note, "wb") as handle:
+            handle.write(b"x")
+        box = self.outbox()
+        box.send_now([note], carry="JOB1")
+        self.assertEqual(box.sent_files("JOB1"), [note])
+        self.assertIsNone(box.sent_files("OTHER"))
+        self.assertTrue(self.sent[0]["carry"])
+        self.assertEqual(self.reports[-1][0], "carried")
 
     def test_without_a_target_nothing_is_sent(self):
         self.peer = peer(in_use=False)
@@ -94,7 +117,7 @@ class OutboxTests(unittest.TestCase):
     def run_outbox(self, *submissions, count=1):
         jobs = []
         box = self.outbox()
-        box.send_now = lambda paths, target, cancelled=None: jobs.append((target, paths))
+        box.send_now = lambda paths, target, cancelled=None, carry=None: jobs.append((target, paths))
         for submission in submissions:
             box.submit(*submission)
         box.start()
@@ -118,7 +141,7 @@ class OutboxTests(unittest.TestCase):
         box.start()
         box.stop()
         jobs = []
-        box.send_now = lambda paths, target, cancelled=None: jobs.append(paths)
+        box.send_now = lambda paths, target, cancelled=None, carry=None: jobs.append(paths)
         box.start()
         self.addCleanup(box.stop)
         box.submit(["a"])

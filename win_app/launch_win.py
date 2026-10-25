@@ -76,6 +76,9 @@ class TransferSettings:
     menu: bool = True
     # The strip that shows at a crossing edge while something is dragged into it.
     drop_zone: bool = True
+    # A drag that reaches the strip carries on over there, dropped wherever the button is let go
+    # on the other PC; off, the strip is a drop target and what is dropped on it opens over there.
+    carry: bool = True
     # The machine sends go to, by id; the only paired one when unset.
     target: str = ""
 
@@ -232,23 +235,51 @@ def mark_from_internet(folder):
                 return
 
 
+def has_association(path):
+    """Whether this PC has an app that opens files like `path` (what a double-click would run)."""
+    if sys.platform != "win32":
+        return False
+    import ctypes
+    from ctypes import wintypes
+
+    size = wintypes.DWORD(1024)
+    buffer = ctypes.create_unicode_buffer(1024)
+    # ASSOCF_INIT_IGNOREUNKNOWN (0x400): an unknown extension is no association, not the
+    # "Open with" dialog; ASSOCSTR_EXECUTABLE (2).
+    result = ctypes.windll.shlwapi.AssocQueryStringW(0x400, 2, Path(path).suffix or ".", None, buffer, ctypes.byref(size))
+    return result == 0 and bool(buffer.value)
+
+
 class Receiver:
     """The callbacks core/transfer.TransferServer takes, under the settings `load()` gives each
     time (so a change on the settings page applies to the next transfer). `notify(title, text)`
-    tells the user what arrived; it is called from the serving thread."""
+    tells the user what arrived; it is called from the serving thread.
 
-    def __init__(self, load, notify=None, spawn=_spawn, startfile=_startfile, find=find_app, mark=mark_from_internet):
+    `carry(entry, folder, offer)` takes files that were dragged across, so the drag goes on with
+    them instead of their being opened; `notice(entry, offer)` handles release and open_back;
+    `ask_back(entry, offer)` asks the sender to open its own copy of a job none of whose files this
+    PC can open. Each returns (ok, error)."""
+
+    def __init__(self, load, notify=None, spawn=_spawn, startfile=_startfile, find=find_app, mark=mark_from_internet,
+                 carry=None, notice=None, ask_back=None, associated=has_association):
         self._load = load
         self._notify = notify or (lambda title, text: None)
         self._spawn = spawn
         self._startfile = startfile
         self._find = find
         self._mark = mark
+        self._carry = carry
+        self._notice = notice
+        self._ask_back = ask_back
+        self._associated = associated
 
     def inbox(self):
         return self._load().inbox_path()
 
     def decide(self, entry, offer):
+        if offer["kind"] in transfer.NOTICE_KINDS:
+            # About a job already here or sent from here; notice() checks that it is one.
+            return None if self._notice is not None else transfer.REFUSE_DECLINED
         settings = self._load()
         if not settings.receive:
             return transfer.REFUSE_DECLINED
@@ -275,18 +306,38 @@ class Receiver:
         self._notify(offer["app"], tr("Started for {name}").format(name=entry.get("name") or tr("the other PC")))
         return True, ""
 
+    def notice(self, entry, offer):
+        if self._notice is None:
+            return False, "notices are not handled here"
+        return self._notice(entry, offer)
+
     def received(self, entry, folder, offer):
+        """A job that arrived: handed to the drag when it was dragged across, opened otherwise."""
+        self._mark(folder)
+        if offer.get("carry") and self._carry is not None:
+            return self._carry(entry, folder, offer)
+        return self.open_received(entry, folder, offer)
+
+    def open_received(self, entry, folder, offer):
         """Open each root of the job: folders in the editor, files of an openable kind with their
-        associated app, anything else only shown. Returns (ok, error); ok when nothing failed.
+        associated app, anything else only shown. When no root at all can be opened here (files
+        of a kind this PC has no app for), the sender is asked to open its own copies instead.
+        Returns (ok, error); ok when nothing failed.
 
         A folder opens in the editor, whose own guard (VS Code's Workspace Trust) decides whether
         anything in it may run: the inbox must never be inside a trusted folder."""
         settings = self._load()
         problems = []
         held_back = []
-        self._mark(folder)
-        for root in offer["roots"]:
-            path = os.path.join(folder, root)
+        paths = [os.path.join(folder, root) for root in offer["roots"]]
+        unopenable = [path for path in paths if not os.path.isdir(path) and not (openable(path) and self._associated(path))]
+        if paths and len(unopenable) == len(paths) and self._ask_back is not None:
+            ok, error = self._ask_back(entry, offer)
+            if ok:
+                self._notify(tr("From {name}").format(name=plain(entry.get("name") or tr("the other PC"))),
+                             tr("{items}: no app for it here, so it opened on the other PC").format(items=plain(", ".join(offer["roots"]))))
+                return True, "opened on the sending PC: nothing here opens it"
+        for root, path in zip(offer["roots"], paths):
             try:
                 if os.path.isdir(path):
                     editor = editor_exe(settings, self._find)
@@ -294,7 +345,7 @@ class Receiver:
                         self._spawn([editor, path])
                     else:
                         self._startfile(path)
-                elif openable(path):
+                elif openable(path) and self._associated(path):
                     self._startfile(path)
                 else:
                     held_back.append(path)

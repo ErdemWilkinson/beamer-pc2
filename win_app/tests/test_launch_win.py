@@ -18,9 +18,9 @@ CODE = r"C:\Programs\Code.exe"
 
 
 class Rig:
-    def __init__(self, test, settings=None, installed=(("Code.exe", CODE),)):
+    def __init__(self, test, settings=None, installed=(("Code.exe", CODE),), associated=lambda path: True, ask_back=True):
         self.settings = settings or launch_win.TransferSettings()
-        self.spawned, self.started, self.notes, self.marked = [], [], [], []
+        self.spawned, self.started, self.notes, self.marked, self.carried, self.asked = [], [], [], [], [], []
         installed = {name.lower(): path for name, path in installed}
         self.receiver = launch_win.Receiver(
             lambda: self.settings,
@@ -29,6 +29,10 @@ class Rig:
             startfile=self.started.append,
             find=lambda name, configured="": installed.get(name.lower(), ""),
             mark=self.marked.append,
+            carry=lambda entry, folder, offer: (self.carried.append(offer["job"]) or (True, "")),
+            notice=lambda entry, offer: (True, ""),
+            ask_back=(lambda entry, offer: (self.asked.append(offer["job"]) or (True, ""))) if ask_back else None,
+            associated=associated,
         )
         self.folder = tempfile.mkdtemp()
         test.addCleanup(shutil.rmtree, self.folder, True)
@@ -97,7 +101,7 @@ class OpenTests(unittest.TestCase):
 
     def test_anything_not_known_to_be_harmless_is_only_shown(self):
         names = ("setup.exe", "run.BAT", "x.ps1", "y.lnk", "rapor.docm", "sayfa.html", "tema.theme", "uzak.rdp", "garip.xyz")
-        rig = Rig(self)
+        rig = Rig(self, ask_back=False)
         rig.make(*names)
         ok, error = rig.receiver.received(PEER, rig.folder, files_offer(*names))
         self.assertTrue(ok)
@@ -106,6 +110,37 @@ class OpenTests(unittest.TestCase):
         self.assertTrue(all(argv[0].lower().endswith("explorer.exe") and os.path.isabs(argv[0]) and argv[1] == "/select,"
                             for argv in rig.spawned))
         self.assertEqual(len(rig.spawned), len(names))
+
+    def test_a_carried_job_goes_to_the_drag_unopened_but_marked(self):
+        rig = Rig(self)
+        rig.make("notlar.txt")
+        offer = dict(files_offer("notlar.txt"), carry=True)
+        rig.receiver.received(PEER, rig.folder, offer)
+        self.assertEqual(rig.carried, ["j"])
+        self.assertEqual(rig.started, [])
+        self.assertEqual(rig.marked, [rig.folder])
+
+    def test_files_nothing_here_opens_are_opened_by_the_sender(self):
+        rig = Rig(self, associated=lambda path: False)
+        rig.make("tasarim.psd", "notlar.txt")
+        ok, error = rig.receiver.received(PEER, rig.folder, files_offer("tasarim.psd", "notlar.txt"))
+        self.assertTrue(ok)
+        self.assertIn("sending PC", error)
+        self.assertEqual(rig.asked, ["j"])
+        self.assertEqual(rig.started, [])
+
+    def test_a_folder_or_one_openable_file_keeps_the_job_here(self):
+        rig = Rig(self, associated=lambda path: path.endswith(".txt"))
+        rig.make("tasarim.psd", "notlar.txt")
+        rig.receiver.received(PEER, rig.folder, files_offer("tasarim.psd", "notlar.txt"))
+        self.assertEqual(rig.asked, [])
+        self.assertEqual(rig.started, [os.path.join(rig.folder, "notlar.txt")])
+
+    def test_notices_pass_the_decision_and_reach_the_handler(self):
+        rig = Rig(self)
+        self.assertIsNone(rig.receiver.decide(PEER, {"job": "n", "kind": transfer.KIND_RELEASE, "ref": "j"}))
+        bare = launch_win.Receiver(lambda: launch_win.TransferSettings())
+        self.assertEqual(bare.decide(PEER, {"job": "n", "kind": transfer.KIND_RELEASE, "ref": "j"}), transfer.REFUSE_DECLINED)
 
     def test_what_arrives_is_marked_as_from_the_internet_first(self):
         rig = Rig(self)

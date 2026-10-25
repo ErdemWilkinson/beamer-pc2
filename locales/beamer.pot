@@ -4827,6 +4827,11 @@ msgstr ""
 msgid "{items} (saved and shown, not opened)"
 msgstr ""
 
+#: win_app/launch_win.py
+#, python-brace-format
+msgid "{items}: no app for it here, so it opened on the other PC"
+msgstr ""
+
 #: win_app/machines_win.py
 msgid "Pairing code"
 msgstr ""
@@ -5324,6 +5329,16 @@ msgstr ""
 msgid "{name} could not open what was sent"
 msgstr ""
 
+#: win_app/send_win.py
+#, python-brace-format
+msgid "{app} is not on {name}, so it opened on this PC"
+msgstr ""
+
+#: win_app/send_win.py
+#, python-brace-format
+msgid "Could not open {app}: {error}"
+msgstr ""
+
 #: win_app/sender.py
 msgid "Not connected"
 msgstr ""
@@ -5391,6 +5406,11 @@ msgstr ""
 
 #: win_app/transfer_feature.py
 #, python-brace-format
+msgid "To {name}"
+msgstr ""
+
+#: win_app/transfer_feature.py
+#, python-brace-format
 msgid "Drop to open on {name}"
 msgstr ""
 
@@ -5402,6 +5422,11 @@ msgstr ""
 #: win_app/transfer_feature.py
 #, python-brace-format
 msgid "Send to {name}"
+msgstr ""
+
+#: win_app/transfer_feature.py
+#, python-brace-format
+msgid "{items}: no app for it on {name}, so it opened here"
 msgstr ""
 
 #: win_app/transfer_feature.py
