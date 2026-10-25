@@ -10,6 +10,22 @@ donanımıyla açtırmak.**
 > durumu o makinede kalır). Bu yüzden gönderilen şey **içerik** (dosya/klasör) ya da **başlatma
 > isteği** (uygulama adı). PC2 bunu kendi kurulu uygulamasıyla, kendi CPU/GPU/RAM'iyle açar.
 
+## Kurulum (tek satır)
+
+Her iki PC'de PowerShell açıp şunu yapıştırın:
+
+```powershell
+irm https://raw.githubusercontent.com/ErdemWilkinson/beamer-pc2/main/kur.ps1 | iex
+```
+
+`kur.ps1` sırasıyla şunları yapar:
+1. Python 3.11 ve Git yoksa `winget` ile kurar.
+2. Repoyu `%USERPROFILE%\beamer-pc2` klasörüne indirir (zaten varsa günceller) ve bağımlılıkları kurar.
+3. Güvenlik duvarı kurallarını yazar ve Wi-Fi'ı Özel ağ yapar. Bu adım bir kez yönetici izni ister.
+4. Masaüstü, Başlat menüsü ve oturum açılışı için kısayol ekler, sonra Beamer'ı başlatır.
+
+Güncellemek için aynı komutu tekrar çalıştırmanız yeterli.
+
 ## Nasıl kullanılır
 
 İki bilgisayara da bu fork kurulur ve normal Beamer gibi eşleştirilir (6 haneli kod). Sonra:

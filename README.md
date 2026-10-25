@@ -12,6 +12,15 @@
 > **This is a fork.** It adds sending files, folders and app launches to the other PC, opened
 > there on its own hardware: drag onto the crossing edge, or right-click → "Open on …".
 > See [docs/PC2-AKTARIM.md](docs/PC2-AKTARIM.md) (Turkish). Everything else is upstream Beamer.
+>
+> **Tek satırda kurulum / one-line setup** (Windows PowerShell, on each PC):
+>
+> ```powershell
+> irm https://raw.githubusercontent.com/ErdemWilkinson/beamer-pc2/main/kur.ps1 | iex
+> ```
+>
+> Installs Python 3.11 and Git if needed, puts the app in `%USERPROFILE%\beamer-pc2`, writes the
+> firewall rules (one admin prompt), adds shortcuts and starts Beamer. Run it again to update.
 
 ![The pointer is pushed against the right-hand edge of a Mac's screen, the edge lights up as the push builds, and the pointer carries on onto the Windows PC beside it at the same height](assets/beamer-crossing.gif)
 

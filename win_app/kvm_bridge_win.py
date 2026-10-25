@@ -4875,7 +4875,12 @@ class WindowsApplication(QWidget):
 
     def _firewall_target(self) -> tuple:
         port = self._config.port if self._config is not None else protocol.DEFAULT_PORT
-        return str(Path(sys.executable).resolve()), port
+        exe = Path(sys.executable)
+        if not getattr(sys, "frozen", False) and sys.prefix != sys.base_prefix:
+            # Run from a venv, the venv's pythonw.exe only starts the base interpreter, and that
+            # process is the one that listens, so the rule has to name it.
+            exe = Path(sys.base_exec_prefix) / exe.name
+        return str(exe.resolve()), port
 
     def _check_firewall(self) -> None:
         if portable_runtime.enabled():
