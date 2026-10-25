@@ -183,6 +183,9 @@ class DropZone(QWidget):
     def paintEvent(self, event):
         painter = QPainter(self)
         painter.setRenderHint(QPainter.RenderHint.Antialiasing)
+        # Every pixel gets some alpha: Windows passes a drag straight through a translucent
+        # window's fully transparent pixels, and a drag pushing at the edge sits on the last one.
+        painter.fillRect(self.rect(), QColor(46, 125, 255, 60))
         fill = QColor(46, 125, 255, 200 if self._hover else 120)
         painter.setPen(QPen(QColor(255, 255, 255, 220), 2))
         painter.setBrush(fill)
