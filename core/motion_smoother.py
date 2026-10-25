@@ -1,16 +1,18 @@
-"""Pointer motion from a peer, played out on the hand's own timeline instead of as it arrives.
+"""Pointer motion from a peer, played out at the hand's speed instead of as it arrives.
 
 Over a jittery Wi-Fi link the moves of a steadily moving mouse arrive in bursts: nothing for
-20-80 ms, then everything at once. The receiver applied each burst as one jump, so the pointer
-moved like 20 fps however smooth the mouse.
+20-80 ms, then the dozens of small messages sent meanwhile, all at once. The receiver applied
+them as they came, so the pointer jumped every burst and looked like 20 fps however smooth the
+mouse.
 
-This is a jitter buffer. Motion that arrives after a gap was made during that gap, so each
-arrival is spread evenly over the gap before it (at most MAX_DELAY; after a rest of the hand,
-over one TICK). That rebuilds the hand's timeline, and the pointer follows it `delay` seconds
-behind, moved every TICK seconds by whatever of the timeline that stretch covers. A stall
-shorter than the delay is played straight through at the hand's speed. The delay follows the
-link: it rises at once to the longest recent gap (with a margin) and falls back with a half-life
-of HALF_LIFE seconds, between MIN_DELAY and MAX_DELAY.
+This is a jitter buffer. What arrives joins a queue, kept in order so the pointer follows the
+hand's path. The pointer is moved every TICK seconds along that queue at the hand's speed: the
+path length that arrived over the last SPEED_WINDOW seconds, eased over EASE seconds so bursts
+do not make it pulse, and corrected to keep about `delay` seconds of motion in hand, which lets a
+stall shorter than the delay play straight through. The delay follows the link: a gap between
+arrivals while the hand is moving (a stall; a gap while it is still is the hand resting) sets it
+to that gap with a margin, and it falls back with a half-life of HALF_LIFE seconds, between
+MIN_DELAY and MAX_DELAY.
 
 The receiver smooths only motion away from every wall and armed edge, and flushes what is
 pending before anything else it injects (a click, a key, a move near an edge), so those land
@@ -29,13 +31,21 @@ from typing import Callable, Tuple
 
 LOGGER = logging.getLogger(__name__)
 TICK = 0.004
+SPEED_WINDOW = 0.25
+EASE = 0.10
+CORRECTION = 0.15
 MIN_DELAY = 0.020
-MAX_DELAY = 0.100
+MAX_DELAY = 0.090
 DELAY_MARGIN = 1.2
-HALF_LIFE = 2.0
-# A pause longer than this is the hand at rest, not the link: it is not spread over, and it does
-# not lengthen the delay.
-REST = 0.25
+HALF_LIFE = 1.0
+# A gap longer than STALL while the hand moves was a stall of the link if, soon after the arrival
+# that ends it (half the gap, at most BURST), at least half the motion the hand would have made
+# meanwhile comes in: the messages held, released together (a burst a slow receiver works through
+# one by one, or merged into one). A gap followed by little was the hand resting.
+STALL = 0.008
+BURST = 0.020
+# The hand counts as moving above this speed, in pixels a second.
+MOVING = 30.0
 STATS_EVERY = 10.0
 
 
@@ -57,24 +67,9 @@ def _fine_timer(enable: bool) -> None:
         LOGGER.debug("Could not change the timer resolution", exc_info=True)
 
 
-class _Stretch:
-    """Motion (dx, dy) made evenly over [start, end] on the hand's timeline; `done` is the share
-    already moved."""
-
-    __slots__ = ("start", "end", "dx", "dy", "done")
-
-    def __init__(self, start, end, dx, dy):
-        self.start, self.end, self.dx, self.dy, self.done = start, end, dx, dy, 0.0
-
-    def share(self, until):
-        if until >= self.end:
-            return 1.0
-        return max(0.0, (until - self.start) / (self.end - self.start))
-
-
 class MotionSmoother:
-    """`move(dx, dy)` injects one relative move; `active()` says whether a peer still drives this
-    machine (pending motion is dropped when not). `clock` and `sleep` are injected by tests."""
+    """`move(dx, dy)` places the pointer that far on; `active()` says whether a peer still drives
+    this machine (pending motion is dropped when not). `clock` and `sleep` are injected by tests."""
 
     def __init__(self, move: Callable[[int, int], None], active: Callable[[], bool] = lambda: True,
                  clock=time.perf_counter, sleep=time.sleep, tick: float = TICK) -> None:
@@ -87,98 +82,140 @@ class MotionSmoother:
         self._wake = threading.Event()
         self._stop = threading.Event()
         self._thread = None
-        self._stretches = collections.deque()
-        self._x = self._y = 0.0
-        self._out_x = self._out_y = 0.0
+        self._queue = collections.deque()      # [dx, dy] still to move, oldest first
+        self._arrived = collections.deque()    # (time, path length) over SPEED_WINDOW
+        self._x = self._y = 0.0                # the queue's sum
+        self._out_x = self._out_y = 0.0        # moved in fractions, not yet whole pixels
+        self._speed = 0.0
         self._delay = MIN_DELAY
         self._last_add = None
-        self._played_to = float("-inf")
-        # For the log, every STATS_EVERY seconds of play: what arrived, how evenly the steps ran,
-        # and how often the buffer ran dry while motion was still owed.
-        self._stats = {"arrivals": 0, "steps": 0, "dry": 0, "longest_step": 0.0, "longest_gap": 0.0}
+        self._suspect = None                   # a gap while moving: a stall if its motion follows
+        self._last_step = None
+        self._stats = {"arrivals": 0, "steps": 0, "dry": 0, "longest_step": 0.0, "longest_stall": 0.0}
         self._stats_at = None
-        self._last_step_at = None
 
     @property
     def delay(self) -> float:
         return self._delay
 
     def add(self, dx: float, dy: float) -> None:
-        """Motion that has arrived, in the pixels the injector moves."""
+        """Motion that has arrived, in the pixels the pointer moves."""
         now = self._clock()
         with self._lock:
-            gap = now - self._last_add if self._last_add is not None else REST
-            spread = min(gap, MAX_DELAY) if gap < REST else self._tick
             self._stats["arrivals"] += 1
-            if gap < REST:
-                self._stats["longest_gap"] = max(self._stats["longest_gap"], gap)
-            self._delay = min(MAX_DELAY, max(MIN_DELAY, self._delay * 0.5 ** (gap / HALF_LIFE),
-                                             spread * DELAY_MARGIN))
+            length = math.hypot(dx, dy)
+            if self._last_add is not None:
+                gap = now - self._last_add
+                delay = self._delay * 0.5 ** (gap / HALF_LIFE)
+                if gap > STALL and self._speed > MOVING and gap < 4 * MAX_DELAY:
+                    # [the gap, the motion it should have held, what has come since, until when]
+                    self._suspect = [gap, self._speed * gap, 0.0, now + min(BURST, gap / 2)]
+                if self._suspect is not None:
+                    if now > self._suspect[3]:
+                        self._suspect = None
+                    else:
+                        self._suspect[2] += length
+                        if self._suspect[2] >= 0.5 * self._suspect[1]:
+                            self._stats["longest_stall"] = max(self._stats["longest_stall"], self._suspect[0])
+                            delay = max(delay, self._suspect[0] * DELAY_MARGIN)
+                            self._suspect = None
+                self._delay = min(MAX_DELAY, max(MIN_DELAY, delay))
             self._last_add = now
-            self._stretches.append(_Stretch(now - spread, now, dx, dy))
+            self._queue.append([float(dx), float(dy)])
+            self._arrived.append((now, length))
             self._x += dx
             self._y += dy
         self._wake.set()
 
     def pending(self) -> Tuple[int, int]:
-        """The whole pixels arrived but not yet injected."""
+        """The whole pixels arrived but not yet moved."""
         with self._lock:
             return _whole(self._x), _whole(self._y)
 
     def flush(self) -> None:
-        """Inject everything pending at once: before a click, a key or a move near an edge."""
+        """Move everything pending at once: before a click, a key or a move near an edge."""
         with self._lock:
             dx, dy = _whole(self._x), _whole(self._y)
             self._x -= dx
             self._y -= dy
+            self._queue.clear()
             self._out_x = self._out_y = 0.0
-            self._stretches.clear()
-            self._played_to = self._clock() - self._delay
             if dx or dy:
                 self._move(dx, dy)
 
     def drop(self) -> None:
         with self._lock:
-            self._x = self._y = self._out_x = self._out_y = 0.0
-            self._stretches.clear()
+            self._clear()
+
+    def _clear(self) -> None:
+        self._queue.clear()
+        self._arrived.clear()
+        self._x = self._y = self._out_x = self._out_y = 0.0
+        self._speed = 0.0
+
+    def _take(self, distance: float) -> Tuple[float, float]:
+        """`distance` along the queued path, from its oldest end."""
+        moved_x = moved_y = 0.0
+        while self._queue and distance > 0:
+            part = self._queue[0]
+            length = math.hypot(part[0], part[1])
+            if length <= distance:
+                moved_x += part[0]
+                moved_y += part[1]
+                distance -= length
+                self._queue.popleft()
+                continue
+            share = distance / length
+            moved_x += part[0] * share
+            moved_y += part[1] * share
+            part[0] -= part[0] * share
+            part[1] -= part[1] * share
+            distance = 0.0
+        return moved_x, moved_y
 
     def step(self) -> bool:
-        """Move the pointer along the timeline up to `delay` ago. False when nothing is pending."""
+        """Move the pointer for the time since the last step. False when nothing is pending."""
         now = self._clock()
         with self._lock:
             if not self._active():
+                self._clear()
+                return False
+            while self._arrived and now - self._arrived[0][0] > SPEED_WINDOW:
+                self._arrived.popleft()
+            owed = sum(math.hypot(part[0], part[1]) for part in self._queue)
+            if owed < 0.5:
+                # The last of it, fractions included, so the pointer ends where the hand did.
+                dx, dy = round(self._out_x + self._x), round(self._out_y + self._y)
+                self._queue.clear()
                 self._x = self._y = self._out_x = self._out_y = 0.0
-                self._stretches.clear()
+                self._last_step = None
+                if dx or dy:
+                    self._move(dx, dy)
                 return False
-            if not self._stretches:
-                return False
-            if self._last_step_at is not None and now - self._last_step_at < REST:
-                self._stats["longest_step"] = max(self._stats["longest_step"], now - self._last_step_at)
-            self._last_step_at = now
+            elapsed = self._tick if self._last_step is None else min(0.05, now - self._last_step)
+            if self._last_step is not None:
+                self._stats["longest_step"] = max(self._stats["longest_step"], elapsed)
+            self._last_step = now
             self._stats["steps"] += 1
-            until = max(self._played_to, now - self._delay)
-            self._played_to = until
-            if until <= self._stretches[0].start and now - self._stretches[-1].end > self._delay:
-                # Owed motion, none of it due yet, and nothing new for longer than the delay:
-                # the link stalled past what the buffer covers.
+            arriving = sum(length for _at, length in self._arrived) / SPEED_WINDOW
+            self._speed += (arriving - self._speed) * min(1.0, elapsed / EASE)
+            # The hand's speed, pulled toward keeping `delay` seconds of motion in hand; never below
+            # half the hand's speed while something is owed (a stop is what reads as a stutter),
+            # and draining what is left once the hand has stopped.
+            rate = max(self._speed + (owed - self._speed * self._delay) / CORRECTION,
+                       0.5 * self._speed, owed / (4 * CORRECTION))
+            distance = min(owed, rate * elapsed)
+            if distance <= 0:
                 self._stats["dry"] += 1
-            for stretch in self._stretches:
-                if stretch.start >= until:
-                    break
-                share = stretch.share(until)
-                self._out_x += stretch.dx * (share - stretch.done)
-                self._out_y += stretch.dy * (share - stretch.done)
-                stretch.done = share
-            while self._stretches and self._stretches[0].done >= 1.0:
-                self._stretches.popleft()
+                return True
+            moved_x, moved_y = self._take(distance)
+            self._out_x += moved_x
+            self._out_y += moved_y
             dx, dy = _whole(self._out_x), _whole(self._out_y)
             self._out_x -= dx
             self._out_y -= dy
-            self._x -= dx
-            self._y -= dy
-            if not self._stretches:
-                # The last of it: the fraction left over goes with the next motion.
-                self._out_x = self._out_y = 0.0
+            self._x -= moved_x
+            self._y -= moved_y
             if dx or dy:
                 self._move(dx, dy)
             return True
@@ -208,8 +245,7 @@ class MotionSmoother:
             if busy:
                 self._sleep(self._tick)
             else:
-                self._last_step_at = None
-                self._wake.wait(REST)
+                self._wake.wait(0.25)
                 self._wake.clear()
 
     def _report(self) -> None:
@@ -221,8 +257,8 @@ class MotionSmoother:
             return
         with self._lock:
             stats, self._stats_at = dict(self._stats), now
-            self._stats.update(arrivals=0, steps=0, dry=0, longest_step=0.0, longest_gap=0.0)
+            self._stats.update(arrivals=0, steps=0, dry=0, longest_step=0.0, longest_stall=0.0)
         if stats["steps"]:
-            LOGGER.info("Smoothed motion: %d arrivals (longest gap %.0f ms), %d steps (longest %.1f ms), "
-                        "%d dry, delay %.0f ms", stats["arrivals"], stats["longest_gap"] * 1000, stats["steps"],
+            LOGGER.info("Smoothed motion: %d arrivals (longest stall %.0f ms), %d steps (longest %.1f ms), "
+                        "%d dry, delay %.0f ms", stats["arrivals"], stats["longest_stall"] * 1000, stats["steps"],
                         stats["longest_step"] * 1000, stats["dry"], self._delay * 1000)

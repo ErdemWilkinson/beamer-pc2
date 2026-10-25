@@ -21,68 +21,89 @@ def smoother(active=lambda: True):
     return smooth, moves, clock
 
 
+def deliveries(stall, seconds, speed=1000.0, every=0.002):
+    """A sender's messages, one every `every` seconds of `speed` px/s, each held by the link for
+    `stall(sent)` and delivered in order, as TCP does: what a stall holds arrives back to back."""
+    out, last, sent = [], 0.0, 0.0
+    while sent < seconds:
+        last = max(last, sent + stall(sent))
+        out.append((last, speed * every))
+        sent = round(sent + every, 6)
+    return out
+
+
 def play(smooth, clock, arrivals, until, tick=0.004):
-    """Run `smooth` on `clock` until `until`, adding each (time, dx) of `arrivals` when due;
-    the moves made, as (time, dx)."""
-    made, arrivals, now = [], list(arrivals), 0.0
+    """Run `smooth` on `clock` until `until`, adding each (time, dx) of `arrivals` on its own at
+    its time; the moves made, as (time, dx)."""
+    made, now, index = [], 0.0, 0
     smooth._move = lambda dx, dy: made.append((clock.now, dx))
     while now <= until:
+        while index < len(arrivals) and arrivals[index][0] <= now:
+            clock.now = arrivals[index][0]
+            smooth.add(arrivals[index][1], 0)
+            index += 1
         clock.now = now
-        due = sum(dx for at, dx in arrivals if at <= now)
-        arrivals = [(at, dx) for at, dx in arrivals if at > now]
-        if due:
-            smooth.add(due, 0)
         smooth.step()
         now = round(now + tick, 6)
     return made
 
 
+def per_frame(made, start, end):
+    frames = {}
+    for at, dx in made:
+        if start <= at < end:
+            frames[int(at * 60)] = frames.get(int(at * 60), 0) + dx
+    return [frames.get(frame, 0) for frame in range(int(start * 60) + 1, int(end * 60))]
+
+
 class SmootherTests(unittest.TestCase):
     def test_bursts_play_out_at_the_hand_s_steady_speed(self):
-        # A hand at 1000 px/s whose motion arrives in a burst every 50 ms, as over PC2's Wi-Fi.
+        # A hand at 1000 px/s whose messages the link releases every 50 ms, as over PC2's Wi-Fi.
         smooth, _moves, clock = smoother()
-        arrivals = [(0.05 * (k + 1), 50) for k in range(40)]
-        made = play(smooth, clock, arrivals, until=2.3)
+        made = play(smooth, clock, deliveries(lambda sent: 0.05 - sent % 0.05, 2.0), until=2.6)
         self.assertEqual(2000, sum(dx for _at, dx in made))
-        frames = {}
-        for at, dx in made:
-            if 0.5 <= at < 1.9:
-                frames[int(at * 60)] = frames.get(int(at * 60), 0) + dx
-        per_frame = [frames.get(frame, 0) for frame in range(31, 113)]
+        frames = per_frame(made, 0.8, 2.0)
         # 16.7 px a 60 Hz frame; applied as it arrived, every third frame took the whole 50.
-        self.assertGreaterEqual(min(per_frame), 12)
-        self.assertLessEqual(max(per_frame), 22)
+        self.assertGreaterEqual(min(frames), 12)
+        self.assertLessEqual(max(frames), 24)
 
-    def test_the_delay_covers_the_longest_recent_gap(self):
+    def test_a_stall_while_the_hand_moves_lengthens_the_delay(self):
         smooth, _moves, clock = smoother()
-        smooth.add(0, 0)
-        clock.now = 0.050
-        smooth.add(100, 0)
-        self.assertAlmostEqual(0.050 * motion_smoother.DELAY_MARGIN, smooth.delay)
+        play(smooth, clock, deliveries(lambda sent: 0.002 if sent < 0.5 else 0.06 - sent % 0.06, 1.0), until=1.0)
+        self.assertGreater(smooth.delay, 0.05)
+        self.assertLessEqual(smooth.delay, motion_smoother.MAX_DELAY)
 
     def test_an_even_link_adds_only_the_least_delay(self):
         smooth, _moves, clock = smoother()
-        for step in range(100):
-            clock.now = step * 0.002
-            smooth.add(2, 1)
+        play(smooth, clock, deliveries(lambda sent: 0.002, 1.0), until=1.0)
         self.assertEqual(motion_smoother.MIN_DELAY, smooth.delay)
 
     def test_the_delay_falls_back_once_the_link_is_even_again(self):
         smooth, _moves, clock = smoother()
-        smooth.add(0, 0)
-        clock.now = 0.080
-        smooth.add(1, 0)
-        for step in range(1, 5000):
-            clock.now = 0.080 + step * 0.002
-            smooth.add(1, 0)
+        play(smooth, clock, deliveries(lambda sent: 0.06 - sent % 0.06 if sent < 0.5 else 0.002, 5.0), until=5.0)
         self.assertLess(smooth.delay, 0.030)
 
-    def test_a_pause_of_the_hand_is_not_a_stall_of_the_link(self):
+    def test_a_rest_of_the_hand_is_not_a_stall_of_the_link(self):
         smooth, _moves, clock = smoother()
-        smooth.add(1, 0)
-        clock.now = 2.0
-        smooth.add(1, 0)
+        arrivals = [(at, dx) for at, dx in deliveries(lambda sent: 0.002, 0.3)]
+        arrivals += [(at + 0.5, dx) for at, dx in deliveries(lambda sent: 0.002, 0.3)]
+        play(smooth, clock, arrivals, until=1.0)
         self.assertEqual(motion_smoother.MIN_DELAY, smooth.delay)
+
+    def test_the_pointer_follows_the_hand_s_path(self):
+        smooth, moves, clock = smoother()
+        smooth.add(30, 0)
+        smooth.add(0, 40)
+        for step in range(1, 200):
+            clock.now = step * 0.004
+            smooth.step()
+        # Along the right, then down: never cutting the corner diagonally.
+        self.assertEqual((30, 40), (sum(dx for dx, _dy in moves), sum(dy for _dx, dy in moves)))
+        reached = 0
+        for dx, dy in moves:
+            if dy:
+                self.assertGreaterEqual(reached + dx, 29)
+            reached += dx
 
     def test_flush_shows_everything_at_once_and_keeps_the_fraction(self):
         smooth, moves, _clock = smoother()
