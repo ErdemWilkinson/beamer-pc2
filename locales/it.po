@@ -4698,7 +4698,7 @@ msgstr "Inserisci di nuovo la frase segreta."
 
 #: win_app/kvm_bridge_win.py
 msgid "Beamer is not running, so nothing was sent. Start Beamer and try again."
-msgstr ""
+msgstr "Beamer non è in esecuzione, quindi non è stato inviato nulla. Avvia Beamer e riprova."
 
 #: win_app/kvm_bridge_win.py
 msgid "With it off, closing the window quits Beamer. Open Beamer again to bring the window back."
@@ -4890,22 +4890,22 @@ msgstr "la modifica non è riuscita: {error}"
 
 #: win_app/launch_win.py win_app/send_win.py win_app/transfer_feature.py
 msgid "the other PC"
-msgstr ""
+msgstr "l'altro PC"
 
 #: win_app/launch_win.py
 #, python-brace-format
 msgid "Started for {name}"
-msgstr ""
+msgstr "Avviato per {name}"
 
 #: win_app/launch_win.py
 #, python-brace-format
 msgid "{items} (saved and shown, not opened)"
-msgstr ""
+msgstr "{items} (salvato e mostrato, non aperto)"
 
 #: win_app/launch_win.py
 #, python-brace-format
 msgid "{items}: no app for it here, so it opened on the other PC"
-msgstr ""
+msgstr "{items}: nessuna app qui per aprirlo, quindi si è aperto sull'altro PC"
 
 #: win_app/machines_win.py
 msgid "Pairing code"
@@ -5339,80 +5339,80 @@ msgstr "Beamer Portable"
 #: win_app/send_win.py
 #, python-brace-format
 msgid "Could not send to {name}: {error}"
-msgstr ""
+msgstr "Impossibile inviare a {name}: {error}"
 
 #: win_app/send_win.py
 msgid "No other PC to send to: pair one first, or choose one in transfer.json"
-msgstr ""
+msgstr "Nessun altro PC a cui inviare: abbinane prima uno, o scegline uno in transfer.json"
 
 #: win_app/send_win.py
 #, python-brace-format
 msgid "{name} does not let this PC drive it, so it takes nothing from it either"
-msgstr ""
+msgstr "{name} non consente a questo PC di controllarlo, quindi non ne accetta nemmeno nulla"
 
 #: win_app/send_win.py
 #, python-brace-format
 msgid "{app} is not installed on {name}, or not in its allowed apps"
-msgstr ""
+msgstr "{app} non è installato su {name}, o non è tra le sue app consentite"
 
 #: win_app/send_win.py
 #, python-brace-format
 msgid "Too large for {name}'s limit (transfer.json, max_bytes)"
-msgstr ""
+msgstr "Troppo grande per il limite di {name} (transfer.json, max_bytes)"
 
 #: win_app/send_win.py
 #, python-brace-format
 msgid "{name} does not have room for it"
-msgstr ""
+msgstr "{name} non ha spazio sufficiente"
 
 #: win_app/send_win.py
 #, python-brace-format
 msgid "{name} is not taking transfers"
-msgstr ""
+msgstr "{name} non accetta trasferimenti"
 
 #: win_app/send_win.py
 msgid "Sending failed; see the log"
-msgstr ""
+msgstr "Invio non riuscito; vedi il registro"
 
 #: win_app/send_win.py
 #, python-brace-format
 msgid "Starting {app} on {name}…"
-msgstr ""
+msgstr "Avvio di {app} su {name}…"
 
 #: win_app/send_win.py
 #, python-brace-format
 msgid "Preparing {count} item(s) for {name}…"
-msgstr ""
+msgstr "Preparazione di {count} elementi per {name}…"
 
 #: win_app/send_win.py
 #, python-brace-format
 msgid "Opened on {name}"
-msgstr ""
+msgstr "Aperto su {name}"
 
 #: win_app/send_win.py
 #, python-brace-format
 msgid "Sending to {name}: {sent} of {total}"
-msgstr ""
+msgstr "Invio a {name}: {sent} di {total}"
 
 #: win_app/send_win.py
 #, python-brace-format
 msgid "{name} could not start {app}"
-msgstr ""
+msgstr "{name} non ha potuto avviare {app}"
 
 #: win_app/send_win.py
 #, python-brace-format
 msgid "{name} could not open what was sent"
-msgstr ""
+msgstr "{name} non ha potuto aprire ciò che è stato inviato"
 
 #: win_app/send_win.py
 #, python-brace-format
 msgid "{app} is not on {name}, so it opened on this PC"
-msgstr ""
+msgstr "{app} non è su {name}, quindi si è aperto su questo PC"
 
 #: win_app/send_win.py
 #, python-brace-format
 msgid "Could not open {app}: {error}"
-msgstr ""
+msgstr "Impossibile aprire {app}: {error}"
 
 #: win_app/sender.py
 msgid "Not connected"
@@ -5469,45 +5469,45 @@ msgstr "Impossibile passare: il desktop non ha consentito a Beamer di inviare in
 
 #: win_app/transfer_feature.py
 msgid "Send files to the other PC…"
-msgstr ""
+msgstr "Invia file all'altro PC…"
 
 #: win_app/transfer_feature.py
 msgid "Send a folder to the other PC…"
-msgstr ""
+msgstr "Invia una cartella all'altro PC…"
 
 #: win_app/transfer_feature.py
 msgid "Open received files"
-msgstr ""
+msgstr "Apri i file ricevuti"
 
 #: win_app/transfer_feature.py
 #, python-brace-format
 msgid "To {name}"
-msgstr ""
+msgstr "Verso {name}"
 
 #: win_app/transfer_feature.py
 #, python-brace-format
 msgid "Drop to open on {name}"
-msgstr ""
+msgstr "Rilascia per aprire su {name}"
 
 #: win_app/transfer_feature.py
 #, python-brace-format
 msgid "Open on {name}"
-msgstr ""
+msgstr "Apri su {name}"
 
 #: win_app/transfer_feature.py
 #, python-brace-format
 msgid "Send to {name}"
-msgstr ""
+msgstr "Invia a {name}"
 
 #: win_app/transfer_feature.py
 #, python-brace-format
 msgid "{items}: no app for it on {name}, so it opened here"
-msgstr ""
+msgstr "{items}: nessuna app su {name} per aprirlo, quindi si è aperto qui"
 
 #: win_app/transfer_feature.py
 #, python-brace-format
 msgid "Another program is using port {port}: files cannot be sent to this PC"
-msgstr ""
+msgstr "Un altro programma usa la porta {port}: non si possono inviare file a questo PC"
 
 #: win_app/widgets.py
 msgid "Response time: no fresh measurement"

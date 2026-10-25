@@ -1,0 +1,5464 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Beamer\n"
+"Language: tr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Beamer-Status: draft, awaiting check\n"
+
+#: core/effects.py mac_app/pages.py win_app/pages_win.py
+msgid "Light"
+msgstr "Açık"
+
+#: core/effects.py mac_app/pages.py win_app/pages_win.py
+msgid "Mono"
+msgstr "Tek renk"
+
+#: core/effects.py
+msgid "Bright"
+msgstr "Parlak"
+
+#: core/effects.py mac_app/pages.py
+msgid "Quiet"
+msgstr "Sakin"
+
+#: core/effects.py mac_app/pages.py
+msgid "Medium"
+msgstr "Orta"
+
+#: core/effects.py mac_app/pages.py
+msgid "Showpiece"
+msgstr "Gösteriş"
+
+#: core/effects.py mac_app/pages.py
+msgid "Ring"
+msgstr "Halka"
+
+#: core/effects.py
+msgid "A ring in the chosen colours closes onto the pointer."
+msgstr "Seçilen renklerde bir halka imlecin üzerine kapanır."
+
+#: core/effects.py
+msgid "Membrane"
+msgstr "Zar"
+
+#: core/effects.py
+msgid "Sparks"
+msgstr "Kıvılcım"
+
+#: core/effects.py
+msgid "Instrument"
+msgstr "Gösterge"
+
+#: core/effects.py
+msgid "Folio"
+msgstr "Folyo"
+
+#: core/effects.py
+msgid "Selvedge"
+msgstr "Kenar dokuma"
+
+#: core/effects.py
+msgid "Ink"
+msgstr "Mürekkep"
+
+#: core/effects.py
+msgid "Warp"
+msgstr "Bükülme"
+
+#: core/effects.py
+msgid "White"
+msgstr "Beyaz"
+
+#: core/effects.py
+msgid "Silver"
+msgstr "Gümüş"
+
+#: core/effects.py
+msgid "Graphite"
+msgstr "Grafit"
+
+#: core/effects.py
+msgid "Warm grey"
+msgstr "Sıcak gri"
+
+#: core/effects.py
+msgid "Citron"
+msgstr "Ağaç kavunu"
+
+#: core/effects.py
+msgid "Laser"
+msgstr "Lazer"
+
+#: core/effects.py
+msgid "Electric"
+msgstr "Elektrik"
+
+#: core/effects.py
+msgid "Fuchsia"
+msgstr "Fuşya"
+
+#: core/effects.py
+msgid "Ultraviolet"
+msgstr "Morötesi"
+
+#: core/effects.py mac_app/pages.py win_app/pages_win.py
+msgid "Glow"
+msgstr "Işıma"
+
+#: core/effects.py mac_app/pages.py win_app/pages_win.py
+msgid "A band of light that deepens the harder you push."
+msgstr "Ne kadar sert iterseniz o kadar koyulaşan bir ışık bandı."
+
+#: core/effects.py mac_app/pages.py win_app/pages_win.py
+msgid "Beam"
+msgstr "Işın"
+
+#: core/effects.py mac_app/pages.py win_app/pages_win.py
+msgid "A thin line with a comet of light running along it."
+msgstr "Üzerinde bir ışık kuyruklu yıldızı koşan ince bir çizgi."
+
+#: core/effects.py mac_app/pages.py win_app/pages_win.py
+msgid "Aperture"
+msgstr "Diyafram"
+
+#: core/effects.py mac_app/pages.py win_app/pages_win.py
+msgid "A fine lens of light opens under pressure and closes softly behind the arriving pointer."
+msgstr "Baskı altında ince bir ışık merceği açılır ve gelen imlecin ardından yumuşakça kapanır."
+
+#: core/effects.py
+msgid "Short"
+msgstr "Kısa"
+
+#: core/effects.py
+msgid "Normal"
+msgstr "Normal"
+
+#: core/effects.py
+msgid "Long"
+msgstr "Uzun"
+
+#: core/effects.py
+msgid "Small"
+msgstr "Küçük"
+
+#: core/effects.py
+msgid "Large"
+msgstr "Büyük"
+
+#: core/effects.py
+msgid "Match display"
+msgstr "Ekrana uy"
+
+#: core/effects.py
+msgid "Half"
+msgstr "Yarım"
+
+#: core/effects.py
+msgid "Quarter"
+msgstr "Çeyrek"
+
+#: core/effects.py mac_app/pages.py
+msgid "Same as crossing"
+msgstr "Geçişle aynı"
+
+#: core/fx_folio.py
+msgid "Crease"
+msgstr "Kırışık"
+
+#: core/fx_folio.py
+msgid "A small paper crease lifts under pressure, parts, then settles flat where you arrive."
+msgstr "Baskı altında küçük bir kâğıt kırışığı kalkar, ayrılır, sonra vardığınız yerde düzleşir."
+
+#: core/fx_folio.py
+msgid "Pleat"
+msgstr "Pli"
+
+#: core/fx_folio.py
+msgid "Six alternating folds gather at the edge, slide apart and unfold on the other screen."
+msgstr "Altı dönüşümlü kat kenarda toplanır, ayrılarak kayar ve öbür ekranda açılır."
+
+#: core/fx_folio.py
+msgid "Concertina"
+msgstr "Akordeon"
+
+#: core/fx_folio.py
+msgid "A scored paper fan rises along the boundary, opens a passage and folds itself away behind you."
+msgstr "Çizikli bir kâğıt yelpaze sınır boyunca yükselir, bir geçit açar ve arkanızdan kendini katlar."
+
+#: core/fx_folio.py
+msgid "Moss"
+msgstr "Yosun"
+
+#: core/fx_folio.py
+msgid "Plum"
+msgstr "Erik"
+
+#: core/fx_folio.py
+msgid "Vellum"
+msgstr "Parşömen"
+
+#: core/fx_folio.py
+msgid "Carbon copy"
+msgstr "Karbon kopya"
+
+#: core/fx_folio.py
+msgid "Marbled"
+msgstr "Ebru"
+
+#: core/fx_ink.py
+msgid "Capillary"
+msgstr "Kılcal"
+
+#: core/fx_ink.py
+msgid "A soft pigment meniscus swells against the boundary with viscous surface tension. On breakthrough, it releases cleanly and diffuses as a calm, translucent wash on the arrival screen."
+msgstr "Yumuşak bir pigment menisküsü yapışkan bir yüzey gerilimiyle sınıra doğru şişer. Kırıldığında temizce serbest kalır ve varış ekranında sakin, yarı saydam bir boya gibi yayılır."
+
+#: core/fx_ink.py
+msgid "Viscous drop"
+msgstr "Yoğun damla"
+
+#: core/fx_ink.py
+msgid "An organic ink droplet gathers at the pointer, flattening against the glass edge before necking through the seam. On arrival, it splashes into a multi-lobed pigment bloom that bleeds outward."
+msgstr "İmlecin ucunda organik bir mürekkep damlası toplanır, dikiş yerinden boğumlanarak geçmeden önce cam kenara yassılır. Varışta dışa doğru yayılan çok loblu bir pigment çiçeği olarak sıçrar."
+
+#: core/fx_ink.py
+msgid "Sumi bloom"
+msgstr "Sumi çiçeği"
+
+#: core/fx_ink.py
+msgid "Dense calligraphic ink pulls from the boundary into a viscous bridge that necks and snaps through the seam. It arrives as an ink-in-water vortex bloom, unfurling delicate pigment filaments that dissolve into the screen."
+msgstr "Yoğun hat mürekkebi sınırdan uzayıp boğumlanan ve dikiş yerinden kopup geçen yapışkan bir köprü olur. Varışta sudaki mürekkep gibi bir girdap çiçeğine dönüşür; ekranda eriyen ince pigment lifleri açılır."
+
+#: core/fx_ink.py
+msgid "Indigo ink"
+msgstr "Çivit mürekkebi"
+
+#: core/fx_ink.py
+msgid "Matcha"
+msgstr "Matcha"
+
+#: core/fx_ink.py
+msgid "Terracotta"
+msgstr "Terakota"
+
+#: core/fx_instrument.py
+msgid "Rule"
+msgstr "Cetvel"
+
+#: core/fx_instrument.py
+msgid "A fine ruler rises along the edge round the pointer and lights outward one division at a time as the push builds, the three quarter detents marked long. At breakthrough it closes on the pointer in four clicks; on the other screen a short register mark sits where you came in and a four-arm cross steps in three clicks onto the landing point."
+msgstr "İmlecin çevresinde kenar boyunca ince bir cetvel yükselir ve itiş arttıkça bölmeleri teker teker dışa doğru yanar; üç çeyrek çentiği uzun işaretlidir. Kırılma anında dört tıkla imlecin üzerine kapanır; öbür ekranda girdiğiniz yerde kısa bir hizalama işareti durur ve dört kollu bir artı üç tıkla iniş noktasına yerleşir."
+
+#: core/fx_instrument.py
+msgid "Gauge"
+msgstr "Kadran"
+
+#: core/fx_instrument.py
+msgid "A half dial seated on the edge at the pointer, a quarter dial in the corner and a graduated collar round the notch, whose needle clicks round sixteen detents as the push builds. At breakthrough an iris shuts over the dial in four steps; on the other screen a graduated ring contracts onto the landing point, turning one graduation per click, and flashes as it locks."
+msgstr "İmlecin olduğu yerde kenara oturan yarım bir kadran, köşede çeyrek kadran ve çentiğin çevresinde dereceli bir bilezik; itiş arttıkça ibresi on altı çentik boyunca tıklayarak döner. Kırılma anında kadranın üzerine dört adımda bir diyafram kapanır; öbür ekranda dereceli bir halka her tıkta bir derece dönerek iniş noktasına daralır ve kilitlenirken parlar."
+
+#: core/fx_instrument.py
+msgid "Rangefinder"
+msgstr "Telemetre"
+
+#: core/fx_instrument.py
+msgid "A long scale runs along the edge and a pair of caliper jaws closes on the pointer in detents, lighting the divisions it passes, while three tally lamps light at each quarter. At breakthrough shutter blades slide in from both ends and a bright slit at the pointer shuts; on the far screen the jaws open outward from the entry point as a graduated reticle with corner brackets steps in, turns and locks onto the landing point."
+msgstr "Kenar boyunca uzun bir ölçek uzanır ve bir çift kumpas çenesi çentik çentik imlecin üzerine kapanır, geçtiği bölmeleri yakarken her çeyrekte üç sayaç lambası yanar. Kırılma anında iki uçtan perde kanatları kayarak gelir ve imleçteki parlak yarık kapanır; uzak ekranda çeneler giriş noktasından dışa açılır, köşe ayraçlı dereceli bir nişangâh adım adım gelir, döner ve iniş noktasına kilitlenir."
+
+#: core/fx_instrument.py
+msgid "Ruby"
+msgstr "Yakut"
+
+#: core/fx_instrument.py
+msgid "Cobalt"
+msgstr "Kobalt"
+
+#: core/fx_instrument.py
+msgid "Phosphor"
+msgstr "Fosfor"
+
+#: core/fx_instrument.py
+msgid "Sodium"
+msgstr "Sodyum"
+
+#: core/fx_instrument.py
+msgid "Contrast"
+msgstr "Kontrast"
+
+#: core/fx_membrane.py
+msgid "Skin"
+msgstr "Deri"
+
+#: core/fx_membrane.py
+msgid "A single iridescent hairline sits just inside the edge and dimples under the pointer as you push, thinning and shifting colour. It parts at the pointer and the two ends pull back; on the other screen the same hairline closes behind the pointer and one ripple spreads out."
+msgstr "Kenarın hemen içinde tek bir yanardöner kıl çizgisi durur ve ittikçe imlecin altında incelip renk değiştirerek çöker. İmleçte ayrılır ve iki ucu geri çekilir; öbür ekranda aynı çizgi imlecin arkasında kapanır ve tek bir dalga yayılır."
+
+#: core/fx_membrane.py
+msgid "Film"
+msgstr "Film"
+
+#: core/fx_membrane.py
+msgid "A band of interference fringes, one added at each quarter tick, crowds and thins into the dent under the pointer, so the band itself is the pressure meter. At breakthrough the film tears and each fringe peels back with a curled rim; on the other side the skin bulges in around the arriving pointer, springs back, heals, and throws two ripples."
+msgstr "Her çeyrek tıkta bir yenisi eklenen bir girişim saçağı bandı imlecin altındaki çukura doğru sıkışıp incelir; yani bandın kendisi basınç göstergesidir. Kırılma anında film yırtılır ve her saçak kıvrık kenarıyla geri soyulur; öbür tarafta zar gelen imlecin çevresinde içe doğru şişer, geri yaylanır, iyileşir ve iki dalga yayar."
+
+#: core/fx_membrane.py
+msgid "Rupture"
+msgstr "Patlama"
+
+#: core/fx_membrane.py
+msgid "The whole edge becomes a visible soap film with a sheen behind its fringes; every tick sends a shudder along it, and at breakthrough it bursts, the torn rims racing away along the edge carrying beads of film. The arrival opens a set of Newton's rings around the entry point while the skin bulges in, heals and sends a surface wave along the edge."
+msgstr "Kenarın tamamı saçaklarının ardında bir parıltı olan görünür bir sabun filmine dönüşür; her tık boyunca bir titreme gönderir ve kırılma anında patlar, yırtık kenarlar film damlacıklarını taşıyarak kenar boyunca hızla uzaklaşır. Varışta giriş noktasının çevresinde bir dizi Newton halkası açılır; zar içe şişer, iyileşir ve kenar boyunca bir yüzey dalgası gönderir."
+
+#: core/fx_membrane.py
+msgid "Opal"
+msgstr "Opal"
+
+#: core/fx_membrane.py
+msgid "Sea glass"
+msgstr "Deniz camı"
+
+#: core/fx_membrane.py
+msgid "Oil slick"
+msgstr "Yağ tabakası"
+
+#: core/fx_membrane.py
+msgid "Soap bubble"
+msgstr "Sabun köpüğü"
+
+#: core/fx_membrane.py
+msgid "Pearl"
+msgstr "İnci"
+
+#: core/fx_selvedge.py
+msgid "Thread"
+msgstr "İplik"
+
+#: core/fx_selvedge.py
+msgid "Two fine yarns tighten, part for the pointer and stitch the seam closed behind it."
+msgstr "İki ince iplik gerilir, imlece yol açar ve arkasından dikiş yerini diker."
+
+#: core/fx_selvedge.py
+msgid "Weave"
+msgstr "Dokuma"
+
+#: core/fx_selvedge.py
+msgid "A woven border gathers tension, opens between its strands and gently mends on arrival."
+msgstr "Dokuma bir kenarlık gerilir, iplikleri arasından açılır ve varışta usulca onarılır."
+
+#: core/fx_selvedge.py
+msgid "Jacquard"
+msgstr "Jakar"
+
+#: core/fx_selvedge.py
+msgid "A diamond-patterned textile tightens across the edge, opens its weave and settles behind you."
+msgstr "Elmas desenli bir kumaş kenar boyunca gerilir, dokusunu açar ve arkanızda yerine oturur."
+
+#: core/fx_selvedge.py
+msgid "Woad"
+msgstr "Çivit otu"
+
+#: core/fx_selvedge.py
+msgid "Saffron"
+msgstr "Safran"
+
+#: core/fx_selvedge.py
+msgid "Flax"
+msgstr "Keten"
+
+#: core/fx_selvedge.py
+msgid "Madder"
+msgstr "Kökboya"
+
+#: core/fx_selvedge.py
+msgid "Tide"
+msgstr "Gelgit"
+
+#: core/fx_sparks.py
+msgid "Flint"
+msgstr "Çakmaktaşı"
+
+#: core/fx_sparks.py
+msgid "A single hot point at the pointer draws in a few close sparks as you push, snaps them through the edge, and a pinch of sparks pops out where you land. Small enough to leave on all day."
+msgstr "İttikçe imleçteki tek bir sıcak nokta birkaç yakın kıvılcımı içine çeker, kenardan geçirir ve indiğiniz yerde bir tutam kıvılcım patlar. Bütün gün açık bırakacak kadar küçük."
+
+#: core/fx_sparks.py
+msgid "Filings"
+msgstr "Talaşlar"
+
+#: core/fx_sparks.py
+msgid "Scattered sparks swing round to point at the pointer and creep in like iron filings to a magnet, the edge warming beside it; at breakthrough they are sucked through the point, and on the other screen the same sparks are thrown back out and fall."
+msgstr "Dağınık kıvılcımlar dönüp imleci gösterir ve mıknatısa çekilen demir talaşları gibi yaklaşır, kenar yanında ısınır; kırılma anında noktadan içeri emilir, öbür ekranda aynı kıvılcımlar geri fırlatılır ve düşer."
+
+#: core/fx_sparks.py
+msgid "Discharge"
+msgstr "Boşalma"
+
+#: core/fx_sparks.py
+msgid "The boundary charges up: sparks crawl along it and forty filings wheel in, with a crackle arcing to the pointer at every tick. At breakthrough the whole charge implodes through the point with a last arc; where it lands it goes off like a sparkler, stars splitting as they fall."
+msgstr "Sınır yüklenir: kıvılcımlar üzerinde gezinir, kırk talaş dönerek gelir ve her tıkta imlece doğru çatırdayan bir ark çakar. Kırılma anında tüm yük son bir arkla noktadan içe çöker; indiği yerde maytap gibi patlar, yıldızlar düşerken bölünür."
+
+#: core/fx_sparks.py
+msgid "Arc"
+msgstr "Ark"
+
+#: core/fx_sparks.py
+msgid "Magnesium"
+msgstr "Magnezyum"
+
+#: core/fx_sparks.py
+msgid "Ember"
+msgstr "Kor"
+
+#: core/fx_sparks.py
+msgid "Forge"
+msgstr "Ocak"
+
+#: core/fx_sparks.py
+msgid "Sparkler gold"
+msgstr "Maytap altını"
+
+#: core/fx_warp.py
+msgid "Neon"
+msgstr "Neon"
+
+#: core/fx_warp.py
+msgid "Vaporwave"
+msgstr "Vaporwave"
+
+#: core/fx_warp.py
+msgid "Cyber"
+msgstr "Siber"
+
+#: core/fx_warp.py
+msgid "Light slit"
+msgstr "Işık yarığı"
+
+#: core/fx_warp.py
+msgid "A subtle slit opens, pulling in faint trails."
+msgstr "Hafif bir yarık açılır ve soluk izleri içine çeker."
+
+#: core/fx_warp.py
+msgid "Hyperdrive"
+msgstr "Hiper sürüş"
+
+#: core/fx_warp.py
+msgid "Speed lines accelerate towards the portal."
+msgstr "Hız çizgileri geçide doğru hızlanır."
+
+#: core/fx_warp.py
+msgid "Wormhole"
+msgstr "Solucan deliği"
+
+#: core/fx_warp.py
+msgid "A dynamic stretching grid of light."
+msgstr "Esneyen, hareketli bir ışık ızgarası."
+
+#. the separator between all but the last two names in a list, "Mac, PC and Laptop".
+#: core/i18n.py core/receiver.py core/settings_sync.py core/ways.py
+msgctxt "list"
+msgid ", "
+msgstr ", "
+
+#. the last two names of a list; {first} may itself be several names.
+#: core/i18n.py
+#, python-brace-format
+msgctxt "list"
+msgid "{first} and {last}"
+msgstr "{first} ve {last}"
+
+#: core/link.py win_app/sender.py
+msgid "The other machine"
+msgstr "Diğer makine"
+
+#: core/link.py
+#, python-brace-format
+msgid "Connection failed: {error}"
+msgstr "Bağlantı başarısız: {error}"
+
+#: core/link.py
+#, python-brace-format
+msgid "{name} closed the connection: it may have removed this machine, or be too busy to answer"
+msgstr "{name} bağlantıyı kapattı: bu makineyi kaldırmış ya da yanıt veremeyecek kadar meşgul olabilir"
+
+#: core/link.py
+msgid "This pairing was removed"
+msgstr "Bu eşleştirme kaldırıldı"
+
+#: core/link.py
+#, python-brace-format
+msgid "{name} is unreachable from this machine. Check that both can communicate on the local network."
+msgstr "{name} bu makineden erişilemiyor. İkisinin de yerel ağda iletişim kurabildiğinden emin olun."
+
+#: core/link.py
+#, python-brace-format
+msgid "{name} is reachable, but Beamer is not listening on this port."
+msgstr "{name} erişilebilir, ancak Beamer bu portu dinlemiyor."
+
+#: core/link.py
+#, python-brace-format
+msgid "{name} did not answer before the connection timed out."
+msgstr "{name} bağlantı zaman aşımına uğramadan yanıt vermedi."
+
+#: core/link.py
+#, python-brace-format
+msgid "Connecting to {host}:{port}"
+msgstr "{host}:{port} adresine bağlanılıyor"
+
+#: core/link.py
+msgid "This link was stopped"
+msgstr "Bu bağlantı durduruldu"
+
+#: core/link.py
+#, python-brace-format
+msgid "Update Beamer on {name} to 1.5.0; if it is up to date, pair the two again"
+msgstr "{name} üzerindeki Beamer'ı 1.5.0'a güncelleyin; güncelse ikisini yeniden eşleştirin"
+
+#: core/link.py
+#, python-brace-format
+msgid "Connected to {name} via the secure macOS 27 fallback"
+msgstr "{name} ile güvenli macOS 27 yedek yolu üzerinden bağlanıldı"
+
+#: core/link.py
+#, python-brace-format
+msgid "Connected to {name}"
+msgstr "{name} ile bağlanıldı"
+
+#: core/link.py
+#, python-brace-format
+msgid "{name} closed the connection"
+msgstr "{name} bağlantıyı kapattı"
+
+#: core/link.py
+msgid "Sending to this machine was switched off"
+msgstr "Bu makineye gönderim kapatıldı"
+
+#: core/link.py
+#, python-brace-format
+msgid "A different Beamer answered at {host}"
+msgstr "{host} adresinde farklı bir Beamer yanıt verdi"
+
+#: core/link.py
+#, python-brace-format
+msgid "{name} stopped acknowledging input"
+msgstr "{name} girişleri onaylamayı bıraktı"
+
+#: core/link.py
+#, python-brace-format
+msgid "{name} stopped accepting data"
+msgstr "{name} veri kabul etmeyi bıraktı"
+
+#: core/link.py
+#, python-brace-format
+msgid "{name} did not answer as a Beamer: it is probably running one from before version 4"
+msgstr "{name} bir Beamer gibi yanıt vermedi: muhtemelen 4. sürümden eski bir Beamer çalıştırıyor"
+
+#: core/link.py
+#, python-brace-format
+msgid "{name} could not be authenticated: something on the path altered the link"
+msgstr "{name} doğrulanamadı: yol üzerindeki bir şey bağlantıyı değiştirdi"
+
+#: core/link.py
+#, python-brace-format
+msgid "{name} did not answer like Beamer: {error}"
+msgstr "{name} Beamer gibi yanıt vermedi: {error}"
+
+#: core/link.py core/receiver.py
+#, python-brace-format
+msgid "{name} runs a newer Beamer: update Beamer on this machine"
+msgstr "{name} daha yeni bir Beamer çalıştırıyor: bu makinedeki Beamer'ı güncelleyin"
+
+#: core/link.py
+#, python-brace-format
+msgid "{name} could not read what this machine sent first; Beamer on the two machines may differ"
+msgstr "{name} bu makinenin ilk gönderdiğini okuyamadı; iki makinedeki Beamer sürümleri farklı olabilir"
+
+#: core/link.py
+#, python-brace-format
+msgid "Could not save what {name} told this machine"
+msgstr "{name} makinesinin bu makineye bildirdikleri kaydedilemedi"
+
+#: core/link.py
+#, python-brace-format
+msgid "The link to {name} failed: {error}"
+msgstr "{name} ile bağlantı başarısız oldu: {error}"
+
+#: core/link.py
+#, python-brace-format
+msgid "{name} took too long to send one message"
+msgstr "{name} tek bir mesajı göndermekte çok geç kaldı"
+
+#: core/link.py
+msgid "The link failed"
+msgstr "Bağlantı başarısız oldu"
+
+#: core/link.py
+msgid "macOS 27 blocked direct LAN access. Open /Applications/Beamer Tunnel.command."
+msgstr "macOS 27 doğrudan yerel ağ erişimini engelledi. /Applications/Beamer Tunnel.command dosyasını açın."
+
+#: core/link.py
+#, python-brace-format
+msgid "{name} stopped responding"
+msgstr "{name} yanıt vermeyi bıraktı"
+
+#: core/link.py
+#, python-brace-format
+msgid "{name} did not answer as a Beamer"
+msgstr "{name} bir Beamer gibi yanıt vermedi"
+
+#: core/link.py core/receiver.py
+#, python-brace-format
+msgid "Update Beamer on {name}: it is older than this one"
+msgstr "{name} üzerindeki Beamer'ı güncelleyin: bundan daha eski"
+
+#: core/link.py
+#, python-brace-format
+msgid "{name} has this pairing under another machine: use Re-pair on Overview."
+msgstr "{name} bu eşleştirmeyi başka bir makine adına tutuyor: Genel Bakış'ta Yeniden eşleştir'i kullanın."
+
+#: core/link.py
+#, python-brace-format
+msgid "{name} no longer has this pairing: use Re-pair on Overview"
+msgstr "{name} artık bu eşleştirmeye sahip değil: Genel Bakış'ta Yeniden eşleştir'i kullanın"
+
+#: core/peerlist.py
+msgid "This pairing needs to be set up again."
+msgstr "Bu eşleştirmenin yeniden kurulması gerekiyor."
+
+#: core/peerlist.py
+msgid "Pairing finished, but Beamer could not save it on this machine. Try again in a moment."
+msgstr "Eşleştirme tamamlandı ancak Beamer bunu bu makineye kaydedemedi. Birazdan tekrar deneyin."
+
+#: core/peerlist.py
+msgid "Another pairing is still finishing. Try again in a moment."
+msgstr "Başka bir eşleştirme hâlâ tamamlanıyor. Birazdan tekrar deneyin."
+
+#: core/peerlist.py
+msgid "A wrong code was tried, so this code was cancelled. Show a new one to try again."
+msgstr "Yanlış bir kod denendi, bu yüzden bu kod iptal edildi. Tekrar denemek için yeni bir kod gösterin."
+
+#: core/peerlist.py
+msgid "A machine on an older Beamer tried to pair. Update Beamer on it to 1.5.0, then show a new code."
+msgstr "Eski bir Beamer çalıştıran bir makine eşleşmeye çalıştı. Oradaki Beamer'ı 1.5.0'a güncelleyin, sonra yeni bir kod gösterin."
+
+#: core/peerlist.py
+msgid "The code expired. Show a new one."
+msgstr "Kodun süresi doldu. Yeni bir kod gösterin."
+
+#: core/peerlist.py
+msgid "That machine may already be paired here, or the code was wrong. Show a new code to try again."
+msgstr "O makine burada zaten eşleşmiş olabilir ya da kod yanlıştı. Tekrar denemek için yeni bir kod gösterin."
+
+#: core/peerlist.py
+msgid "Beamer could not save the pairing on this machine, so it did not complete. Show a new code to try again."
+msgstr "Beamer eşleştirmeyi bu makineye kaydedemediği için eşleştirme tamamlanmadı. Tekrar denemek için yeni bir kod gösterin."
+
+#: core/peerlist.py
+msgid "That is this machine, not another one."
+msgstr "Bu, başka bir makine değil, bu makine."
+
+#: core/peerlist.py
+#, python-brace-format
+msgid "Pairing failed: {reason}."
+msgstr "Eşleştirme başarısız: {reason}."
+
+#: core/peerlist.py
+msgid "That machine gave this machine's own identity, so nothing was paired. Show a new code to try again."
+msgstr "O makine bu makinenin kendi kimliğini verdi, bu yüzden hiçbir şey eşleştirilmedi. Tekrar denemek için yeni bir kod gösterin."
+
+#: core/peerlist.py
+msgid "The saved pairing now identifies a different machine."
+msgstr "Kayıtlı eşleştirme artık farklı bir makineyi tanımlıyor."
+
+#: core/peerlist.py
+msgid "The other machine no longer has this pairing."
+msgstr "Diğer makine artık bu eşleştirmeye sahip değil."
+
+#: core/peerlist.py
+#, python-brace-format
+msgid "{name} is already paired with this machine. Remove it from the list first to pair again."
+msgstr "{name} bu makineyle zaten eşleşmiş. Yeniden eşleştirmek için önce listeden kaldırın."
+
+#: core/peerlist.py
+#, python-brace-format
+msgid "{name} is not showing a code. Show one in Beamer on it, then try again."
+msgstr "{name} bir kod göstermiyor. Oradaki Beamer'da bir kod gösterin, sonra tekrar deneyin."
+
+#: core/peerlist.py
+#, python-brace-format
+msgid "That code was not accepted, and {name} has cancelled it. Show a new one there to try again."
+msgstr "O kod kabul edilmedi ve {name} kodu iptal etti. Tekrar denemek için orada yeni bir kod gösterin."
+
+#: core/peerlist.py
+#, python-brace-format
+msgid "{name} runs an older Beamer. Update Beamer on it to 1.5.0, then pair again."
+msgstr "{name} eski bir Beamer çalıştırıyor. Oradaki Beamer'ı 1.5.0'a güncelleyin, sonra yeniden eşleştirin."
+
+#: core/peerlist.py
+#, python-brace-format
+msgid "{name} did not answer. Check both machines are on the same network, then try again."
+msgstr "{name} yanıt vermedi. İki makinenin de aynı ağda olduğundan emin olun, sonra tekrar deneyin."
+
+#: core/peerlist.py
+#, python-brace-format
+msgid "Either this machine or {name} already has {n} machines paired, the most Beamer keeps. Remove one, then try again."
+msgstr "Bu makinede ya da {name} üzerinde zaten Beamer'ın tutabileceği en fazla sayı olan {n} eşleşmiş makine var. Birini kaldırıp tekrar deneyin."
+
+#: core/peerlist.py
+#, python-brace-format
+msgid "{name} already has this machine paired. Remove this machine from its list there, then pair again."
+msgstr "{name} bu makineyle zaten eşleşmiş. Bu makineyi oradaki listeden kaldırın, sonra yeniden eşleştirin."
+
+#: core/peerlist.py win_app/kvm_bridge_win.py
+#, python-brace-format
+msgid "Paired with {name}."
+msgstr "{name} ile eşleşildi."
+
+#: core/peerlist.py
+#, python-brace-format
+msgid "{name} is already paired here. Remove it from the list first to pair again."
+msgstr "{name} burada zaten eşleşmiş. Yeniden eşleştirmek için önce listeden kaldırın."
+
+#: core/peerlist.py
+#, python-brace-format
+msgid "This machine already has {n} machines paired, the most Beamer keeps. Remove one, then show a new code."
+msgstr "Bu makinede zaten Beamer'ın tutabileceği en fazla sayı olan {n} eşleşmiş makine var. Birini kaldırın, sonra yeni bir kod gösterin."
+
+#: core/peerlist.py
+#, python-brace-format
+msgid "{name} is already paired with this machine, since {when}. Remove it from the list first to pair again."
+msgstr "{name} {when} tarihinden beri bu makineyle eşleşmiş. Yeniden eşleştirmek için önce listeden kaldırın."
+
+#: core/peerlist.py
+#, python-brace-format
+msgid "Can't cross to {name}: it is being driven from {other}."
+msgstr "{name} makinesine geçilemiyor: {other} tarafından kontrol ediliyor."
+
+#: core/peerlist.py
+#, python-brace-format
+msgid "Can't cross to {name}: another machine is driving it."
+msgstr "{name} makinesine geçilemiyor: başka bir makine onu kontrol ediyor."
+
+#: core/peerlist.py
+#, python-brace-format
+msgid "Can't cross to {name}: it is driving {other}."
+msgstr "{name} makinesine geçilemiyor: {other} makinesini kontrol ediyor."
+
+#: core/peerlist.py
+#, python-brace-format
+msgid "Can't cross to {name}: it is driving another machine."
+msgstr "{name} makinesine geçilemiyor: başka bir makineyi kontrol ediyor."
+
+#: core/peerlist.py
+#, python-brace-format
+msgid "{name} is already paired here, since {when}. Remove it from the list first to pair again."
+msgstr "{name} {when} tarihinden beri burada eşleşmiş. Yeniden eşleştirmek için önce listeden kaldırın."
+
+#: core/profiles.py
+msgid "Uses the desk's ways"
+msgstr "Masanın yollarını kullanır"
+
+#. on a map tile, a machine running a Beamer too old to share ways. Keep it short.
+#: core/profiles.py
+msgid "Older"
+msgstr "Eski"
+
+#: core/profiles.py mac_app/diagram.py
+msgid "Offline"
+msgstr "Çevrimdışı"
+
+#: core/profiles.py mac_app/diagram.py win_app/diagram.py
+msgid "Own"
+msgstr "Kendi"
+
+#: core/profiles.py mac_app/diagram.py win_app/diagram.py win_app/kvm_bridge_win.py
+msgid "Desk"
+msgstr "Masa"
+
+#: core/profiles.py
+msgid "An older Beamer. Its ways are set on it; update it to set them here. Read only"
+msgstr "Eski bir Beamer. Yolları kendi üzerinde ayarlanır; burada ayarlamak için onu güncelleyin. Salt okunur"
+
+#: core/profiles.py
+msgid "Offline. It takes these when it next connects"
+msgstr "Çevrimdışı. Bir sonraki bağlantıda bunları alır"
+
+#: core/profiles.py
+msgid "Sending…"
+msgstr "Gönderiliyor…"
+
+#: core/profiles.py
+msgid "Keeps its own ways. The desk's are saved for when it uses them"
+msgstr "Kendi yollarını korur. Masanın yolları, onları kullandığı zaman için saklanır"
+
+#: core/profiles.py win_app/kvm_bridge_win.py
+msgid "This machine"
+msgstr "Bu makine"
+
+#: core/profiles.py
+#, python-brace-format
+msgid "Last heard {time}"
+msgstr "Son görülme {time}"
+
+#: core/profiles.py
+#, python-brace-format
+msgid "Needs pairing with {name}"
+msgstr "{name} ile eşleştirilmesi gerekiyor"
+
+#: core/profiles.py
+#, python-brace-format
+msgid "{name} is off on that machine"
+msgstr "{name} o makinede kapalı"
+
+#: core/profiles.py
+#, python-brace-format
+msgid "{name} · {date}"
+msgstr "{name} · {date}"
+
+#: core/receiver.py
+msgid "Listening stopped"
+msgstr "Dinleme durdu"
+
+#: core/receiver.py
+msgid "Unlocking Windows…"
+msgstr "Windows kilidi açılıyor…"
+
+#: core/receiver.py
+msgid "Windows is locked — unlock it at the PC"
+msgstr "Windows kilitli — kilidi bilgisayarın başında açın"
+
+#: core/receiver.py
+#, python-brace-format
+msgid "Starting on port {port}"
+msgstr "{port} portunda başlatılıyor"
+
+#: core/receiver.py
+#, python-brace-format
+msgid "Input error from {name}; see log"
+msgstr "{name} kaynaklı giriş hatası; günlüğe bakın"
+
+#: core/receiver.py
+#, python-brace-format
+msgid "Connected to {names}"
+msgstr "{names} ile bağlanıldı"
+
+#: core/receiver.py
+#, python-brace-format
+msgid "Waiting on port {port}"
+msgstr "{port} portunda bekleniyor"
+
+#: core/receiver.py
+#, python-brace-format
+msgid "Listener failed: {error}"
+msgstr "Dinleyici başarısız: {error}"
+
+#: core/receiver.py
+#, python-brace-format
+msgid "Another program is using port {port} — change the port on the Connection page"
+msgstr "{port} portunu başka bir program kullanıyor — portu Bağlantı sayfasından değiştirin"
+
+#: core/settings_sync.py
+msgid "Design not available yet: connect to this machine with Beamer 1.5.0 beta.6 or later."
+msgstr "Tasarım henüz kullanılamıyor: bu makineye Beamer 1.5.0 beta.6 veya sonrasıyla bağlanın."
+
+#: core/settings_sync.py
+msgid "Needs beta.6 or later"
+msgstr "beta.6 veya sonrası gerekli"
+
+#: core/settings_sync.py
+msgid "A connected machine is unavailable until it has beta.6 or later."
+msgstr "Bağlı bir makine, beta.6 veya sonrasına geçene kadar kullanılamaz."
+
+#: core/settings_sync.py
+msgid "No paired machine is connected."
+msgstr "Bağlı eşleşmiş makine yok."
+
+#: core/settings_sync.py mac_app/kvm_bridge_app.py mac_app/pages.py win_app/kvm_bridge_win.py win_app/pages_win.py
+msgid "Crossing"
+msgstr "Geçiş"
+
+#: core/settings_sync.py mac_app/kvm_bridge_app.py mac_app/pages.py win_app/kvm_bridge_win.py win_app/pages_win.py
+msgid "Design"
+msgstr "Tasarım"
+
+#: core/settings_sync.py mac_app/kvm_bridge_app.py win_app/kvm_bridge_win.py
+msgid "Shortcut"
+msgstr "Kısayol"
+
+#: core/settings_sync.py mac_app/kvm_bridge_app.py win_app/kvm_bridge_win.py
+msgid "Names"
+msgstr "Adlar"
+
+#: core/settings_sync.py mac_app/diagram.py mac_app/kvm_bridge_app.py win_app/diagram.py win_app/kvm_bridge_win.py
+msgid "Resistance"
+msgstr "Direnç"
+
+#: core/settings_sync.py
+msgid "drag protection"
+msgstr "sürükleme koruması"
+
+#: core/settings_sync.py
+msgid "Connected machines with compatible Beamer versions update now; others catch up when they reconnect. Zones, sides, jump keys, full-screen hold, animation enable and appearance stay on each machine."
+msgstr "Uyumlu Beamer sürümüne sahip bağlı makineler şimdi güncellenir; diğerleri yeniden bağlandığında yetişir. Bölgeler, kenarlar, atlama tuşları, tam ekran tutma, animasyon etkinleştirme ve görünüm her makinede ayrı kalır."
+
+#: core/settings_sync.py
+msgid "Off: each machine keeps its current values."
+msgstr "Kapalı: her makine mevcut değerlerini korur."
+
+#: core/settings_sync.py
+msgid "Style, colour, length, size and landing animation stay in step. Animation enable and window appearance stay local."
+msgstr "Stil, renk, uzunluk, boyut ve iniş animasyonu eşit kalır. Animasyonun açık olup olmadığı ve pencere görünümü yerel kalır."
+
+#: core/settings_sync.py
+msgid "Off: each machine keeps its current values; previous separate values are not restored."
+msgstr "Kapalı: her makine mevcut değerlerini korur; önceki ayrı değerler geri yüklenmez."
+
+#: core/settings_sync.py
+msgid "compatible paired machines"
+msgstr "uyumlu eşleşmiş makineler"
+
+#: core/settings_sync.py
+msgid "Connected machines with compatible Beamer versions update now; others catch up when they reconnect. Zones, sides, jump keys, full-screen hold, animation enable and appearance stay on each machine. Notch and trackpad controls stay on this Mac."
+msgstr "Uyumlu Beamer sürümüne sahip bağlı makineler şimdi güncellenir; diğerleri yeniden bağlandığında yetişir. Bölgeler, kenarlar, atlama tuşları, tam ekran tutma, animasyon etkinleştirme ve görünüm her makinede ayrı kalır. Çentik ve trackpad denetimleri bu Mac'te kalır."
+
+#: core/settings_sync.py
+#, python-brace-format
+msgid "Following {name}'s design"
+msgstr "{name} makinesinin tasarımı izleniyor"
+
+#: core/settings_sync.py
+#, python-brace-format
+msgid "Shares {groups} with compatible paired machines."
+msgstr "{groups} uyumlu eşleşmiş makinelerle paylaşılır."
+
+#: core/settings_sync.py
+msgid "Resistance, drag protection and Shortcut stay in step. Ways and jump keys below are local; each side is shared with its paired machine."
+msgstr "Direnç, sürükleme koruması ve Kısayol eşit kalır. Aşağıdaki yollar ve atlama tuşları yereldir; her kenar eşleştiği makineyle paylaşılır."
+
+#: core/settings_sync.py
+msgid "Style, colour, length, size and landing animation stay in step. Animation enable and window appearance stay local. Notch and trackpad controls stay local."
+msgstr "Stil, renk, uzunluk, boyut ve iniş animasyonu eşit kalır. Animasyonun açık olup olmadığı ve pencere görünümü yerel kalır. Çentik ve trackpad denetimleri yerel kalır."
+
+#: core/settings_sync.py
+#, python-brace-format
+msgid "Shares resistance, drag protection, Shortcut and six animation settings with {machines}."
+msgstr "Direnç, sürükleme koruması, Kısayol ve altı animasyon ayarı {machines} ile paylaşılır."
+
+#: core/settings_sync.py
+#, python-brace-format
+msgid "{name}'s Beamer is too old to keep settings in step. Update it to turn this on."
+msgstr "{name} üzerindeki Beamer ayarları eşit tutmak için çok eski. Bunu açmak için onu güncelleyin."
+
+#: core/settings_sync.py
+#, python-brace-format
+msgid "compatible versions of {name}"
+msgstr "{name} makinesinin uyumlu sürümleri"
+
+#: core/settings_sync.py
+#, python-brace-format
+msgid "{shared} stay in step. Ways and jump keys below are local; each side is shared with its paired machine."
+msgstr "{shared} eşit kalır. Aşağıdaki yollar ve atlama tuşları yereldir; her kenar eşleştiği makineyle paylaşılır."
+
+#: core/ways.py win_app/diagram.py
+msgid "left"
+msgstr "sol"
+
+#: core/ways.py win_app/diagram.py
+msgid "right"
+msgstr "sağ"
+
+#: core/ways.py win_app/diagram.py
+msgid "top"
+msgstr "üst"
+
+#: core/ways.py win_app/diagram.py
+msgid "bottom"
+msgstr "alt"
+
+#: core/ways.py
+msgid "this PC"
+msgstr "bu bilgisayar"
+
+#: core/ways.py
+msgid "this Mac"
+msgstr "bu Mac"
+
+#: core/ways.py
+msgid "this computer"
+msgstr "bu bilgisayar"
+
+#: core/ways.py mac_app/diagram.py
+msgid "middle"
+msgstr "orta"
+
+#: core/ways.py mac_app/ledger.py win_app/crossing_ledger.py
+msgid "Top left"
+msgstr "Sol üst"
+
+#: core/ways.py mac_app/ledger.py win_app/crossing_ledger.py
+msgid "Top right"
+msgstr "Sağ üst"
+
+#: core/ways.py mac_app/ledger.py win_app/crossing_ledger.py
+msgid "Bottom left"
+msgstr "Sol alt"
+
+#: core/ways.py mac_app/ledger.py win_app/crossing_ledger.py
+msgid "Bottom right"
+msgstr "Sağ alt"
+
+#: core/ways.py mac_app/kvm_bridge_app.py
+msgid "top left"
+msgstr "sol üst"
+
+#: core/ways.py mac_app/kvm_bridge_app.py
+msgid "top right"
+msgstr "sağ üst"
+
+#: core/ways.py mac_app/kvm_bridge_app.py
+msgid "bottom left"
+msgstr "sol alt"
+
+#: core/ways.py mac_app/kvm_bridge_app.py
+msgid "bottom right"
+msgstr "sağ alt"
+
+#: core/ways.py mac_app/ledger.py mac_app/pages.py win_app/crossing_ledger.py
+msgid "Top"
+msgstr "Üst"
+
+#: core/ways.py mac_app/ledger.py
+msgid "Middle"
+msgstr "Orta"
+
+#: core/ways.py mac_app/ledger.py mac_app/pages.py win_app/crossing_ledger.py
+msgid "Bottom"
+msgstr "Alt"
+
+#: core/ways.py mac_app/ledger.py mac_app/pages.py win_app/crossing_ledger.py win_app/pages_win.py
+msgid "Left"
+msgstr "Sol"
+
+#: core/ways.py mac_app/ledger.py mac_app/pages.py win_app/crossing_ledger.py win_app/pages_win.py
+msgid "Right"
+msgstr "Sağ"
+
+#: core/ways.py
+#, python-brace-format
+msgid "Set on {first} or {second}."
+msgstr "{first} veya {second} üzerinde ayarlanır."
+
+#: core/ways.py
+#, python-brace-format
+msgid "Crosses between {first} and {second}."
+msgstr "{first} ile {second} arasında geçer."
+
+#: core/ways.py
+#, python-brace-format
+msgid "No edge leads to {name}. The shortcut and the menu still reach it."
+msgstr "{name} makinesine giden kenar yok. Kısayol ve menü yine de ona ulaşır."
+
+#: core/ways.py
+#, python-brace-format
+msgid "Edge to {name} is off. Tick Edge to turn it back on."
+msgstr "{name} makinesine giden kenar kapalı. Yeniden açmak için Kenar'ı işaretleyin."
+
+#: core/ways.py
+#, python-brace-format
+msgid "None of the thirds picked for {name} touch its tile. Click a third along its edge."
+msgstr "{name} için seçilen üçte birlerin hiçbiri onun kutusuna değmiyor. Kenarı boyunca bir üçte bire tıklayın."
+
+#: core/ways.py
+#, python-brace-format
+msgid "{first} overlaps {second}. Drag them apart."
+msgstr "{first}, {second} ile çakışıyor. Onları sürükleyerek ayırın."
+
+#: core/ways.py
+msgid "Whole edge or the thirds you pick"
+msgstr "Tüm kenar veya seçtiğiniz üçte birler"
+
+#: core/ways.py
+msgid "Whole edge"
+msgstr "Tüm kenar"
+
+#: core/ways.py
+#, python-brace-format
+msgid "{key}, next in order"
+msgstr "{key}, sıradaki"
+
+#: core/ways.py
+#, python-brace-format
+msgid "the {parts} of the {edge} edge"
+msgstr "{edge} kenarın {parts}"
+
+#: core/ways.py
+#, python-brace-format
+msgid "{first} and {last} thirds"
+msgstr "{first} ve {last} üçte birleri"
+
+#: core/ways.py
+msgid "a phone cannot be a jump target"
+msgstr "telefon bir atlama hedefi olamaz"
+
+#: core/ways.py
+msgid "choose a modifier and one non-modifier key"
+msgstr "bir değiştirici tuş ve değiştirici olmayan bir tuş seçin"
+
+#: core/ways.py
+msgid "that key is the trigger shortcut's: pick a chord without it"
+msgstr "bu tuş tetikleyici kısayola ait: onu içermeyen bir tuş bileşimi seçin"
+
+#. {where} names the screen region and {here} is this PC or Mac.
+#: core/ways.py
+#, python-brace-format
+msgid "{first} and {second} would both lead from {where} of {here}. Move one of them to another side, or give each its own thirds of the edge."
+msgstr "{first} ve {second}, {here} makinesinin {where} kısmından başlardı. Birini başka bir kenara taşıyın ya da her birine kenarın kendi üçte birlerini verin."
+
+#. {here} is this PC or Mac; {side} is the side of its screen.
+#: core/ways.py
+#, python-brace-format
+msgid "{name} has no way in: {other} already leads from the {side} edge of {here}. Give each its own thirds of that edge by moving the machines on the map, or move one to another side."
+msgstr "{name} için giriş yolu yok: {other} zaten {here} makinesinin {side} kenarından başlıyor. Makineleri haritada taşıyarak her birine o kenarın kendi üçte birlerini verin ya da birini başka bir kenara taşıyın."
+
+#: core/ways.py mac_app/kvm_bridge_app.py win_app/pages_win.py
+msgid "another machine"
+msgstr "başka bir makine"
+
+#: core/ways.py
+#, python-brace-format
+msgid "{name} has no way back to this machine: none of its edges leads here. Its own Crossing page says why."
+msgstr "{name} makinesinin bu makineye dönüş yolu yok: kenarlarından hiçbiri buraya çıkmıyor. Nedenini kendi Geçiş sayfası söyler."
+
+#: core/ways.py
+#, python-brace-format
+msgid "{name} no longer has this pairing, so it has no way in. Remove {name} here and pair the two again."
+msgstr "{name} artık bu eşleştirmeye sahip değil, bu yüzden giriş yolu yok. {name} makinesini burada kaldırın ve ikisini yeniden eşleştirin."
+
+#: core/ways.py
+#, python-brace-format
+msgid "{key}, next among ticked"
+msgstr "{key}, işaretlilerden sıradaki"
+
+#: core/ways.py
+#, python-brace-format
+msgid "{key}, to where input last went"
+msgstr "{key}, girişin en son gittiği yere"
+
+#: core/ways.py
+#, python-brace-format
+msgctxt "ways alternatives"
+msgid "{head} or {last}"
+msgstr "{head} veya {last}"
+
+#. {drivers} is a list of machine names; {here} is this PC or Mac.
+#: core/ways.py
+#, python-brace-format
+msgid "While {drivers} drives {here}, this way to {target} does nothing: none of them is paired with {target}. Pair them to use it from there too."
+msgstr "{drivers}, {here} makinesini kontrol ederken {target} makinesine giden bu yol bir şey yapmaz: hiçbiri {target} ile eşleşmiş değil. Oradan da kullanmak için onları eşleştirin."
+
+#: core/ways.py
+#, python-brace-format
+msgid "Place it beside {here} on the map"
+msgstr "Haritada {here} makinesinin yanına yerleştirin"
+
+#: core/ways.py
+#, python-brace-format
+msgid "{name} third"
+msgstr "{name} üçte biri"
+
+#: core/ways.py
+msgid "that key is already assigned to another machine"
+msgstr "bu tuş zaten başka bir makineye atanmış"
+
+#: core/ways.py
+#, python-brace-format
+msgid "the {edge} edge of display {display}"
+msgstr "{display} ekranının {edge} kenarı"
+
+#: core/ways.py mac_app/kvm_bridge_app.py mac_app/pages.py
+msgid "the notch"
+msgstr "çentik"
+
+#. {where} names the screen region and {here} is this PC or Mac.
+#: core/ways.py
+#, python-brace-format
+msgid "Two of the ways to {name} cover {where} of {here}. Keep one of them."
+msgstr "{name} makinesine giden yollardan ikisi {here} makinesinin {where} kısmını kaplıyor. Yalnızca birini tutun."
+
+#. {where} names the screen region and {here} is this PC or Mac.
+#: core/ways.py
+#, python-brace-format
+msgid "{first} and {second} would both lead from {where} of {here}. Turn the notch off for one of them."
+msgstr "{first} ve {second}, {here} makinesinin {where} kısmından başlardı. Biri için çentiği kapatın."
+
+#. {where} names the screen region and {here} is this PC or Mac.
+#: core/ways.py
+#, python-brace-format
+msgid "{first} and {second} would both lead from {where} of {here}. Choose another corner for one of them."
+msgstr "{first} ve {second}, {here} makinesinin {where} kısmından başlardı. Biri için başka bir köşe seçin."
+
+#: core/ways.py
+#, python-brace-format
+msgid "{name} has {other} too, so none of its edges leads back here. On {name}'s Crossing page, share that side by thirds or move one of them."
+msgstr "{name} makinesinde {other} de var, bu yüzden kenarlarından hiçbiri buraya dönmüyor. {name} makinesinin Geçiş sayfasında o kenarı üçte birlere bölerek paylaştırın ya da birini taşıyın."
+
+#. {here} is this PC or Mac.
+#: core/ways.py
+#, python-brace-format
+msgid "{name} no longer has this pairing. If another machine takes its side, {here} gives it up. Remove {name} here and pair the two again."
+msgstr "{name} artık bu eşleştirmeye sahip değil. Başka bir makine onun kenarını alırsa {here} o kenarı bırakır. {name} makinesini burada kaldırın ve ikisini yeniden eşleştirin."
+
+#. {here} is this PC or Mac; {name} and {target} are machine names.
+#: core/ways.py
+#, python-brace-format
+msgid "While {name} drives {here}, this way to {target} does nothing: {name} is not paired with {target}. Pair them to use it from there too."
+msgstr "{name}, {here} makinesini kontrol ederken {target} makinesine giden bu yol bir şey yapmaz: {name}, {target} ile eşleşmiş değil. Oradan da kullanmak için onları eşleştirin."
+
+#: core/ways.py
+#, python-brace-format
+msgctxt "ways alternatives"
+msgid "{first} or {last}"
+msgstr "{first} veya {last}"
+
+#. {drivers} is a list of machine names; {here} is this PC or Mac.
+#: core/ways.py
+#, python-brace-format
+msgid "While {drivers} drives {here}, this way to {target} does nothing: neither is paired with {target}. Pair them to use it from there too."
+msgstr "{drivers}, {here} makinesini kontrol ederken {target} makinesine giden bu yol bir şey yapmaz: ikisi de {target} ile eşleşmiş değil. Oradan da kullanmak için onları eşleştirin."
+
+#: core/ways.py
+#, python-brace-format
+msgid "the {corner} corner of display {display}"
+msgstr "{display} ekranının {corner} köşesi"
+
+#: core/ways.py
+#, python-brace-format
+msgid "{name} has {other} on its {facing} too, so none of its edges leads back here. On {name}'s Crossing page, share that side by thirds or move one of them."
+msgstr "{name} makinesinin {facing} tarafında {other} de var, bu yüzden kenarlarından hiçbiri buraya dönmüyor. {name} makinesinin Geçiş sayfasında o kenarı üçte birlere bölerek paylaştırın ya da birini taşıyın."
+
+#: core/ways.py
+#, python-brace-format
+msgid "That shortcut clashes with the jump key {key}; the jump key has been kept."
+msgstr "Bu kısayol {key} atlama tuşuyla çakışıyor; atlama tuşu korundu."
+
+#: core/ways.py mac_app/kvm_bridge_app.py win_app/pages_win.py
+#, python-brace-format
+msgid "the {corner} corner"
+msgstr "{corner} köşe"
+
+#: core/ways.py win_app/pages_win.py
+#, python-brace-format
+msgid "the {edge} edge"
+msgstr "{edge} kenar"
+
+#: mac_app/bridge.py
+#, python-brace-format
+msgid "{name} does not accept input from this Mac"
+msgstr "{name} bu Mac'ten giriş kabul etmiyor"
+
+#: mac_app/bridge.py
+#, python-brace-format
+msgid "{name} could not read the request to take it"
+msgstr "{name} onu devralma isteğini okuyamadı"
+
+#: mac_app/bridge.py
+#, python-brace-format
+msgid "{name} refused the input"
+msgstr "{name} girişi reddetti"
+
+#: mac_app/bridge.py win_app/sender.py
+#, python-brace-format
+msgid "{name} did not answer"
+msgstr "{name} yanıt vermedi"
+
+#: mac_app/bridge.py win_app/sender.py
+#, python-brace-format
+msgid "Lost the link to {name}"
+msgstr "{name} ile bağlantı koptu"
+
+#: mac_app/bridge.py
+msgid "Waiting to connect"
+msgstr "Bağlanmayı bekliyor"
+
+#: mac_app/bridge.py
+msgid "Settings saved; reconnecting"
+msgstr "Ayarlar kaydedildi; yeniden bağlanılıyor"
+
+#: mac_app/bridge.py mac_app/kvm_bridge_app.py mac_app/link_state.py mac_app/wake.py win_app/pages_win.py
+msgid "the other machine"
+msgstr "diğer makine"
+
+#: mac_app/bridge.py win_app/kvm_bridge_win.py
+msgid "Beamer"
+msgstr "Beamer"
+
+#: mac_app/bridge.py
+msgid "Input returned to this Mac"
+msgstr "Giriş bu Mac'e döndü"
+
+#: mac_app/bridge.py win_app/sender.py
+#, python-brace-format
+msgid "Skipped {name}: not connected."
+msgstr "{name} atlandı: bağlı değil."
+
+#: mac_app/bridge.py win_app/kvm_bridge_win.py
+#, python-brace-format
+msgid "Shook home from {name}. Turn this off in Crossing → Way home."
+msgstr "{name} makinesinden sallayarak eve dönüldü. Bunu Geçiş → Eve dönüş'ten kapatabilirsiniz."
+
+#: mac_app/bridge.py win_app/sender.py
+#, python-brace-format
+msgid "Cannot switch — {status}"
+msgstr "Geçilemiyor — {status}"
+
+#: mac_app/bridge.py
+#, python-brace-format
+msgid "{machine} took over {name}"
+msgstr "{machine}, {name} makinesini devraldı"
+
+#: mac_app/bridge.py
+#, python-brace-format
+msgid "Another machine took over {name}"
+msgstr "Başka bir makine {name} makinesini devraldı"
+
+#: mac_app/bridge.py
+#, python-brace-format
+msgid "{name} could not be reached"
+msgstr "{name} makinesine ulaşılamadı"
+
+#: mac_app/diagram.py
+msgid "right of"
+msgstr "sağında"
+
+#: mac_app/diagram.py
+msgid "left of"
+msgstr "solunda"
+
+#: mac_app/diagram.py mac_app/pages.py
+msgid "below"
+msgstr "altında"
+
+#: mac_app/diagram.py mac_app/pages.py
+msgid "above"
+msgstr "üstünde"
+
+#: mac_app/diagram.py
+msgid "start"
+msgstr "başlangıç"
+
+#: mac_app/diagram.py
+msgid "end"
+msgstr "son"
+
+#: mac_app/diagram.py win_app/kvm_bridge_win.py
+msgid "Crosses"
+msgstr "Geçer"
+
+#: mac_app/diagram.py
+msgid "Overlaps"
+msgstr "Çakışır"
+
+#: mac_app/diagram.py
+msgid "Drag to connect"
+msgstr "Bağlamak için sürükleyin"
+
+#: mac_app/diagram.py
+msgid "Edge off"
+msgstr "Kenar kapalı"
+
+#: mac_app/diagram.py mac_app/ledger.py mac_app/machines_panel.py win_app/crossing_ledger.py win_app/diagram.py win_app/machines_win.py
+msgid "In the shortcut's cycle"
+msgstr "Kısayol döngüsünde"
+
+#: mac_app/diagram.py win_app/crossing_ledger.py win_app/diagram.py win_app/sender.py
+msgid "Other machine"
+msgstr "Diğer makine"
+
+#: mac_app/diagram.py mac_app/kvm_bridge_app.py mac_app/machines_panel.py
+msgid "This Mac"
+msgstr "Bu Mac"
+
+#: mac_app/diagram.py mac_app/machines_panel.py
+msgid "Selected"
+msgstr "Seçili"
+
+#: mac_app/diagram.py
+msgid "Drag a corner to resize, or use Option and the arrow keys."
+msgstr "Boyutlandırmak için bir köşeyi sürükleyin ya da Option ve ok tuşlarını kullanın."
+
+#: mac_app/diagram.py
+msgid "Whole desk layout"
+msgstr "Tüm masa düzeni"
+
+#: mac_app/diagram.py
+msgid "No machines paired."
+msgstr "Eşleşmiş makine yok."
+
+#. {third} is one of the three sections along an edge.
+#: mac_app/diagram.py
+#, python-brace-format
+msgid "{name}, {side} This Mac, {third} third. {outcome}."
+msgstr "{name}, bu Mac'in {side}, {third} üçte bir. {outcome}."
+
+#: mac_app/diagram.py
+#, python-brace-format
+msgid "{name}, {side} This Mac. {outcome}."
+msgstr "{name}, bu Mac'in {side}. {outcome}."
+
+#. third names are one of the three sections of a screen edge.
+#: mac_app/diagram.py
+msgid "click to turn it off"
+msgstr "kapatmak için tıklayın"
+
+#. third names are one of the three sections of a screen edge.
+#: mac_app/diagram.py
+msgid "click to turn it on"
+msgstr "açmak için tıklayın"
+
+#: mac_app/diagram.py
+#, python-brace-format
+msgid "Current pressure {pressure} of {value} pointer units at the {edge} edge."
+msgstr "{edge} kenarda mevcut basınç {value} imleç biriminden {pressure}."
+
+#: mac_app/diagram.py
+msgid "machine"
+msgstr "makine"
+
+#: mac_app/diagram.py
+msgid "Not in use"
+msgstr "Kullanımda değil"
+
+#: mac_app/diagram.py win_app/diagram.py
+msgid "Recentre"
+msgstr "Ortala"
+
+#: mac_app/diagram.py
+#, python-brace-format
+msgid "{name} third: {detail}"
+msgstr "{name} üçte biri: {detail}"
+
+#: mac_app/diagram.py
+msgid "Rename this Mac on Overview."
+msgstr "Bu Mac'i Genel Bakış'tan yeniden adlandırın."
+
+#: mac_app/diagram.py win_app/diagram.py
+#, python-brace-format
+msgid "Recentre {name}"
+msgstr "{name} makinesini ortala"
+
+#: mac_app/diagram.py
+#, python-brace-format
+msgid "Machine · {id}"
+msgstr "Makine · {id}"
+
+#: mac_app/diagram.py
+#, python-brace-format
+msgid "{name}, In the shortcut's cycle"
+msgstr "{name}, Kısayol döngüsünde"
+
+#: mac_app/diagram.py
+#, python-brace-format
+msgid "{name}, {status}"
+msgstr "{name}, {status}"
+
+#: mac_app/diagram.py
+#, python-brace-format
+msgid "{name} is in the shortcut's cycle."
+msgstr "{name} kısayol döngüsünde."
+
+#: mac_app/diagram.py
+#, python-brace-format
+msgid "{name} is out of the shortcut's cycle."
+msgstr "{name} kısayol döngüsünün dışında."
+
+#: mac_app/diagram.py win_app/diagram.py
+#, python-brace-format
+msgid "{name} resized."
+msgstr "{name} yeniden boyutlandırıldı."
+
+#: mac_app/diagram.py
+msgid "Set elsewhere"
+msgstr "Başka yerde ayarlı"
+
+#: mac_app/diagram.py
+#, python-brace-format
+msgid "No push. Current pressure is 0 of {value} pointer units."
+msgstr "İtiş yok. Mevcut basınç {value} imleç biriminden 0."
+
+#: mac_app/diagram.py
+#, python-brace-format
+msgid "{name} · macOS"
+msgstr "{name} · macOS"
+
+#: mac_app/diagram.py mac_app/ledger.py win_app/crossing_ledger.py
+#, python-brace-format
+msgid "{platform} · {status}"
+msgstr "{platform} · {status}"
+
+#: mac_app/diagram.py mac_app/ledger.py
+#, python-brace-format
+msgid "Beamer {version} · only sees which side"
+msgstr "Beamer {version} · yalnızca hangi kenar olduğunu görür"
+
+#: mac_app/diagram.py
+#, python-brace-format
+msgid "{name}: drag a corner to resize, or use Option and the arrow keys."
+msgstr "{name}: boyutlandırmak için bir köşeyi sürükleyin ya da Option ve ok tuşlarını kullanın."
+
+#: mac_app/diagram.py win_app/crossing_ledger.py
+msgid "Computer"
+msgstr "Bilgisayar"
+
+#: mac_app/diagram.py mac_app/ledger.py mac_app/link_state.py mac_app/machines.py win_app/crossing_ledger.py win_app/peers_view.py
+msgid "Linked"
+msgstr "Bağlı"
+
+#: mac_app/diagram.py
+#, python-brace-format
+msgid "{label}, {outcome}."
+msgstr "{label}, {outcome}."
+
+#: mac_app/diagram.py
+#, python-brace-format
+msgid "{label}, {name}, this Mac."
+msgstr "{label}, {name}, bu Mac."
+
+#: mac_app/diagram.py
+#, python-brace-format
+msgid "{label}, this Mac."
+msgstr "{label}, bu Mac."
+
+#: mac_app/kvm_bridge_app.py
+msgid "Input on this Mac"
+msgstr "Giriş bu Mac'te"
+
+#: mac_app/kvm_bridge_app.py
+msgid "Input held on this Mac; crossing is off"
+msgstr "Giriş bu Mac'te tutuluyor; geçiş kapalı"
+
+#: mac_app/kvm_bridge_app.py
+msgid "Input on another machine"
+msgstr "Giriş başka bir makinede"
+
+#: mac_app/kvm_bridge_app.py win_app/kvm_bridge_win.py
+msgid "About Beamer"
+msgstr "Beamer Hakkında"
+
+#: mac_app/kvm_bridge_app.py
+msgid "Hide Beamer"
+msgstr "Beamer'ı Gizle"
+
+#: mac_app/kvm_bridge_app.py
+msgid "Hide Others"
+msgstr "Diğerlerini Gizle"
+
+#: mac_app/kvm_bridge_app.py win_app/kvm_bridge_win.py
+msgid "Quit Beamer"
+msgstr "Beamer'dan Çık"
+
+#: mac_app/kvm_bridge_app.py
+msgid "Edit"
+msgstr "Düzen"
+
+#: mac_app/kvm_bridge_app.py
+msgid "Undo"
+msgstr "Geri Al"
+
+#: mac_app/kvm_bridge_app.py
+msgid "Redo"
+msgstr "Yinele"
+
+#: mac_app/kvm_bridge_app.py
+msgid "Cut"
+msgstr "Kes"
+
+#: mac_app/kvm_bridge_app.py
+msgid "Copy"
+msgstr "Kopyala"
+
+#: mac_app/kvm_bridge_app.py
+msgid "Paste"
+msgstr "Yapıştır"
+
+#: mac_app/kvm_bridge_app.py
+msgid "Select All"
+msgstr "Tümünü Seç"
+
+#: mac_app/kvm_bridge_app.py
+msgid "View"
+msgstr "Görünüm"
+
+#: mac_app/kvm_bridge_app.py
+msgid "Window"
+msgstr "Pencere"
+
+#: mac_app/kvm_bridge_app.py
+msgid "Close"
+msgstr "Kapat"
+
+#: mac_app/kvm_bridge_app.py
+msgid "Minimise"
+msgstr "Simge Durumuna Küçült"
+
+#: mac_app/kvm_bridge_app.py
+#, python-brace-format
+msgid "Shortcut: {style} {key} ·"
+msgstr "Kısayol: {style} {key} ·"
+
+#: mac_app/kvm_bridge_app.py win_app/kvm_bridge_win.py
+msgid "Idle"
+msgstr "Boşta"
+
+#: mac_app/kvm_bridge_app.py win_app/kvm_bridge_win.py
+msgid "Get update"
+msgstr "Güncellemeyi al"
+
+#: mac_app/kvm_bridge_app.py win_app/kvm_bridge_win.py
+msgid "What's new"
+msgstr "Yenilikler"
+
+#: mac_app/kvm_bridge_app.py win_app/kvm_bridge_win.py
+msgid "Dismiss"
+msgstr "Kapat"
+
+#: mac_app/kvm_bridge_app.py mac_app/machines.py mac_app/machines_panel.py mac_app/widgets.py win_app/crossing_ledger.py win_app/peers_view.py
+msgid "Mac"
+msgstr "Mac"
+
+#: mac_app/kvm_bridge_app.py win_app/kvm_bridge_win.py
+msgid "Everything"
+msgstr "Her şey"
+
+#: mac_app/kvm_bridge_app.py win_app/kvm_bridge_win.py
+msgid "Shares every group and can replace local values on this machine."
+msgstr "Tüm grupları paylaşır ve bu makinedeki yerel değerlerin yerine geçebilir."
+
+#: mac_app/kvm_bridge_app.py win_app/kvm_bridge_win.py
+msgid "Older Beamer versions share known Crossing and Design settings without group choices."
+msgstr "Eski Beamer sürümleri bilinen Geçiş ve Tasarım ayarlarını grup seçimi olmadan paylaşır."
+
+#: mac_app/kvm_bridge_app.py win_app/kvm_bridge_win.py
+msgid "Revert"
+msgstr "Geri döndür"
+
+#: mac_app/kvm_bridge_app.py
+msgid "Start Beamer when you log in"
+msgstr "Oturum açtığınızda Beamer'ı başlat"
+
+#: mac_app/kvm_bridge_app.py
+msgid "Open Login Items settings"
+msgstr "Oturum Açma Öğeleri ayarlarını aç"
+
+#: mac_app/kvm_bridge_app.py
+msgid "Show in Dock"
+msgstr "Dock'ta göster"
+
+#: mac_app/kvm_bridge_app.py
+msgid "Show in menu bar"
+msgstr "Menü çubuğunda göster"
+
+#: mac_app/kvm_bridge_app.py win_app/kvm_bridge_win.py
+msgid "Automatically check for updates"
+msgstr "Güncellemeleri otomatik denetle"
+
+#: mac_app/kvm_bridge_app.py win_app/kvm_bridge_win.py
+msgid "Check for updates"
+msgstr "Güncellemeleri denetle"
+
+#: mac_app/kvm_bridge_app.py win_app/kvm_bridge_win.py
+msgid "Download"
+msgstr "İndir"
+
+#: mac_app/kvm_bridge_app.py win_app/kvm_bridge_win.py
+msgid "Mouse only"
+msgstr "Yalnızca fare"
+
+#: mac_app/kvm_bridge_app.py
+msgid "Reverse other machines' scrolling"
+msgstr "Diğer makinelerin kaydırmasını ters çevir"
+
+#: mac_app/kvm_bridge_app.py
+msgid "Delay"
+msgstr "Gecikme"
+
+#: mac_app/kvm_bridge_app.py mac_app/ledger.py win_app/crossing_ledger.py win_app/kvm_bridge_win.py
+msgid "Machine"
+msgstr "Makine"
+
+#: mac_app/kvm_bridge_app.py
+msgid "Send input"
+msgstr "Girişi gönder"
+
+#: mac_app/kvm_bridge_app.py win_app/kvm_bridge_win.py
+msgid "Pause crossing"
+msgstr "Geçişi duraklat"
+
+#: mac_app/kvm_bridge_app.py
+msgid "Hold this Mac's edges while an app on it is full screen"
+msgstr "Bu Mac'te bir uygulama tam ekranken kenarlarını tut"
+
+#: mac_app/kvm_bridge_app.py win_app/kvm_bridge_win.py
+msgid "This screen decides, including when another machine drives it. On, a full-screen app here holds pointer crossings; shortcuts and jump keys still work. Off, another machine's pointer can go home or onward through the configured ways."
+msgstr "Diğer bir makine onu kontrol ettiğinde de bu ekran karar verir. Açıkken burada tam ekran bir uygulama imleç geçişlerini durdurur; kısayollar ve atlama tuşları yine çalışır. Kapalıyken başka bir makinenin imleci ayarlanan yollardan eve ya da ileriye gidebilir."
+
+#: mac_app/kvm_bridge_app.py win_app/kvm_bridge_win.py
+msgid "This screen's setting applies to every pointer on it."
+msgstr "Bu ekranın ayarı üzerindeki her imlece uygulanır."
+
+#: mac_app/kvm_bridge_app.py win_app/kvm_bridge_win.py
+msgid "Hide the pointer on the machine not in use"
+msgstr "Kullanılmayan makinedeki imleci gizle"
+
+#: mac_app/kvm_bridge_app.py win_app/kvm_bridge_win.py
+msgid "Same ways on every machine"
+msgstr "Her makinede aynı yollar"
+
+#: mac_app/kvm_bridge_app.py win_app/kvm_bridge_win.py
+msgid "Set every machine's ways from this screen. Turning it on changes nothing until you do; each machine's own ways are kept."
+msgstr "Her makinenin yollarını bu ekrandan ayarlayın. Açmak, siz bir şey değiştirene kadar hiçbir şeyi değiştirmez; her makinenin kendi yolları saklanır."
+
+#: mac_app/kvm_bridge_app.py win_app/kvm_bridge_win.py
+msgid "Identify screens"
+msgstr "Ekranları tanımla"
+
+#: mac_app/kvm_bridge_app.py win_app/kvm_bridge_win.py
+msgid "Show these numbers on every linked machine's screens for 3 seconds."
+msgstr "Bu numaraları bağlı her makinenin ekranlarında 3 saniye göster."
+
+#: mac_app/kvm_bridge_app.py
+msgid "Option-click a display to split or group · drag to move · click a third of a lit edge to leave it out · drag a corner to resize"
+msgstr "Bölmek veya gruplamak için Option ile bir ekrana tıklayın · taşımak için sürükleyin · dışarıda bırakmak için yanan kenarın bir üçte birine tıklayın · boyutlandırmak için bir köşeyi sürükleyin"
+
+#: mac_app/kvm_bridge_app.py win_app/kvm_bridge_win.py
+msgid "Switching moves every machine to this profile's places and ways."
+msgstr "Geçiş yapmak, her makineyi bu profilin yerlerine ve yollarına taşır."
+
+#: mac_app/kvm_bridge_app.py mac_app/machines_panel.py win_app/machines_win.py
+msgid "Machines"
+msgstr "Makineler"
+
+#: mac_app/kvm_bridge_app.py win_app/kvm_bridge_win.py
+msgid "Keep this machine's own ways"
+msgstr "Bu makinenin kendi yollarını koru"
+
+#: mac_app/kvm_bridge_app.py win_app/kvm_bridge_win.py
+msgid "Use the desk's ways"
+msgstr "Masanın yollarını kullan"
+
+#: mac_app/kvm_bridge_app.py win_app/kvm_bridge_win.py
+msgid "Share mine with the desk"
+msgstr "Benimkini masayla paylaş"
+
+#: mac_app/kvm_bridge_app.py
+msgid "This Mac keeps its own ways"
+msgstr "Bu Mac kendi yollarını korur"
+
+#: mac_app/kvm_bridge_app.py
+msgid "Don't cross while dragging with this Mac's pointer"
+msgstr "Bu Mac'in imleciyle sürüklerken geçme"
+
+#: mac_app/kvm_bridge_app.py win_app/kvm_bridge_win.py
+msgid "Shake to come home"
+msgstr "Eve dönmek için salla"
+
+#: mac_app/kvm_bridge_app.py win_app/kvm_bridge_win.py
+msgid "Delete…"
+msgstr "Sil…"
+
+#: mac_app/kvm_bridge_app.py win_app/kvm_bridge_win.py
+msgid "Profile name"
+msgstr "Profil adı"
+
+#: mac_app/kvm_bridge_app.py mac_app/machines_panel.py win_app/kvm_bridge_win.py win_app/machines_win.py
+msgid "Cancel"
+msgstr "İptal"
+
+#: mac_app/kvm_bridge_app.py win_app/kvm_bridge_win.py
+msgid "Earlier ways ▾"
+msgstr "Önceki yollar ▾"
+
+#: mac_app/kvm_bridge_app.py win_app/kvm_bridge_win.py
+msgid "Earlier ways ▴"
+msgstr "Önceki yollar ▴"
+
+#: mac_app/kvm_bridge_app.py
+msgid "hold"
+msgstr "basılı tut"
+
+#: mac_app/kvm_bridge_app.py
+msgid "double-tap"
+msgstr "çift dokun"
+
+#: mac_app/kvm_bridge_app.py win_app/kvm_bridge_win.py
+msgid "Time between taps"
+msgstr "Dokunuşlar arası süre"
+
+#: mac_app/kvm_bridge_app.py win_app/pages_win.py
+msgid "With Hold, input goes to the last machine."
+msgstr "Basılı Tut ile giriş son makineye gider."
+
+#: mac_app/kvm_bridge_app.py
+msgid "Nothing yet. Every key and button goes to the machine that has input."
+msgstr "Henüz yok. Her tuş ve düğme girişin bulunduğu makineye gider."
+
+#: mac_app/kvm_bridge_app.py
+msgid "Animate crossings on this Mac"
+msgstr "Bu Mac'te geçişleri canlandır"
+
+#: mac_app/kvm_bridge_app.py win_app/kvm_bridge_win.py
+msgid "Show where the pointer lands"
+msgstr "İmlecin nereye indiğini göster"
+
+#: mac_app/kvm_bridge_app.py win_app/kvm_bridge_win.py
+msgid "Hover to preview"
+msgstr "Önizlemek için üzerine gelin"
+
+#: mac_app/kvm_bridge_app.py win_app/kvm_bridge_win.py
+msgid "Length"
+msgstr "Uzunluk"
+
+#: mac_app/kvm_bridge_app.py win_app/kvm_bridge_win.py
+msgid "Sets the effect's playback time."
+msgstr "Efektin oynatma süresini ayarlar."
+
+#: mac_app/kvm_bridge_app.py win_app/kvm_bridge_win.py
+msgid "Size"
+msgstr "Boyut"
+
+#: mac_app/kvm_bridge_app.py win_app/kvm_bridge_win.py
+msgid "Sets effect depth relative to the shorter screen edge."
+msgstr "Efekt derinliğini kısa ekran kenarına göre ayarlar."
+
+#: mac_app/kvm_bridge_app.py
+msgid "Tick as the push builds"
+msgstr "İtiş arttıkça tıkla"
+
+#: mac_app/kvm_bridge_app.py
+msgid "Ticks at"
+msgstr "Tık noktaları"
+
+#: mac_app/kvm_bridge_app.py
+msgid "Try it"
+msgstr "Deneyin"
+
+#: mac_app/kvm_bridge_app.py win_app/kvm_bridge_win.py
+msgid "Modifier keys"
+msgstr "Değiştirici tuşlar"
+
+#: mac_app/kvm_bridge_app.py win_app/kvm_bridge_win.py
+msgid "Hide addresses"
+msgstr "Adresleri gizle"
+
+#: mac_app/kvm_bridge_app.py win_app/kvm_bridge_win.py
+msgid "Beamer changes language when it next opens."
+msgstr "Beamer dili bir sonraki açılışta değiştirir."
+
+#: mac_app/kvm_bridge_app.py win_app/kvm_bridge_win.py
+msgid "Relaunch Beamer"
+msgstr "Beamer'ı yeniden başlat"
+
+#: mac_app/kvm_bridge_app.py
+msgid "First paired machine's port"
+msgstr "İlk eşleşen makinenin portu"
+
+#: mac_app/kvm_bridge_app.py
+msgid "Accessibility"
+msgstr "Erişilebilirlik"
+
+#: mac_app/kvm_bridge_app.py
+msgid "Lets Beamer move this Mac's pointer and type on it when another machine drives."
+msgstr "Başka bir makine kontrol ederken Beamer'ın bu Mac'in imlecini hareket ettirmesine ve yazmasına izin verir."
+
+#: mac_app/kvm_bridge_app.py
+msgid "Input Monitoring"
+msgstr "Giriş İzleme"
+
+#: mac_app/kvm_bridge_app.py
+msgid "Lets Beamer read this keyboard and trackpad, to send them to another machine."
+msgstr "Beamer'ın bu klavyeyi ve trackpad'i okuyup başka bir makineye göndermesine izin verir."
+
+#: mac_app/kvm_bridge_app.py
+msgid "Required"
+msgstr "Gerekli"
+
+#: mac_app/kvm_bridge_app.py
+msgid "Grant"
+msgstr "İzin ver"
+
+#: mac_app/kvm_bridge_app.py
+msgid "Saved. Connecting…"
+msgstr "Kaydedildi. Bağlanılıyor…"
+
+#: mac_app/kvm_bridge_app.py win_app/kvm_bridge_win.py
+msgid "Current chain: Idle"
+msgstr "Geçerli zincir: Boşta"
+
+#: mac_app/kvm_bridge_app.py
+msgid "This Mac drives other machines"
+msgstr "Bu Mac diğer makineleri kontrol eder"
+
+#: mac_app/kvm_bridge_app.py
+msgid "Other machines drive this Mac"
+msgstr "Diğer makineler bu Mac'i kontrol eder"
+
+#: mac_app/kvm_bridge_app.py win_app/kvm_bridge_win.py
+msgid "Profile"
+msgstr "Profil"
+
+#: mac_app/kvm_bridge_app.py
+msgid "Configuration reloaded"
+msgstr "Yapılandırma yeniden yüklendi"
+
+#: mac_app/kvm_bridge_app.py
+msgid "Beamer is using the config on disk."
+msgstr "Beamer diskteki yapılandırmayı kullanıyor."
+
+#: mac_app/kvm_bridge_app.py
+msgid "Open Beamer's website, kalkmancode.co.uk/beamer"
+msgstr "Beamer'ın web sitesini aç, kalkmancode.co.uk/beamer"
+
+#: mac_app/kvm_bridge_app.py win_app/kvm_bridge_win.py
+msgid "Click a machine on the map to set its ways. The ledger says how it reaches each other machine."
+msgstr "Yollarını ayarlamak için haritada bir makineye tıklayın. Liste, her makineye nasıl ulaşıldığını gösterir."
+
+#: mac_app/kvm_bridge_app.py
+msgid "Off: the trackpad stays still while you push."
+msgstr "Kapalı: siz iterken trackpad sabit kalır."
+
+#: mac_app/kvm_bridge_app.py
+msgid "Switches the moment this Mac's pointer touches the edge. Each screen supplies its own zones."
+msgstr "Bu Mac'in imleci kenara değdiği anda geçer. Her ekran kendi bölgelerini belirler."
+
+#: mac_app/kvm_bridge_app.py
+msgid "Custom: the key map in settings.json is kept as it is."
+msgstr "Özel: settings.json'daki tuş eşlemesi olduğu gibi korunur."
+
+#: mac_app/kvm_bridge_app.py
+msgid "Refused: that position is already occupied."
+msgstr "Reddedildi: o konum zaten dolu."
+
+#: mac_app/kvm_bridge_app.py mac_app/link_state.py
+msgid "Not paired"
+msgstr "Eşleşmemiş"
+
+#: mac_app/kvm_bridge_app.py mac_app/machines.py win_app/peers_view.py
+msgid "No address"
+msgstr "Adres yok"
+
+#: mac_app/kvm_bridge_app.py win_app/kvm_bridge_win.py
+msgid "Settings"
+msgstr "Ayarlar"
+
+#: mac_app/kvm_bridge_app.py win_app/kvm_bridge_win.py
+msgid "Same on all machines"
+msgstr "Tüm makinelerde aynı"
+
+#: mac_app/kvm_bridge_app.py
+msgid "At login"
+msgstr "Oturum açılışında"
+
+#: mac_app/kvm_bridge_app.py
+msgid "Dock and menu bar"
+msgstr "Dock ve menü çubuğu"
+
+#: mac_app/kvm_bridge_app.py win_app/kvm_bridge_win.py
+msgid "Updates"
+msgstr "Güncellemeler"
+
+#: mac_app/kvm_bridge_app.py win_app/kvm_bridge_win.py
+msgid "Checking for updates…"
+msgstr "Güncellemeler denetleniyor…"
+
+#: mac_app/kvm_bridge_app.py win_app/kvm_bridge_win.py
+msgid "Beamer is up to date."
+msgstr "Beamer güncel."
+
+#: mac_app/kvm_bridge_app.py win_app/kvm_bridge_win.py
+msgid "Update available."
+msgstr "Güncelleme var."
+
+#: mac_app/kvm_bridge_app.py win_app/kvm_bridge_win.py
+msgid "Could not check for updates. Check your connection and try again."
+msgstr "Güncellemeler denetlenemedi. Bağlantınızı kontrol edip tekrar deneyin."
+
+#: mac_app/kvm_bridge_app.py mac_app/widgets.py win_app/kvm_bridge_win.py
+msgid "Match design with"
+msgstr "Tasarımı eşle"
+
+#: mac_app/kvm_bridge_app.py win_app/kvm_bridge_win.py
+msgid "None"
+msgstr "Yok"
+
+#: mac_app/kvm_bridge_app.py win_app/kvm_bridge_win.py
+msgid "Appearance"
+msgstr "Görünüm"
+
+#: mac_app/kvm_bridge_app.py win_app/kvm_bridge_win.py
+msgid "Keyboard sharing"
+msgstr "Klavye paylaşımı"
+
+#: mac_app/kvm_bridge_app.py win_app/kvm_bridge_win.py
+msgid "Another machine's pointer here"
+msgstr "Buradaki başka bir makinenin imleci"
+
+#: mac_app/kvm_bridge_app.py win_app/kvm_bridge_win.py
+msgid "Pointer speed"
+msgstr "İmleç hızı"
+
+#: mac_app/kvm_bridge_app.py
+msgid "Scrolling"
+msgstr "Kaydırma"
+
+#: mac_app/kvm_bridge_app.py win_app/kvm_bridge_win.py
+msgid "Scroll speed"
+msgstr "Kaydırma hızı"
+
+#: mac_app/kvm_bridge_app.py
+msgid "Keyboard and pointer"
+msgstr "Klavye ve imleç"
+
+#: mac_app/kvm_bridge_app.py win_app/kvm_bridge_win.py
+msgid "New profile…"
+msgstr "Yeni profil…"
+
+#: mac_app/kvm_bridge_app.py mac_app/ledger.py mac_app/machines_panel.py win_app/crossing_ledger.py win_app/kvm_bridge_win.py win_app/machines_win.py
+msgid "Rename"
+msgstr "Yeniden adlandır"
+
+#: mac_app/kvm_bridge_app.py win_app/kvm_bridge_win.py
+msgid "This machine kept the ways set while it ran an older Beamer."
+msgstr "Bu makine, eski bir Beamer çalıştırırken ayarlanan yolları korudu."
+
+#: mac_app/kvm_bridge_app.py
+msgid "●  Crosses"
+msgstr "●  Geçer"
+
+#: mac_app/kvm_bridge_app.py
+msgid "●  Offline, ways kept"
+msgstr "●  Çevrimdışı, yollar korundu"
+
+#: mac_app/kvm_bridge_app.py
+msgid "Back to This Mac"
+msgstr "Bu Mac'e dön"
+
+#: mac_app/kvm_bridge_app.py
+msgid "The desk is full. Remove an unused profile before adding more ways."
+msgstr "Masa dolu. Daha fazla yol eklemeden önce kullanılmayan bir profili kaldırın."
+
+#: mac_app/kvm_bridge_app.py win_app/kvm_bridge_win.py
+msgid "Shake sensitivity"
+msgstr "Sallama hassasiyeti"
+
+#: mac_app/kvm_bridge_app.py win_app/kvm_bridge_win.py
+msgid "Same → Shortcut"
+msgstr "Aynı → Kısayol"
+
+#: mac_app/kvm_bridge_app.py
+msgid "Rename profile"
+msgstr "Profili yeniden adlandır"
+
+#: mac_app/kvm_bridge_app.py win_app/kvm_bridge_win.py
+msgid "New profile"
+msgstr "Yeni profil"
+
+#: mac_app/kvm_bridge_app.py win_app/kvm_bridge_win.py
+msgid "Save"
+msgstr "Kaydet"
+
+#: mac_app/kvm_bridge_app.py
+msgid "Add"
+msgstr "Ekle"
+
+#: mac_app/kvm_bridge_app.py mac_app/pages.py win_app/kvm_bridge_win.py
+msgid "Drag a machine on the map to where it sits. The ledger says how each one is reached; click a row to pick it on the map."
+msgstr "Haritada bir makineyi durduğu yere sürükleyin. Liste her birine nasıl ulaşıldığını gösterir; haritada seçmek için bir satıra tıklayın."
+
+#: mac_app/kvm_bridge_app.py win_app/kvm_bridge_win.py
+msgid "Click a machine to set its ways · Tab and Return pick one from the keyboard"
+msgstr "Yollarını ayarlamak için bir makineye tıklayın · klavyeden seçmek için Tab ve Return"
+
+#: mac_app/kvm_bridge_app.py win_app/pages_win.py
+msgid "Before Beamer 1.5.5"
+msgstr "Beamer 1.5.5'ten önce"
+
+#: mac_app/kvm_bridge_app.py win_app/pages_win.py
+msgid "From an older Beamer"
+msgstr "Eski bir Beamer'dan"
+
+#: mac_app/kvm_bridge_app.py win_app/pages_win.py
+msgid "When Same ways went off"
+msgstr "Aynı yollar kapatıldığında"
+
+#: mac_app/kvm_bridge_app.py win_app/pages_win.py
+msgid "When Same ways went on"
+msgstr "Aynı yollar açıldığında"
+
+#: mac_app/kvm_bridge_app.py win_app/pages_win.py
+msgid "Before you changed it"
+msgstr "Siz değiştirmeden önce"
+
+#: mac_app/kvm_bridge_app.py win_app/pages_win.py
+msgid "Before a restore"
+msgstr "Bir geri yüklemeden önce"
+
+#: mac_app/kvm_bridge_app.py
+msgid "With Hold, input goes to the first ready machine in order. Choose which machines join the cycle with the tick boxes on their tiles."
+msgstr "Basılı Tut ile giriş sıradaki ilk hazır makineye gider. Döngüye hangi makinelerin katılacağını kutucuklarındaki onay kutularıyla seçin."
+
+#: mac_app/kvm_bridge_app.py
+msgid "Stays on this Mac"
+msgstr "Bu Mac'te kalır"
+
+#: mac_app/kvm_bridge_app.py mac_app/machines_panel.py win_app/kvm_bridge_win.py win_app/machines_win.py
+msgid "Remove"
+msgstr "Kaldır"
+
+#: mac_app/kvm_bridge_app.py win_app/kvm_bridge_win.py
+msgid "That key is the shortcut; it always stays with Beamer."
+msgstr "Bu tuş kısayoldur; her zaman Beamer'da kalır."
+
+#: mac_app/kvm_bridge_app.py win_app/kvm_bridge_win.py
+msgid "On screen"
+msgstr "Ekranda"
+
+#: mac_app/kvm_bridge_app.py
+msgid "Notch style"
+msgstr "Çentik stili"
+
+#: mac_app/kvm_bridge_app.py win_app/kvm_bridge_win.py
+msgid "Style"
+msgstr "Stil"
+
+#: mac_app/kvm_bridge_app.py win_app/kvm_bridge_win.py
+msgid "Style for"
+msgstr "Stil:"
+
+#: mac_app/kvm_bridge_app.py win_app/kvm_bridge_win.py
+msgid "Show at"
+msgstr "Gösterim yeri"
+
+#: mac_app/kvm_bridge_app.py win_app/kvm_bridge_win.py
+msgid "Frame rate"
+msgstr "Kare hızı"
+
+#: mac_app/kvm_bridge_app.py win_app/kvm_bridge_win.py
+msgid "Colour"
+msgstr "Renk"
+
+#: mac_app/kvm_bridge_app.py
+msgid "Trackpad"
+msgstr "Trackpad"
+
+#: mac_app/kvm_bridge_app.py mac_app/machines_panel.py win_app/machines_win.py
+msgid "Address"
+msgstr "Adres"
+
+#: mac_app/kvm_bridge_app.py
+msgctxt "list"
+msgid " or "
+msgstr " veya "
+
+#: mac_app/kvm_bridge_app.py
+#, python-brace-format
+msgid "Hold {key}, or push through {ways}"
+msgstr "{key} tuşunu basılı tutun ya da {ways} üzerinden itin"
+
+#: mac_app/kvm_bridge_app.py
+#, python-brace-format
+msgid "Double-tap {key}, or push through {ways}"
+msgstr "{key} tuşuna çift dokunun ya da {ways} üzerinden itin"
+
+#: mac_app/kvm_bridge_app.py
+msgid "Saved. Changes apply as you make them."
+msgstr "Kaydedildi. Değişiklikler siz yaptıkça uygulanır."
+
+#: mac_app/kvm_bridge_app.py
+msgid "Quit Beamer and start it again."
+msgstr "Beamer'dan çıkıp yeniden başlatın."
+
+#: mac_app/kvm_bridge_app.py
+msgid "Grant both Mac permissions first."
+msgstr "Önce Mac'in iki iznini de verin."
+
+#: mac_app/kvm_bridge_app.py
+#, python-brace-format
+msgid "Current chain: {route}"
+msgstr "Geçerli zincir: {route}"
+
+#: mac_app/kvm_bridge_app.py
+msgid "Granted"
+msgstr "Verildi"
+
+#: mac_app/kvm_bridge_app.py
+msgid "Both granted. Relaunch Beamer so macOS passes it the keyboard."
+msgstr "İkisi de verildi. macOS'un klavyeyi ona iletmesi için Beamer'ı yeniden başlatın."
+
+#: mac_app/kvm_bridge_app.py win_app/kvm_bridge_win.py
+msgid "Resume crossing"
+msgstr "Geçişi sürdür"
+
+#: mac_app/kvm_bridge_app.py
+msgid "Return input to Mac"
+msgstr "Girişi Mac'e döndür"
+
+#: mac_app/kvm_bridge_app.py
+msgid "Not yet learned"
+msgstr "Henüz öğrenilmedi"
+
+#: mac_app/kvm_bridge_app.py
+msgid "Read from the network the first time this Mac connects; nothing to type."
+msgstr "Bu Mac ilk bağlandığında ağdan okunur; yazacak bir şey yok."
+
+#: mac_app/kvm_bridge_app.py
+msgid "Beamer • Local"
+msgstr "Beamer • Yerel"
+
+#: mac_app/kvm_bridge_app.py
+msgid " macOS plays them only while a finger is on the trackpad, so press and hold Try it."
+msgstr " macOS bunları yalnızca trackpad'de parmak varken çalar, bu yüzden Deneyin'e basılı tutun."
+
+#: mac_app/kvm_bridge_app.py
+#, python-brace-format
+msgid "Once the pointer is through to another machine the notch keeps playing for {seconds} seconds. Outline and Island apply to Glow and Beam; other styles draw their own notch."
+msgstr "İmleç başka bir makineye geçtikten sonra çentik {seconds} saniye daha oynamaya devam eder. Çerçeve ve Ada, Işıma ve Işın için geçerlidir; diğer stiller kendi çentiklerini çizer."
+
+#: mac_app/kvm_bridge_app.py win_app/kvm_bridge_win.py
+msgid "Input is on another machine for as long as the key is held. If you jump while holding the shortcut, releasing it brings input home."
+msgstr "Tuş basılı tutulduğu sürece giriş başka bir makinededir. Kısayolu basılı tutarken atlarsanız, bıraktığınızda giriş eve döner."
+
+#: mac_app/kvm_bridge_app.py win_app/kvm_bridge_win.py
+msgid "Tap twice to switch; tap twice again to come back."
+msgstr "Geçmek için iki kez dokunun; geri dönmek için yine iki kez dokunun."
+
+#: mac_app/kvm_bridge_app.py
+msgid "Follows this Mac's mouse or trackpad on every screen; each screen supplies its own zones."
+msgstr "Bu Mac'in faresini veya trackpad'ini her ekranda izler; her ekran kendi bölgelerini belirler."
+
+#: mac_app/kvm_bridge_app.py win_app/kvm_bridge_win.py
+msgid "Crossing shares resistance and drag protection. Design shares effects, colour, length, size and arrival animation. Shortcut shares shortcut on/off, trigger key and style, and destination. Names shares this machine's name and paired-machine labels."
+msgstr "Geçiş direnci ve sürükleme korumasını paylaşır. Tasarım efektleri, rengi, uzunluğu, boyutu ve varış animasyonunu paylaşır. Kısayol, kısayolun açık/kapalı durumunu, tetik tuşunu ve stilini ve hedefi paylaşır. Adlar, bu makinenin adını ve eşleşmiş makine etiketlerini paylaşır."
+
+#: mac_app/kvm_bridge_app.py win_app/kvm_bridge_win.py
+#, python-brace-format
+msgid "Ways: set on the Crossing page · {state}"
+msgstr "Yollar: Geçiş sayfasında ayarlanır · {state}"
+
+#: mac_app/kvm_bridge_app.py
+msgid "For menu-bar-only use, turn off Show in Dock and close this window. Beamer stays in the menu bar. Its Dock icon appears while this window is open."
+msgstr "Yalnızca menü çubuğunda kullanmak için Dock'ta göster'i kapatıp bu pencereyi kapatın. Beamer menü çubuğunda kalır. Dock simgesi bu pencere açıkken görünür."
+
+#: mac_app/kvm_bridge_app.py win_app/kvm_bridge_win.py
+msgid "Checks GitHub at startup and once a day. Updates are downloaded and installed by you."
+msgstr "Başlangıçta ve günde bir kez GitHub'ı denetler. Güncellemeleri siz indirip kurarsınız."
+
+#: mac_app/kvm_bridge_app.py win_app/kvm_bridge_win.py
+msgid "System"
+msgstr "Sistem"
+
+#: mac_app/kvm_bridge_app.py win_app/kvm_bridge_win.py
+msgctxt "appearance"
+msgid "Light"
+msgstr "Açık"
+
+#: mac_app/kvm_bridge_app.py win_app/kvm_bridge_win.py
+msgid "Dark"
+msgstr "Koyu"
+
+#: mac_app/kvm_bridge_app.py win_app/kvm_bridge_win.py
+msgid "This window"
+msgstr "Bu pencere"
+
+#: mac_app/kvm_bridge_app.py
+msgid "System follows your Mac's light or dark setting."
+msgstr "Sistem, Mac'inizin açık veya koyu ayarını izler."
+
+#: mac_app/kvm_bridge_app.py win_app/kvm_bridge_win.py
+msgid "Keep this machine's keyboard here. Pointer and clipboard sharing stay on."
+msgstr "Bu makinenin klavyesini burada tut. İmleç ve pano paylaşımı açık kalır."
+
+#: mac_app/kvm_bridge_app.py
+msgid "Pointer speed for another machine's mouse or trackpad while it drives this Mac."
+msgstr "Başka bir makinenin faresi veya trackpad'i bu Mac'i kontrol ederken imleç hızı."
+
+#: mac_app/kvm_bridge_app.py win_app/kvm_bridge_win.py
+msgid "Link"
+msgstr "Bağlantı"
+
+#: mac_app/kvm_bridge_app.py
+msgid "This Mac's pointer always hides while it drives another machine. On, it also hides after another machine stops driving it, until its own mouse or trackpad moves."
+msgstr "Bu Mac'in imleci başka bir makineyi kontrol ederken her zaman gizlenir. Açıkken, başka bir makine onu kontrol etmeyi bıraktıktan sonra da kendi faresi veya trackpad'i hareket edene kadar gizlenir."
+
+#: mac_app/kvm_bridge_app.py
+msgid "Each chip is a side of this screen; click one to add or remove it. The side a machine touches crosses on its lit thirds; any other free side wraps round to it, arriving on its far side. A corner is a diagonal push, shown as a square on the map. The notch is this Mac only."
+msgstr "Her çip bu ekranın bir kenarıdır; eklemek veya kaldırmak için birine tıklayın. Bir makinenin değdiği kenar, yanan üçte birlerinde geçer; diğer boş kenarlar ona dolanır ve uzak kenarına varır. Köşe çapraz bir itiştir, haritada kare olarak gösterilir. Çentik yalnızca bu Mac içindir."
+
+#: mac_app/kvm_bridge_app.py win_app/kvm_bridge_win.py
+msgid "This machine's pointer"
+msgstr "Bu makinenin imleci"
+
+#: mac_app/kvm_bridge_app.py win_app/kvm_bridge_win.py
+msgid "Applies when this physical pointer pushes through this screen's ways; visiting pointers are not protected by this switch."
+msgstr "Bu fiziksel imleç bu ekranın yollarından geçerken uygulanır; ziyarete gelen imleçler bu anahtarla korunmaz."
+
+#: mac_app/kvm_bridge_app.py win_app/kvm_bridge_win.py
+msgid "Way home"
+msgstr "Eve dönüş"
+
+#: mac_app/kvm_bridge_app.py win_app/kvm_bridge_win.py
+msgid "Shake the mouse or trackpad left and right a few times while you drive another machine, and input comes straight back to the machine you are using."
+msgstr "Başka bir makineyi kontrol ederken fareyi veya trackpad'i birkaç kez sağa sola sallayın, giriş doğrudan kullandığınız makineye döner."
+
+#: mac_app/kvm_bridge_app.py
+msgid "Push back the way you came: where an edge leads back to This Mac"
+msgstr "Geldiğiniz yoldan geri itin: bir kenarın bu Mac'e döndüğü yerden"
+
+#: mac_app/kvm_bridge_app.py win_app/kvm_bridge_win.py
+msgid "+"
+msgstr "+"
+
+#: mac_app/kvm_bridge_app.py win_app/kvm_bridge_win.py
+msgid "Double-tap"
+msgstr "Çift dokunma"
+
+#: mac_app/kvm_bridge_app.py win_app/kvm_bridge_win.py
+msgid "Hold"
+msgstr "Basılı tutma"
+
+#: mac_app/kvm_bridge_app.py win_app/kvm_bridge_win.py
+msgid "How you press it"
+msgstr "Nasıl basılır"
+
+#: mac_app/kvm_bridge_app.py win_app/kvm_bridge_win.py
+msgid "Last machine"
+msgstr "Son makine"
+
+#: mac_app/kvm_bridge_app.py win_app/kvm_bridge_win.py
+msgid "Next in order"
+msgstr "Sıradaki"
+
+#: mac_app/kvm_bridge_app.py win_app/kvm_bridge_win.py
+msgid "Next among ticked"
+msgstr "İşaretlilerden sıradaki"
+
+#: mac_app/kvm_bridge_app.py win_app/kvm_bridge_win.py
+msgid "Shortcut goes to"
+msgstr "Kısayolun gittiği yer"
+
+#: mac_app/kvm_bridge_app.py win_app/pages_win.py
+msgid "With Hold, input goes to the first ready machine in order."
+msgstr "Basılı Tut ile giriş sıradaki ilk hazır makineye gider."
+
+#: mac_app/kvm_bridge_app.py
+msgid "These keys and buttons keep working on this Mac while its input is on another machine: a mouse's back button for this Mac's browser, say, or a volume key for its speakers."
+msgstr "Bu Mac'in girişi başka bir makinedeyken bu tuşlar ve düğmeler bu Mac'te çalışmaya devam eder: örneğin bu Mac'in tarayıcısı için farenin geri düğmesi ya da hoparlörleri için ses tuşu."
+
+#: mac_app/kvm_bridge_app.py win_app/kvm_bridge_win.py
+msgid "Turns crossing and landing animations on or off on this screen. Saved style choices stay in place."
+msgstr "Bu ekranda geçiş ve iniş animasyonlarını açar veya kapatır. Kayıtlı stil seçimleri yerinde kalır."
+
+#: mac_app/kvm_bridge_app.py win_app/kvm_bridge_win.py
+msgid "For shortcut, menu and jump arrivals; requires Animate crossings on this screen."
+msgstr "Kısayol, menü ve atlama ile varışlar için; bu ekranda Geçişleri canlandır'ın açık olması gerekir."
+
+#: mac_app/kvm_bridge_app.py
+msgid "Outline"
+msgstr "Çerçeve"
+
+#: mac_app/kvm_bridge_app.py
+msgid "A line of colour runs round the notch, faster the harder you push."
+msgstr "Çentiğin çevresinde bir renk çizgisi dolaşır; ne kadar sert iterseniz o kadar hızlı."
+
+#: mac_app/kvm_bridge_app.py
+msgid "Island"
+msgstr "Ada"
+
+#: mac_app/kvm_bridge_app.py
+msgid "The notch grows as you push, with a meter inside, and flashes as you go through."
+msgstr "İttikçe çentik içinde bir göstergeyle büyür ve geçerken parlar."
+
+#: mac_app/kvm_bridge_app.py
+msgid "Keep animating"
+msgstr "Canlandırmayı sürdür"
+
+#: mac_app/kvm_bridge_app.py win_app/kvm_bridge_win.py
+msgid "Shortcut and menu"
+msgstr "Kısayol ve menü"
+
+#: mac_app/kvm_bridge_app.py
+msgid "What plays around the pointer for shortcut, menu and jump arrivals. Same as crossing uses this screen's crossing style."
+msgstr "Kısayol, menü ve atlama ile varışlarda imlecin çevresinde oynayan efekt. Geçişle aynı, bu ekranın geçiş stilini kullanır."
+
+#: mac_app/kvm_bridge_app.py
+msgid "Any colour works with any style. The notch's Outline uses it too; Island keeps Beamer's own cyan."
+msgstr "Her renk her stille çalışır. Çentiğin Çerçeve'si de bunu kullanır; Ada Beamer'ın kendi camgöbeğini korur."
+
+#: mac_app/kvm_bridge_app.py
+msgid "Every quarter"
+msgstr "Her çeyrekte"
+
+#: mac_app/kvm_bridge_app.py
+msgid "Halfway"
+msgstr "Yarı yolda"
+
+#: mac_app/kvm_bridge_app.py
+msgid "Only when through"
+msgstr "Yalnızca geçince"
+
+#: mac_app/kvm_bridge_app.py
+msgid "Feel it"
+msgstr "Hissedin"
+
+#: mac_app/kvm_bridge_app.py win_app/kvm_bridge_win.py
+msgid "Same shortcuts"
+msgstr "Aynı kısayollar"
+
+#: mac_app/kvm_bridge_app.py win_app/kvm_bridge_win.py
+msgid "Same positions"
+msgstr "Aynı konumlar"
+
+#: mac_app/kvm_bridge_app.py
+msgid "Hides every IP and hardware address in this window and its menu."
+msgstr "Bu penceredeki ve menüsündeki tüm IP ve donanım adreslerini gizler."
+
+#: mac_app/kvm_bridge_app.py win_app/kvm_bridge_win.py
+msgid "Automatic"
+msgstr "Otomatik"
+
+#: mac_app/kvm_bridge_app.py win_app/kvm_bridge_win.py
+msgid "Language"
+msgstr "Dil"
+
+#: mac_app/kvm_bridge_app.py
+msgid "Wake-on-LAN"
+msgstr "Wake-on-LAN"
+
+#: mac_app/kvm_bridge_app.py
+msgid "A new address or port takes effect when you connect."
+msgstr "Yeni bir adres veya port bağlandığınızda geçerli olur."
+
+#: mac_app/kvm_bridge_app.py
+msgid "Connect"
+msgstr "Bağlan"
+
+#: mac_app/kvm_bridge_app.py
+msgid "On Overview, turn on Start Beamer when you log in. If macOS needs approval, that page shows the status and opens Login Items settings."
+msgstr "Genel Bakış'ta Oturum açtığınızda Beamer'ı başlat'ı açın. macOS onay isterse o sayfa durumu gösterir ve Oturum Açma Öğeleri ayarlarını açar."
+
+#: mac_app/kvm_bridge_app.py
+#, python-brace-format
+msgid "Push through {ways}"
+msgstr "{ways} üzerinden itin"
+
+#: mac_app/kvm_bridge_app.py
+msgid "Input capture ready."
+msgstr "Giriş yakalama hazır."
+
+#: mac_app/kvm_bridge_app.py
+msgid "Nothing is paired yet. Pairing fills the address and port in."
+msgstr "Henüz hiçbir şey eşleşmedi. Eşleştirme adresi ve portu doldurur."
+
+#: mac_app/kvm_bridge_app.py
+msgid "This Mac drives every machine"
+msgstr "Bu Mac her makineyi kontrol eder"
+
+#: mac_app/kvm_bridge_app.py
+msgid "Every machine drives this Mac"
+msgstr "Her makine bu Mac'i kontrol eder"
+
+#: mac_app/kvm_bridge_app.py
+msgid "Configuration not reloaded"
+msgstr "Yapılandırma yeniden yüklenmedi"
+
+#: mac_app/kvm_bridge_app.py win_app/kvm_bridge_win.py
+#, python-brace-format
+msgid "Driving {name}"
+msgstr "{name} kontrol ediliyor"
+
+#: mac_app/kvm_bridge_app.py win_app/kvm_bridge_win.py
+#, python-brace-format
+msgid "Driven by {name}"
+msgstr "{name} tarafından kontrol ediliyor"
+
+#: mac_app/kvm_bridge_app.py
+#, python-brace-format
+msgid ""
+"Beamer {version}\n"
+"Beamer's website"
+msgstr ""
+"Beamer {version}\n"
+"Beamer'ın web sitesi"
+
+#: mac_app/kvm_bridge_app.py win_app/kvm_bridge_win.py
+#, python-brace-format
+msgid "Plays {name}"
+msgstr "{name} oynatılıyor"
+
+#: mac_app/kvm_bridge_app.py
+msgid "On a PC, Command arrives as Control, so Command-C copies there too, and Control arrives as the Windows key. Between two Macs every key arrives as itself."
+msgstr "Bir PC'de Command, Control olarak varır; böylece Command-C orada da kopyalar ve Control, Windows tuşu olarak varır. İki Mac arasında her tuş kendisi olarak varır."
+
+#: mac_app/kvm_bridge_app.py
+msgid "On a PC, each key arrives as the key in its place, so Command arrives as the Windows key. Between two Macs every key arrives as itself."
+msgstr "Bir PC'de her tuş kendi yerindeki tuş olarak varır, yani Command, Windows tuşu olarak varır. İki Mac arasında her tuş kendisi olarak varır."
+
+#: mac_app/kvm_bridge_app.py win_app/kvm_bridge_win.py
+msgid "On"
+msgstr "Açık"
+
+#: mac_app/kvm_bridge_app.py win_app/kvm_bridge_win.py
+msgid "Off"
+msgstr "Kapalı"
+
+#: mac_app/kvm_bridge_app.py win_app/kvm_bridge_win.py
+#, python-brace-format
+msgid "Beamer {version} is available."
+msgstr "Beamer {version} yayında."
+
+#: mac_app/kvm_bridge_app.py win_app/kvm_bridge_win.py
+#, python-brace-format
+msgid "Download Beamer {version}"
+msgstr "Beamer {version} indir"
+
+#. {reason} is the system's reason for refusing the login item.
+#: mac_app/kvm_bridge_app.py
+#, python-brace-format
+msgid "macOS refused: {reason}"
+msgstr "macOS reddetti: {reason}"
+
+#: mac_app/kvm_bridge_app.py
+msgid "Login item status: Requires approval. Allow Beamer in System Settings, General, Login Items."
+msgstr "Oturum öğesi durumu: Onay gerekiyor. Sistem Ayarları, Genel, Oturum Açma Öğeleri'nde Beamer'a izin verin."
+
+#: mac_app/kvm_bridge_app.py
+msgid "Login item status: Requires approval. Move Beamer to Applications and reopen it before allowing it in Login Items."
+msgstr "Oturum öğesi durumu: Onay gerekiyor. Oturum Açma Öğeleri'nde izin vermeden önce Beamer'ı Uygulamalar'a taşıyıp yeniden açın."
+
+#: mac_app/kvm_bridge_app.py win_app/kvm_bridge_win.py
+#, python-brace-format
+msgid "{name}'s ways"
+msgstr "{name} makinesinin yolları"
+
+#: mac_app/kvm_bridge_app.py win_app/kvm_bridge_win.py
+#, python-brace-format
+msgid "Editing {name}'s ways ·"
+msgstr "{name} makinesinin yolları düzenleniyor ·"
+
+#: mac_app/kvm_bridge_app.py win_app/kvm_bridge_win.py
+#, python-brace-format
+msgid "Jump keys and permissions are set on {name}."
+msgstr "Atlama tuşları ve izinler {name} üzerinde ayarlanır."
+
+#: mac_app/kvm_bridge_app.py win_app/kvm_bridge_win.py
+#, python-brace-format
+msgid "Changes go to {name} at once."
+msgstr "Değişiklikler hemen {name} makinesine gider."
+
+#: mac_app/kvm_bridge_app.py win_app/kvm_bridge_win.py
+msgid "Restore"
+msgstr "Geri yükle"
+
+#: mac_app/kvm_bridge_app.py win_app/kvm_bridge_win.py
+msgid "Delete"
+msgstr "Sil"
+
+#: mac_app/kvm_bridge_app.py
+msgid "The order follows the tiles from top to bottom, then left to right. This Mac is always in the cycle. Choose which machines join the cycle with the tick boxes on their tiles."
+msgstr "Sıra, kutuları yukarıdan aşağıya, sonra soldan sağa izler. Bu Mac her zaman döngüdedir. Döngüye hangi makinelerin katılacağını kutucuklarındaki onay kutularıyla seçin."
+
+#: mac_app/kvm_bridge_app.py
+msgid "The order follows the tiles from top to bottom, then left to right. This Mac is always in the cycle."
+msgstr "Sıra, kutuları yukarıdan aşağıya, sonra soldan sağa izler. Bu Mac her zaman döngüdedir."
+
+#. {name} is the machine name.
+#: mac_app/kvm_bridge_app.py mac_app/machines_panel.py win_app/machines_win.py
+#, python-brace-format
+msgid "Remove {name}"
+msgstr "{name} makinesini kaldır"
+
+#: mac_app/kvm_bridge_app.py
+#, python-brace-format
+msgid "the {side} edge"
+msgstr "{side} kenar"
+
+#: mac_app/kvm_bridge_app.py win_app/pages_win.py
+#, python-brace-format
+msgid "Hold {key}"
+msgstr "{key} tuşunu basılı tut"
+
+#: mac_app/kvm_bridge_app.py win_app/pages_win.py
+#, python-brace-format
+msgid "Double-tap {key}"
+msgstr "{key} tuşuna çift dokun"
+
+#: mac_app/kvm_bridge_app.py mac_app/link_state.py
+#, python-brace-format
+msgid "Waking {name}. It connects on its own once it is up."
+msgstr "{name} uyandırılıyor. Açıldığında kendiliğinden bağlanır."
+
+#: mac_app/kvm_bridge_app.py
+msgid "Beamer needs both, granted separately. macOS only delivers keyboard events to a process started after the grant, so relaunch Beamer once you have given them."
+msgstr "Beamer'ın ikisine de ayrı ayrı izin verilmesi gerekir. macOS klavye olaylarını yalnızca izinden sonra başlatılan bir işleme iletir, bu yüzden izinleri verdikten sonra Beamer'ı yeniden başlatın."
+
+#: mac_app/kvm_bridge_app.py win_app/kvm_bridge_win.py
+msgid "Settings…"
+msgstr "Ayarlar…"
+
+#: mac_app/kvm_bridge_app.py win_app/kvm_bridge_win.py
+msgid "Reload configuration"
+msgstr "Yapılandırmayı yeniden yükle"
+
+#: mac_app/kvm_bridge_app.py win_app/kvm_bridge_win.py
+msgid "Open log folder"
+msgstr "Günlük klasörünü aç"
+
+#: mac_app/kvm_bridge_app.py win_app/kvm_bridge_win.py
+#, python-brace-format
+msgid "Beamer {version} is available…"
+msgstr "Beamer {version} yayında…"
+
+#: mac_app/kvm_bridge_app.py win_app/kvm_bridge_win.py
+#, python-brace-format
+msgid "Beamer {version}"
+msgstr "Beamer {version}"
+
+#: mac_app/kvm_bridge_app.py
+#, python-brace-format
+msgid "This Mac drives {name}"
+msgstr "Bu Mac {name} makinesini kontrol ediyor"
+
+#: mac_app/kvm_bridge_app.py
+#, python-brace-format
+msgid "{name} drives this Mac"
+msgstr "{name} bu Mac'i kontrol ediyor"
+
+#: mac_app/kvm_bridge_app.py win_app/kvm_bridge_win.py
+#, python-brace-format
+msgid "Same as crossing: {name}"
+msgstr "Geçişle aynı: {name}"
+
+#: mac_app/kvm_bridge_app.py win_app/kvm_bridge_win.py
+#, python-brace-format
+msgid "{name}, {intensity}"
+msgstr "{name}, {intensity}"
+
+#: mac_app/kvm_bridge_app.py
+msgid "A tick at a quarter, half and three quarters of the push, then a double tick as the pointer goes through. macOS plays them only while a finger is on the trackpad, so press and hold Try it."
+msgstr "İtişin çeyreğinde, yarısında ve dörtte üçünde birer tık, imleç geçerken de çift tık. macOS bunları yalnızca trackpad'de parmak varken çalar, bu yüzden Deneyin'e basılı tutun."
+
+#: mac_app/kvm_bridge_app.py
+msgid "One tick halfway through the push, then a double tick as the pointer goes through. macOS plays them only while a finger is on the trackpad, so press and hold Try it."
+msgstr "İtişin yarısında bir tık, imleç geçerken de çift tık. macOS bunları yalnızca trackpad'de parmak varken çalar, bu yüzden Deneyin'e basılı tutun."
+
+#: mac_app/kvm_bridge_app.py
+msgid "Nothing on the way in, then a double tick as the pointer goes through. macOS plays them only while a finger is on the trackpad, so press and hold Try it."
+msgstr "Girişte hiçbir şey, imleç geçerken çift tık. macOS bunları yalnızca trackpad'de parmak varken çalar, bu yüzden Deneyin'e basılı tutun."
+
+#: mac_app/kvm_bridge_app.py
+#, python-brace-format
+msgid "Follows this Mac's mouse or trackpad on every screen; each screen supplies its own zones. This screen's {side} edge lights to show the resistance."
+msgstr "Bu Mac'in faresini veya trackpad'ini her ekranda izler; her ekran kendi bölgelerini belirler. Direnci göstermek için bu ekranın {side} kenarı yanar."
+
+#: mac_app/kvm_bridge_app.py
+#, python-brace-format
+msgid "Could not save this Mac's name: {error}"
+msgstr "Bu Mac'in adı kaydedilemedi: {error}"
+
+#: mac_app/kvm_bridge_app.py win_app/kvm_bridge_win.py
+#, python-brace-format
+msgid "Could not save the machine's name: {error}"
+msgstr "Makinenin adı kaydedilemedi: {error}"
+
+#: mac_app/kvm_bridge_app.py
+msgid "Login item status: Not found. Check Beamer is installed in Applications, then turn it on again."
+msgstr "Oturum öğesi durumu: Bulunamadı. Beamer'ın Uygulamalar'da kurulu olduğunu kontrol edip yeniden açın."
+
+#: mac_app/kvm_bridge_app.py
+#, python-brace-format
+msgid "Could not open Login Items settings: {reason}"
+msgstr "Oturum Açma Öğeleri ayarları açılamadı: {reason}"
+
+#: mac_app/kvm_bridge_app.py win_app/kvm_bridge_win.py
+#, python-brace-format
+msgid "{name} has no way back to {machine} except the shortcut and a shake."
+msgstr "{name} makinesinin {machine} makinesine kısayol ve sallama dışında dönüş yolu yok."
+
+#: mac_app/kvm_bridge_app.py win_app/pages_win.py
+#, python-brace-format
+msgid "Before {name} changed it"
+msgstr "{name} değiştirmeden önce"
+
+#: mac_app/kvm_bridge_app.py win_app/pages_win.py
+#, python-brace-format
+msgid "{date} · {reason}"
+msgstr "{date} · {reason}"
+
+#. {detail} is a diagnostic reason supplied by macOS.
+#: mac_app/kvm_bridge_app.py
+msgid "Retrying input capture…"
+msgstr "Giriş yakalama yeniden deneniyor…"
+
+#: mac_app/kvm_bridge_app.py
+#, python-brace-format
+msgid "The address and port of {name}, the first machine paired. Another machine is changed by pairing it again."
+msgstr "İlk eşleşen makine olan {name} makinesinin adresi ve portu. Başka bir makine yeniden eşleştirilerek değiştirilir."
+
+#: mac_app/kvm_bridge_app.py
+#, python-brace-format
+msgid "Crossing to {name} while it sleeps sends a wake-up packet and waits for it."
+msgstr "Uyurken {name} makinesine geçmek bir uyandırma paketi gönderir ve onu bekler."
+
+#. {error} is the system error message.
+#: mac_app/kvm_bridge_app.py
+#, python-brace-format
+msgid "Could not save the change: {error}"
+msgstr "Değişiklik kaydedilemedi: {error}"
+
+#: mac_app/kvm_bridge_app.py
+#, python-brace-format
+msgid "{error}"
+msgstr "{error}"
+
+#: mac_app/kvm_bridge_app.py
+#, python-brace-format
+msgid "Login item status: {status}. Move Beamer to Applications and open it there to start at login."
+msgstr "Oturum öğesi durumu: {status}. Oturum açılışında başlaması için Beamer'ı Uygulamalar'a taşıyıp oradan açın."
+
+#: mac_app/kvm_bridge_app.py
+msgid "Login item status: Enabled. Beamer will start when you log in."
+msgstr "Oturum öğesi durumu: Etkin. Beamer oturum açtığınızda başlayacak."
+
+#: mac_app/kvm_bridge_app.py mac_app/wake.py win_app/peers_view.py win_app/sender.py
+#, python-brace-format
+msgid "Waking {name}…"
+msgstr "{name} uyandırılıyor…"
+
+#: mac_app/kvm_bridge_app.py mac_app/pages.py win_app/kvm_bridge_win.py
+#, python-brace-format
+msgid "Send input to {name}"
+msgstr "Girişi {name} makinesine gönder"
+
+#: mac_app/kvm_bridge_app.py
+msgid "Login item status: Not registered. Turn on Start Beamer when you log in."
+msgstr "Oturum öğesi durumu: Kayıtlı değil. Oturum açtığınızda Beamer'ı başlat'ı açın."
+
+#. {detail} is a diagnostic reason supplied by macOS.
+#: mac_app/kvm_bridge_app.py
+#, python-brace-format
+msgid "Retrying input capture… {detail}"
+msgstr "Giriş yakalama yeniden deneniyor… {detail}"
+
+#: mac_app/kvm_bridge_app.py
+#, python-brace-format
+msgid "Wake {name}"
+msgstr "{name} makinesini uyandır"
+
+#: mac_app/kvm_bridge_app.py
+#, python-brace-format
+msgid "Login item status: {status}."
+msgstr "Oturum öğesi durumu: {status}."
+
+#: mac_app/ledger.py mac_app/machines_panel.py win_app/crossing_ledger.py win_app/machines_win.py
+msgid "Leave out"
+msgstr "Dışarıda bırak"
+
+#: mac_app/ledger.py
+msgid "Return saves, Escape cancels"
+msgstr "Return kaydeder, Escape iptal eder"
+
+#: mac_app/ledger.py mac_app/machines_panel.py
+msgid "Only on this Mac"
+msgstr "Yalnızca bu Mac'te"
+
+#: mac_app/ledger.py win_app/crossing_ledger.py
+msgid "Place it on the map"
+msgstr "Haritaya yerleştirin"
+
+#: mac_app/ledger.py
+msgid "No notch"
+msgstr "Çentik yok"
+
+#: mac_app/ledger.py
+msgid "Return through the notch"
+msgstr "Çentikten dön"
+
+#: mac_app/ledger.py win_app/crossing_ledger.py
+msgid "Jump"
+msgstr "Atla"
+
+#: mac_app/ledger.py win_app/crossing_ledger.py
+msgid "Clear"
+msgstr "Temizle"
+
+#: mac_app/ledger.py win_app/crossing_ledger.py
+msgid "Left out"
+msgstr "Dışarıda bırakıldı"
+
+#: mac_app/ledger.py mac_app/machines_panel.py win_app/crossing_ledger.py win_app/machines_win.py
+msgid "Put back"
+msgstr "Geri koy"
+
+#: mac_app/ledger.py
+msgid "Machines and crossing ways"
+msgstr "Makineler ve geçiş yolları"
+
+#: mac_app/ledger.py win_app/crossing_ledger.py
+msgid "Edges"
+msgstr "Kenarlar"
+
+#: mac_app/ledger.py win_app/crossing_ledger.py
+msgid "Corners"
+msgstr "Köşeler"
+
+#: mac_app/ledger.py mac_app/previews.py win_app/crossing_ledger.py
+msgid "Notch"
+msgstr "Çentik"
+
+#: mac_app/ledger.py win_app/crossing_ledger.py
+msgid "Keys"
+msgstr "Tuşlar"
+
+#: mac_app/ledger.py mac_app/widgets.py win_app/widgets.py
+msgid "Press a key combination…"
+msgstr "Bir tuş bileşimine basın…"
+
+#: mac_app/ledger.py mac_app/widgets.py win_app/kvm_bridge_win.py win_app/widgets.py
+msgid "Click again to cancel"
+msgstr "İptal için yeniden tıklayın"
+
+#: mac_app/ledger.py win_app/crossing_ledger.py win_app/kvm_bridge_win.py
+msgid "Offline, ways kept"
+msgstr "Çevrimdışı, yollar korundu"
+
+#: mac_app/ledger.py win_app/crossing_ledger.py
+msgid "Left out machines stay paired and linked. The shortcut, menu and clipboard still reach them."
+msgstr "Dışarıda bırakılan makineler eşleşmiş ve bağlı kalır. Kısayol, menü ve pano onlara yine ulaşır."
+
+#: mac_app/ledger.py
+msgid "Leave this machine out of pointer crossings"
+msgstr "Bu makineyi imleç geçişlerinin dışında bırak"
+
+#: mac_app/ledger.py
+msgid "Notch, no notch"
+msgstr "Çentik, çentik yok"
+
+#: mac_app/ledger.py win_app/crossing_ledger.py
+msgid "Return through the notch, on"
+msgstr "Çentikten dön, açık"
+
+#: mac_app/ledger.py win_app/crossing_ledger.py
+msgid "Return through the notch, off"
+msgstr "Çentikten dön, kapalı"
+
+#: mac_app/ledger.py
+msgctxt "switch state"
+msgid "on"
+msgstr "açık"
+
+#: mac_app/ledger.py
+msgctxt "switch state"
+msgid "off"
+msgstr "kapalı"
+
+#: mac_app/ledger.py win_app/crossing_ledger.py
+msgid "Notch, on"
+msgstr "Çentik, açık"
+
+#: mac_app/ledger.py win_app/crossing_ledger.py
+msgid "Notch, off"
+msgstr "Çentik, kapalı"
+
+#: mac_app/ledger.py win_app/crossing_ledger.py
+#, python-brace-format
+msgid "Push into the notch to reach {name}"
+msgstr "{name} makinesine ulaşmak için çentiğe doğru itin"
+
+#: mac_app/ledger.py win_app/crossing_ledger.py
+#, python-brace-format
+msgid "Coming back from {name}, arrive just below the notch"
+msgstr "{name} makinesinden dönerken çentiğin hemen altına var"
+
+#. {key} is the recorded key combination; {name} is the machine name.
+#: mac_app/ledger.py win_app/crossing_ledger.py
+#, python-brace-format
+msgid "Press {key} to send input to {name}; press again to bring it home."
+msgstr "Girişi {name} makinesine göndermek için {key} tuşuna basın; eve getirmek için yeniden basın."
+
+#: mac_app/ledger.py mac_app/machines_panel.py
+#, python-brace-format
+msgid "Rename {name}"
+msgstr "{name} makinesini yeniden adlandır"
+
+#: mac_app/ledger.py
+#, python-brace-format
+msgid "{side} edge"
+msgstr "{side} kenar"
+
+#: mac_app/ledger.py win_app/crossing_ledger.py
+msgid "Left out: Put back to change its ways"
+msgstr "Dışarıda bırakıldı: yollarını değiştirmek için geri koyun"
+
+#: mac_app/ledger.py
+msgid "unavailable"
+msgstr "kullanılamıyor"
+
+#: mac_app/ledger.py win_app/crossing_ledger.py
+msgid "macOS"
+msgstr "macOS"
+
+#: mac_app/ledger.py mac_app/machines.py mac_app/widgets.py win_app/crossing_ledger.py win_app/peers_view.py
+msgid "Windows"
+msgstr "Windows"
+
+#: mac_app/ledger.py mac_app/machines.py win_app/crossing_ledger.py win_app/peers_view.py
+msgid "Linux"
+msgstr "Linux"
+
+#: mac_app/ledger.py
+#, python-brace-format
+msgid "Put back {name}"
+msgstr "{name} makinesini geri koy"
+
+#: mac_app/ledger.py
+#, python-brace-format
+msgid "Leave out {name}"
+msgstr "{name} makinesini dışarıda bırak"
+
+#: mac_app/ledger.py
+#, python-brace-format
+msgid "{edge}: touches {name}; click to turn it {state}"
+msgstr "{edge}: {name} makinesine değiyor; {state} yapmak için tıklayın"
+
+#: mac_app/ledger.py
+#, python-brace-format
+msgid "{edge}, touches {name}, {state}"
+msgstr "{edge}, {name} makinesine değiyor, {state}"
+
+#: mac_app/ledger.py win_app/crossing_ledger.py
+#, python-brace-format
+msgid "{corner} corner, {state}"
+msgstr "{corner} köşe, {state}"
+
+#: mac_app/ledger.py win_app/crossing_ledger.py
+#, python-brace-format
+msgid "{side}, wraps"
+msgstr "{side}, dolanır"
+
+#: mac_app/ledger.py
+#, python-brace-format
+msgid "{edge} wraps round to {name}; click to remove"
+msgstr "{edge}, {name} makinesine dolanır; kaldırmak için tıklayın"
+
+#: mac_app/ledger.py
+#, python-brace-format
+msgid "{edge}, wraps round, {state}"
+msgstr "{edge}, dolanır, {state}"
+
+#: mac_app/ledger.py
+#, python-brace-format
+msgid "{corner} corner: click to turn it off"
+msgstr "{corner} köşe: kapatmak için tıklayın"
+
+#: mac_app/ledger.py
+#, python-brace-format
+msgid "{corner} corner: click to turn it on"
+msgstr "{corner} köşe: açmak için tıklayın"
+
+#: mac_app/ledger.py win_app/crossing_ledger.py
+#, python-brace-format
+msgid "{name}'s corner"
+msgstr "{name} makinesinin köşesi"
+
+#: mac_app/ledger.py
+#, python-brace-format
+msgid "Place {name} beside this Mac first"
+msgstr "Önce {name} makinesini bu Mac'in yanına yerleştirin"
+
+#: mac_app/ledger.py
+#, python-brace-format
+msgid "held by {name}"
+msgstr "{name} tarafından tutuluyor"
+
+#: mac_app/ledger.py
+#, python-brace-format
+msgid "{edge}, wraps round, kept"
+msgstr "{edge}, dolanır, korunuyor"
+
+#: mac_app/ledger.py
+#, python-brace-format
+msgid "{edge}, {third} third, {state}"
+msgstr "{edge}, {third} üçte bir, {state}"
+
+#: mac_app/ledger.py
+#, python-brace-format
+msgid "{edge} wraps round to {name} once Edge is on; click to turn Edge on"
+msgstr "{edge}, Kenar açıldığında {name} makinesine dolanır; Kenar'ı açmak için tıklayın"
+
+#: mac_app/ledger.py
+#, python-brace-format
+msgid "{edge}: none of it is free just now; click to remove"
+msgstr "{edge}: şu anda hiçbir kısmı boş değil; kaldırmak için tıklayın"
+
+#: mac_app/ledger.py
+#, python-brace-format
+msgid "{edge}: click to wrap round to {name}"
+msgstr "{edge}: {name} makinesine dolanması için tıklayın"
+
+#: mac_app/ledger.py win_app/crossing_ledger.py
+#, python-brace-format
+msgid "{side}, {name}"
+msgstr "{side}, {name}"
+
+#: mac_app/ledger.py
+#, python-brace-format
+msgid "{edge}: {name}'s"
+msgstr "{edge}: {name} makinesinin"
+
+#: mac_app/ledger.py
+#, python-brace-format
+msgid "{edge}, held by {name}"
+msgstr "{edge}, {name} tarafından tutuluyor"
+
+#: mac_app/ledger.py
+#, python-brace-format
+msgid "{third} third: click to leave it out"
+msgstr "{third} üçte bir: dışarıda bırakmak için tıklayın"
+
+#: mac_app/ledger.py
+#, python-brace-format
+msgid "{third} third: click to turn it on"
+msgstr "{third} üçte bir: açmak için tıklayın"
+
+#: mac_app/link_state.py
+msgid "Beamer keeps trying to reconnect."
+msgstr "Beamer yeniden bağlanmayı denemeye devam ediyor."
+
+#: mac_app/link_state.py
+msgid "Disconnected"
+msgstr "Bağlantı kesildi"
+
+#: mac_app/link_state.py mac_app/machines.py win_app/peers_view.py
+msgid "Dropped"
+msgstr "Düştü"
+
+#: mac_app/link_state.py mac_app/machines.py
+msgid "Live"
+msgstr "Canlı"
+
+#: mac_app/link_state.py
+msgid "Waking"
+msgstr "Uyanıyor"
+
+#: mac_app/link_state.py mac_app/machines.py
+msgid "Tunnel"
+msgstr "Tünel"
+
+#: mac_app/link_state.py
+msgid "On Mac"
+msgstr "Mac'te"
+
+#: mac_app/link_state.py
+msgid "Setup"
+msgstr "Kurulum"
+
+#: mac_app/link_state.py
+msgid "Pair a machine on Overview and Beamer connects on its own."
+msgstr "Genel Bakış'ta bir makine eşleştirin, Beamer kendiliğinden bağlanır."
+
+#. a machine's address and port, as in "192.0.2.20 port 24820".
+#: mac_app/link_state.py
+#, python-brace-format
+msgid "{host} port {port}"
+msgstr "{host} port {port}"
+
+#: mac_app/link_state.py
+msgid "Pairing removed"
+msgstr "Eşleştirme kaldırıldı"
+
+#: mac_app/link_state.py mac_app/machines.py win_app/pages_win.py win_app/peers_view.py
+msgid "Refused"
+msgstr "Reddedildi"
+
+#: mac_app/link_state.py
+msgid "Token mismatch"
+msgstr "Belirteç uyuşmuyor"
+
+#: mac_app/link_state.py
+msgid "Version mismatch"
+msgstr "Sürüm uyuşmuyor"
+
+#: mac_app/link_state.py
+msgid "Did not wake"
+msgstr "Uyanmadı"
+
+#: mac_app/link_state.py mac_app/machines.py
+msgid "No reply"
+msgstr "Yanıt yok"
+
+#: mac_app/link_state.py mac_app/machines.py
+msgid "Blocked"
+msgstr "Engellendi"
+
+#: mac_app/link_state.py
+msgid "macOS 27 blocked direct LAN access. Open Beamer Tunnel from Applications."
+msgstr "macOS 27 doğrudan yerel ağ erişimini engelledi. Uygulamalar'dan Beamer Tunnel'ı açın."
+
+#: mac_app/link_state.py mac_app/machines.py win_app/peers_view.py
+msgid "Unreachable"
+msgstr "Erişilemiyor"
+
+#: mac_app/link_state.py mac_app/machines.py win_app/peers_view.py
+msgid "Not listening"
+msgstr "Dinlemiyor"
+
+#: mac_app/link_state.py mac_app/machines.py
+msgid "No receiver"
+msgstr "Alıcı yok"
+
+#: mac_app/link_state.py mac_app/machines.py win_app/kvm_bridge_win.py win_app/peers_view.py
+msgid "Waiting"
+msgstr "Bekleniyor"
+
+#: mac_app/link_state.py mac_app/machines.py
+msgid "Looking"
+msgstr "Aranıyor"
+
+#: mac_app/link_state.py
+msgid "Unlocking"
+msgstr "Kilit açılıyor"
+
+#: mac_app/link_state.py
+msgid "Paused"
+msgstr "Duraklatıldı"
+
+#: mac_app/link_state.py
+msgid "Held"
+msgstr "Tutuluyor"
+
+#: mac_app/link_state.py mac_app/pages.py win_app/pages_win.py
+msgid "Held: an app is full screen."
+msgstr "Tutuluyor: bir uygulama tam ekran."
+
+#: mac_app/link_state.py mac_app/machines.py win_app/peers_view.py
+#, python-brace-format
+msgid "{status}. Beamer keeps trying to reconnect."
+msgstr "{status}. Beamer yeniden bağlanmayı denemeye devam ediyor."
+
+#: mac_app/link_state.py win_app/launch_win.py
+#, python-brace-format
+msgid "From {name}"
+msgstr "{name} makinesinden"
+
+#: mac_app/link_state.py
+#, python-brace-format
+msgid "{name}'s keyboard and pointer are on this Mac. Push its pointer back through the edge it arrived by to send them home."
+msgstr "{name} makinesinin klavyesi ve imleci bu Mac'te. Geri göndermek için imlecini geldiği kenardan geri itin."
+
+#: mac_app/link_state.py
+#, python-brace-format
+msgid "Connected to {name} through the macOS 27 tunnel."
+msgstr "{name} ile macOS 27 tüneli üzerinden bağlanıldı."
+
+#: mac_app/link_state.py mac_app/machines.py win_app/peers_view.py
+#, python-brace-format
+msgid "Connected to {name}."
+msgstr "{name} ile bağlanıldı."
+
+#: mac_app/link_state.py
+#, python-brace-format
+msgid "{name} no longer has this pairing: remove {name} here and pair the two again."
+msgstr "{name} artık bu eşleştirmeye sahip değil: {name} makinesini burada kaldırın ve ikisini yeniden eşleştirin."
+
+#: mac_app/link_state.py
+#, python-brace-format
+msgid "{name} refused this Mac's token. Remove it, then pair again to write a fresh one."
+msgstr "{name} bu Mac'in belirtecini reddetti. Onu kaldırın, sonra yeni bir belirteç yazmak için yeniden eşleştirin."
+
+#: mac_app/link_state.py
+#, python-brace-format
+msgid "{name} runs a different Beamer from this Mac. Update both to the same version."
+msgstr "{name} bu Mac'ten farklı bir Beamer çalıştırıyor. İkisini de aynı sürüme güncelleyin."
+
+#: mac_app/link_state.py
+#, python-brace-format
+msgid "{name} did not answer within a minute of the wake-up packet."
+msgstr "{name} uyandırma paketinden sonra bir dakika içinde yanıt vermedi."
+
+#: mac_app/link_state.py
+#, python-brace-format
+msgid "{address} is not answering. {name} may be asleep or off this network."
+msgstr "{address} yanıt vermiyor. {name} uyuyor ya da bu ağın dışında olabilir."
+
+#: mac_app/link_state.py
+#, python-brace-format
+msgid "{name} answers, but Beamer is not listening on port {port}. Open Beamer on {name}."
+msgstr "{name} yanıt veriyor ama Beamer {port} portunu dinlemiyor. {name} üzerinde Beamer'ı açın."
+
+#: mac_app/link_state.py
+#, python-brace-format
+msgid "{name} stopped responding. Beamer keeps trying to reconnect."
+msgstr "{name} yanıt vermeyi bıraktı. Beamer yeniden bağlanmayı denemeye devam ediyor."
+
+#: mac_app/link_state.py mac_app/machines.py win_app/peers_view.py
+#, python-brace-format
+msgid "Looking for {name}. It connects on its own once Beamer is open there."
+msgstr "{name} aranıyor. Orada Beamer açıldığında kendiliğinden bağlanır."
+
+#: mac_app/link_state.py
+#, python-brace-format
+msgid "{name} is at its lock screen and is unlocking itself; input follows once the desktop is back."
+msgstr "{name} kilit ekranında ve kendi kilidini açıyor; masaüstü geri geldiğinde giriş devam eder."
+
+#: mac_app/link_state.py win_app/kvm_bridge_win.py
+#, python-brace-format
+msgid "On {name}"
+msgstr "{name} üzerinde"
+
+#: mac_app/link_state.py
+#, python-brace-format
+msgid "Keyboard and pointer are on {name}. Do the same again to bring them home."
+msgstr "Klavye ve imleç {name} üzerinde. Eve getirmek için aynısını yeniden yapın."
+
+#: mac_app/link_state.py
+#, python-brace-format
+msgid "Connected to {name}. Crossing is held, so you can lean on an edge."
+msgstr "{name} ile bağlanıldı. Geçiş tutuluyor, yani bir kenara yaslanabilirsiniz."
+
+#: mac_app/login_item.py
+msgid "Not registered"
+msgstr "Kayıtlı değil"
+
+#: mac_app/login_item.py
+msgid "Enabled"
+msgstr "Etkin"
+
+#: mac_app/login_item.py
+msgid "Requires approval"
+msgstr "Onay gerekiyor"
+
+#: mac_app/login_item.py
+msgid "Not found"
+msgstr "Bulunamadı"
+
+#: mac_app/login_item.py win_app/kvm_bridge_win.py
+msgid "Unknown"
+msgstr "Bilinmiyor"
+
+#: mac_app/machines.py win_app/peers_view.py
+msgid "iPhone"
+msgstr "iPhone"
+
+#: mac_app/machines.py win_app/peers_view.py
+msgid "Android"
+msgstr "Android"
+
+#: mac_app/machines.py win_app/peers_view.py
+msgid "Other"
+msgstr "Diğer"
+
+#: mac_app/machines.py win_app/peers_view.py
+msgid "Needs re-pair"
+msgstr "Yeniden eşleştirme gerekli"
+
+#: mac_app/machines.py win_app/peers_view.py
+msgid "NOT IN USE"
+msgstr "KULLANIMDA DEĞİL"
+
+#: mac_app/machines.py win_app/peers_view.py
+msgid "Pair again"
+msgstr "Yeniden eşleştir"
+
+#: mac_app/machines.py
+msgid "Driving this Mac"
+msgstr "Bu Mac'i kontrol ediyor"
+
+#: mac_app/machines.py win_app/peers_view.py
+msgid "Input here"
+msgstr "Giriş burada"
+
+#: mac_app/machines.py win_app/peers_view.py
+msgid "Version"
+msgstr "Sürüm"
+
+#: mac_app/machines.py mac_app/machines_panel.py win_app/peers_view.py
+#, python-brace-format
+msgid "{address} · port {port}"
+msgstr "{address} · port {port}"
+
+#: mac_app/machines.py
+#, python-brace-format
+msgid "{name} is not in use on this Mac."
+msgstr "{name} bu Mac'te kullanımda değil."
+
+#: mac_app/machines.py win_app/peers_view.py
+#, python-brace-format
+msgid "{name} was paired on Beamer 1.4. Pair the two again to link them on 1.5.0."
+msgstr "{name}, Beamer 1.4'te eşleştirildi. 1.5.0'da bağlamak için ikisini yeniden eşleştirin."
+
+#: mac_app/machines.py
+#, python-brace-format
+msgid "{name}'s keyboard and pointer are on this Mac. Push the pointer back through the edge it arrived by to send them home."
+msgstr "{name} makinesinin klavyesi ve imleci bu Mac'te. Geri göndermek için imleci geldiği kenardan geri itin."
+
+#: mac_app/machines.py
+#, python-brace-format
+msgid "This Mac's keyboard and pointer are on {name}. Do the same again to bring them home."
+msgstr "Bu Mac'in klavyesi ve imleci {name} üzerinde. Eve getirmek için aynısını yeniden yapın."
+
+#: mac_app/machines.py win_app/peers_view.py
+#, python-brace-format
+msgid "Waiting for {name} to connect."
+msgstr "{name} makinesinin bağlanması bekleniyor."
+
+#: mac_app/machines_panel.py win_app/machines_win.py
+#, python-brace-format
+msgid "Expires in {n} s"
+msgstr "{n} sn içinde sona erer"
+
+#: mac_app/machines_panel.py win_app/machines_win.py
+msgid "Pair nearby"
+msgstr "Yakındakiyle eşleştir"
+
+#: mac_app/machines_panel.py win_app/machines_win.py
+msgid "Pair a phone"
+msgstr "Telefon eşleştir"
+
+#: mac_app/machines_panel.py win_app/machines_win.py
+msgid "Pair a machine"
+msgstr "Makine eşleştir"
+
+#: mac_app/machines_panel.py
+msgid "No machines paired yet."
+msgstr "Henüz eşleşmiş makine yok."
+
+#: mac_app/machines_panel.py
+msgid "Beamer connects to each machine on its own whenever both are running."
+msgstr "Beamer, ikisi de çalıştığında her makineye kendiliğinden bağlanır."
+
+#: mac_app/machines_panel.py
+msgid "Rename this Mac"
+msgstr "Bu Mac'i yeniden adlandır"
+
+#: mac_app/machines_panel.py
+msgid "Name for this Mac"
+msgstr "Bu Mac'in adı"
+
+#: mac_app/machines_panel.py win_app/machines_win.py
+msgid "Show a code"
+msgstr "Kod göster"
+
+#: mac_app/machines_panel.py
+msgid "The pairing code as a QR code"
+msgstr "Eşleştirme kodunun QR kodu"
+
+#: mac_app/machines_panel.py
+msgid "Cancel code"
+msgstr "Kodu iptal et"
+
+#: mac_app/machines_panel.py
+msgid "Nearby pairing digits"
+msgstr "Yakın eşleştirme rakamları"
+
+#: mac_app/machines_panel.py win_app/machines_win.py
+msgid "Confirm"
+msgstr "Onayla"
+
+#: mac_app/machines_panel.py win_app/machines_win.py
+msgid "Pair"
+msgstr "Eşleştir"
+
+#: mac_app/machines_panel.py
+msgid "Choose a machine, or type its address, then type the code it shows."
+msgstr "Bir makine seçin ya da adresini yazın, sonra gösterdiği kodu yazın."
+
+#: mac_app/machines_panel.py win_app/machines_win.py
+msgid "In use"
+msgstr "Kullanımda"
+
+#: mac_app/machines_panel.py
+msgid "This Mac drives it"
+msgstr "Bu Mac onu kontrol eder"
+
+#: mac_app/machines_panel.py
+msgid "It drives this Mac"
+msgstr "O bu Mac'i kontrol eder"
+
+#: mac_app/machines_panel.py
+msgid "Press Pair nearby on the other machine within 60 seconds."
+msgstr "Diğer makinede 60 saniye içinde Yakındakiyle eşleştir'e basın."
+
+#: mac_app/machines_panel.py
+msgid "Choose a machine to pair nearby."
+msgstr "Yakında eşleştirilecek bir makine seçin."
+
+#: mac_app/machines_panel.py
+msgid "Compare all six digits on both machines, then confirm on each."
+msgstr "Altı rakamın tamamını iki makinede karşılaştırın, sonra her birinde onaylayın."
+
+#: mac_app/machines_panel.py
+msgid "Waiting for confirmation on the other machine."
+msgstr "Diğer makinede onay bekleniyor."
+
+#: mac_app/machines_panel.py
+msgid "Nearby pairing complete."
+msgstr "Yakın eşleştirme tamamlandı."
+
+#: mac_app/machines_panel.py
+msgid "Nearby pairing expired. Press Pair nearby to try again."
+msgstr "Yakın eşleştirmenin süresi doldu. Tekrar denemek için Yakındakiyle eşleştir'e basın."
+
+#: mac_app/machines_panel.py
+msgid "Nearby pairing refused. Use a new window to try again."
+msgstr "Yakın eşleştirme reddedildi. Tekrar denemek için yeni bir pencere kullanın."
+
+#: mac_app/machines_panel.py
+msgid "The new peer could not be saved."
+msgstr "Yeni eş kaydedilemedi."
+
+#. {name} and {address} come from the other machine.
+#: mac_app/machines_panel.py
+#, python-brace-format
+msgid "{name}, {address}, older Beamer"
+msgstr "{name}, {address}, eski Beamer"
+
+#: mac_app/machines_panel.py
+msgid "That machine"
+msgstr "O makine"
+
+#: mac_app/machines_panel.py
+msgid "Show a code on this Mac"
+msgstr "Bu Mac'te bir kod göster"
+
+#: mac_app/machines_panel.py win_app/machines_win.py
+msgid "Enter a code from another machine"
+msgstr "Başka bir makineden kod gir"
+
+#: mac_app/machines_panel.py win_app/machines_win.py
+msgid "On this network"
+msgstr "Bu ağda"
+
+#: mac_app/machines_panel.py
+msgid "Address of a machine that is not listed"
+msgstr "Listede olmayan bir makinenin adresi"
+
+#: mac_app/machines_panel.py win_app/machines_win.py
+msgid "Not listed? Type its address."
+msgstr "Listede yok mu? Adresini yazın."
+
+#: mac_app/machines_panel.py
+msgid "Code shown on the other machine"
+msgstr "Diğer makinede gösterilen kod"
+
+#: mac_app/machines_panel.py win_app/machines_win.py
+msgid "Re-pair"
+msgstr "Yeniden eşleştir"
+
+#: mac_app/machines_panel.py win_app/machines_win.py
+msgid "Pin address"
+msgstr "Adresi sabitle"
+
+#: mac_app/machines_panel.py win_app/machines_win.py
+msgid "Keeps this address through reconnects and re-pairing. Turn off to follow address changes automatically."
+msgstr "Bu adresi yeniden bağlanmalarda ve yeniden eşleştirmelerde korur. Adres değişikliklerini otomatik izlemek için kapatın."
+
+#: mac_app/machines_panel.py win_app/machines_win.py
+msgid "Hide directions"
+msgstr "Yönleri gizle"
+
+#: mac_app/machines_panel.py win_app/machines_win.py
+msgid "Directions"
+msgstr "Yönler"
+
+#: mac_app/machines_panel.py win_app/machines_win.py
+msgid "Keep"
+msgstr "Koru"
+
+#: mac_app/machines_panel.py
+msgid "Pairing is not available on this Mac."
+msgstr "Eşleştirme bu Mac'te kullanılamıyor."
+
+#: mac_app/machines_panel.py
+msgid "Connecting to the selected machine…"
+msgstr "Seçilen makineye bağlanılıyor…"
+
+#: mac_app/machines_panel.py win_app/crossing_ledger.py win_app/sender.py
+msgid "Another machine"
+msgstr "Başka bir makine"
+
+#: mac_app/machines_panel.py
+msgid "Looking for machines running Beamer. Open it on the other machine and it appears here; across a VPN or on guest Wi-Fi it may not, so type its address below."
+msgstr "Beamer çalıştıran makineler aranıyor. Diğer makinede açtığınızda burada görünür; VPN üzerinden ya da misafir Wi-Fi'da görünmeyebilir, o zaman adresini aşağıya yazın."
+
+#: mac_app/machines_panel.py
+#, python-brace-format
+msgid "{name}, {address}, showing a code"
+msgstr "{name}, {address}, kod gösteriyor"
+
+#: mac_app/machines_panel.py
+#, python-brace-format
+msgid "{name}, {address}"
+msgstr "{name}, {address}"
+
+#: mac_app/machines_panel.py
+msgid "On the other machine, open Beamer, choose this Mac in its list and type the code."
+msgstr "Diğer makinede Beamer'ı açın, listesinden bu Mac'i seçin ve kodu yazın."
+
+#: mac_app/machines_panel.py
+#, python-brace-format
+msgid "{name}, {state}"
+msgstr "{name}, {state}"
+
+#: mac_app/machines_panel.py
+#, python-brace-format
+msgid "Name for {name}"
+msgstr "{name} için ad"
+
+#. {name} is the other machine's chosen name.
+#: mac_app/machines_panel.py
+#, python-brace-format
+msgid "Off: no input or settings link to {name}. Pairing, directions, ways and jump key are kept. Turn it back on here to reconnect."
+msgstr "Kapalı: {name} ile giriş veya ayar bağlantısı yok. Eşleştirme, yönler, yollar ve atlama tuşu korunur. Yeniden bağlanmak için burada tekrar açın."
+
+#: mac_app/machines_panel.py win_app/machines_win.py
+#, python-brace-format
+msgid "{action} {name}"
+msgstr "{action} {name}"
+
+#. {name} is the other machine's chosen name.
+#: mac_app/machines_panel.py
+#, python-brace-format
+msgid "Input moves only when this Mac enables this switch and {name} enables It drives this Mac."
+msgstr "Giriş yalnızca bu Mac bu anahtarı, {name} de O bu Mac'i kontrol eder'i açtığında taşınır."
+
+#. {name} is the other machine's chosen name.
+#: mac_app/machines_panel.py
+#, python-brace-format
+msgid "Input moves only when {name} enables This machine drives it and this Mac enables this switch."
+msgstr "Giriş yalnızca {name}, Bu makine onu kontrol eder'i, bu Mac de bu anahtarı açtığında taşınır."
+
+#: mac_app/machines_panel.py
+#, python-brace-format
+msgid "{action} directions for {name}"
+msgstr "{name} için yönler: {action}"
+
+#: mac_app/machines_panel.py
+#, python-brace-format
+msgid "Remove {name}? It stays paired on that machine until you remove this one there too."
+msgstr "{name} kaldırılsın mı? Oradaki listeden de bunu kaldırana kadar o makinede eşleşmiş kalır."
+
+#: mac_app/machines_panel.py
+msgid "The QR is hidden while addresses are hidden."
+msgstr "Adresler gizliyken QR gizlenir."
+
+#: mac_app/machines_panel.py
+#, python-brace-format
+msgid "Pairing with {name}…"
+msgstr "{name} ile eşleştiriliyor…"
+
+#: mac_app/machines_panel.py
+#, python-brace-format
+msgid "Paired with {name}. Connecting…"
+msgstr "{name} ile eşleşildi. Bağlanılıyor…"
+
+#: mac_app/machines_panel.py win_app/machines_win.py
+#, python-brace-format
+msgid "Re-pair {name}"
+msgstr "{name} makinesini yeniden eşleştir"
+
+#: mac_app/machines_panel.py win_app/machines_win.py
+msgid "Left out of the layout. The shortcut and the menu still reach it."
+msgstr "Düzenin dışında bırakıldı. Kısayol ve menü yine de ona ulaşır."
+
+#: mac_app/machines_panel.py
+#, python-brace-format
+msgid "Off: {name} cannot connect or drive this Mac. Turn it back on here to reconnect."
+msgstr "Kapalı: {name} bağlanamaz veya bu Mac'i kontrol edemez. Yeniden bağlanmak için burada tekrar açın."
+
+#: mac_app/machines_panel.py
+msgid "Hide"
+msgstr "Gizle"
+
+#: mac_app/machines_panel.py
+msgid "Show"
+msgstr "Göster"
+
+#: mac_app/machines_panel.py
+#, python-brace-format
+msgid "Confirm removing {name}"
+msgstr "{name} makinesinin kaldırılmasını onayla"
+
+#: mac_app/machines_panel.py
+#, python-brace-format
+msgid "Keep {name}"
+msgstr "{name} makinesini koru"
+
+#: mac_app/machines_panel.py
+msgid "this machine"
+msgstr "bu makine"
+
+#: mac_app/machines_panel.py
+msgid "The same code as a QR, for a phone to scan."
+msgstr "Bir telefonun taraması için aynı kodun QR hali."
+
+#: mac_app/machines_panel.py
+#, python-brace-format
+msgid "Beamer cannot look for machines: {reason}"
+msgstr "Beamer makine arayamıyor: {reason}"
+
+#: mac_app/machines_panel.py
+#, python-brace-format
+msgid "Code shown on {name}"
+msgstr "{name} üzerinde gösterilen kod"
+
+#: mac_app/machines_panel.py
+#, python-brace-format
+msgid "The code is {n} digits."
+msgstr "Kod {n} hanelidir."
+
+#. {error} is the system error message.
+#: mac_app/machines_panel.py
+#, python-brace-format
+msgid "Could not remove it: {error}"
+msgstr "Kaldırılamadı: {error}"
+
+#. {error} is the system error message.
+#: mac_app/machines_panel.py win_app/kvm_bridge_win.py
+#, python-brace-format
+msgid "Nearby pairing is not available: {error}"
+msgstr "Yakın eşleştirme kullanılamıyor: {error}"
+
+#: mac_app/machines_panel.py
+msgid "Not selected"
+msgstr "Seçili değil"
+
+#: mac_app/machines_panel.py
+msgid "No network address found"
+msgstr "Ağ adresi bulunamadı"
+
+#: mac_app/machines_panel.py
+msgid "No QR while this Mac has no address."
+msgstr "Bu Mac'in adresi yokken QR yok."
+
+#: mac_app/machines_panel.py
+#, python-brace-format
+msgid "{name} is not showing a code yet. Show one in Beamer on it first."
+msgstr "{name} henüz kod göstermiyor. Önce oradaki Beamer'da bir kod gösterin."
+
+#: mac_app/machines_panel.py
+#, python-brace-format
+msgid "Six digits, as shown on {name}."
+msgstr "{name} üzerinde gösterilen altı rakam."
+
+#: mac_app/machines_panel.py
+#, python-brace-format
+msgid "No QR: {reason}"
+msgstr "QR yok: {reason}"
+
+#: mac_app/pages.py
+msgid "This Mac only."
+msgstr "Yalnızca bu Mac."
+
+#: mac_app/pages.py
+msgid "The notch is this Mac only."
+msgstr "Çentik yalnızca bu Mac içindir."
+
+#: mac_app/pages.py win_app/pages_win.py
+msgid "Changes apply as you make them."
+msgstr "Değişiklikler siz yaptıkça uygulanır."
+
+#: mac_app/pages.py
+msgid "Closing this window keeps Beamer running in the menu bar."
+msgstr "Bu pencereyi kapatmak Beamer'ı menü çubuğunda çalışır halde bırakır."
+
+#: mac_app/pages.py
+msgid "Simple"
+msgstr "Sade"
+
+#: mac_app/pages.py
+msgid "Ways below lead to the selected machine. Its side is shared with that machine. Resistance, drag protection and Shortcut apply to this Mac's input for every destination."
+msgstr "Aşağıdaki yollar seçili makineye gider. Kenarı o makineyle paylaşılır. Direnç, sürükleme koruması ve Kısayol her hedef için bu Mac'in girişine uygulanır."
+
+#: mac_app/pages.py
+msgid "Used on this screen. Shared animation settings may follow another machine; Animate, window appearance, notch and trackpad controls stay on this Mac."
+msgstr "Bu ekranda kullanılır. Paylaşılan animasyon ayarları başka bir makineyi izleyebilir; Canlandır, pencere görünümü, çentik ve trackpad denetimleri bu Mac'te kalır."
+
+#: mac_app/pages.py
+msgid "Modifier keys and Stays here belong to this Mac's input. Pointer speed and scrolling belong to this screen when another machine drives it. Every machine keeps its own."
+msgstr "Değiştirici tuşlar ve Burada kalanlar bu Mac'in girişine aittir. İmleç hızı ve kaydırma, başka bir makine onu kontrol ederken bu ekrana aittir. Her makine kendininkini korur."
+
+#: mac_app/pages.py
+msgid "Classic"
+msgstr "Klasik"
+
+#: mac_app/pages.py win_app/pages_win.py
+msgid "Signal"
+msgstr "Sinyal"
+
+#: mac_app/pages.py win_app/pages_win.py
+msgid "Colourful"
+msgstr "Renkli"
+
+#: mac_app/pages.py win_app/pages_win.py
+msgid "Ocean"
+msgstr "Okyanus"
+
+#: mac_app/pages.py win_app/pages_win.py
+msgid "Sunset"
+msgstr "Gün batımı"
+
+#: mac_app/pages.py win_app/pages_win.py
+msgid "Aurora"
+msgstr "Kutup ışığı"
+
+#: mac_app/pages.py
+msgid "to the left of"
+msgstr "solunda"
+
+#: mac_app/pages.py
+msgid "to the right of"
+msgstr "sağında"
+
+#: mac_app/pages.py
+msgid "This corner crosses its left or right edge."
+msgstr "Bu köşe sol veya sağ kenarından geçer."
+
+#: mac_app/pages.py win_app/pages_win.py
+msgid "On. Pause it to lean on an edge without switching."
+msgstr "Açık. Geçiş yapmadan bir kenara yaslanmak için duraklatın."
+
+#: mac_app/pages.py
+msgid "the edge"
+msgstr "kenar"
+
+#: mac_app/pages.py
+msgid "a corner"
+msgstr "bir köşe"
+
+#: mac_app/pages.py
+msgid "With only the notch or a corner on, input arrives by the notch's or corner's own side, so this choice does nothing on this Mac; the other machine's own push still follows it."
+msgstr "Yalnızca çentik ya da bir köşe açıkken giriş çentiğin ya da köşenin kendi tarafından varır, bu yüzden bu seçim bu Mac'te bir şey yapmaz; diğer makinenin kendi itişi yine buna uyar."
+
+#: mac_app/pages.py win_app/pages_win.py
+msgid "Overview"
+msgstr "Genel Bakış"
+
+#: mac_app/pages.py
+msgid "Where input is, whether each link is up, and the controls you reach for every day. Pair your machines here first."
+msgstr "Girişin nerede olduğu, her bağlantının çalışıp çalışmadığı ve her gün kullandığınız denetimler. Makinelerinizi önce burada eşleştirin."
+
+#: mac_app/pages.py
+msgid "Permissions"
+msgstr "İzinler"
+
+#: mac_app/pages.py
+msgid "macOS must allow Beamer to read this Mac's input and to move its pointer and type when another machine drives it."
+msgstr "macOS, Beamer'ın bu Mac'in girişini okumasına ve başka bir makine onu kontrol ederken imlecini hareket ettirip yazmasına izin vermelidir."
+
+#: mac_app/pages.py win_app/pages_win.py
+msgid "Keyboard"
+msgstr "Klavye"
+
+#: mac_app/pages.py
+msgid "How this Mac's modifier keys arrive on other machines, which keys and buttons stay on this Mac, and how fast another machine's pointer moves here. The switch key is on the Crossing page."
+msgstr "Bu Mac'in değiştirici tuşlarının diğer makinelere nasıl vardığı, hangi tuş ve düğmelerin bu Mac'te kaldığı ve başka bir makinenin imlecinin burada ne kadar hızlı hareket ettiği. Geçiş tuşu Geçiş sayfasındadır."
+
+#: mac_app/pages.py
+msgid "How crossing looks and feels on this Mac: the edge, the corner, the notch and the trackpad."
+msgstr "Geçişin bu Mac'te nasıl göründüğü ve hissettirdiği: kenar, köşe, çentik ve trackpad."
+
+#: mac_app/pages.py win_app/pages_win.py
+msgid "Connection"
+msgstr "Bağlantı"
+
+#: mac_app/pages.py
+msgid "Local connection details for the first machine you paired. Pair again to change another machine's entry."
+msgstr "Eşleştirdiğiniz ilk makinenin yerel bağlantı ayrıntıları. Başka bir makinenin kaydını değiştirmek için yeniden eşleştirin."
+
+#: mac_app/pages.py
+msgid "Changes apply as you make them. Closing this window keeps Beamer running in the menu bar."
+msgstr "Değişiklikler siz yaptıkça uygulanır. Bu pencereyi kapatmak Beamer'ı menü çubuğunda çalışır halde bırakır."
+
+#: mac_app/pages.py
+msgid "Where the other machine is"
+msgstr "Diğer makine nerede"
+
+#: mac_app/pages.py
+msgid "Not paired yet, so no edge or shortcut moves input until you pair a machine on Overview."
+msgstr "Henüz eşleştirilmedi; Genel Bakış'ta bir makine eşleştirene kadar hiçbir kenar ya da kısayol girişi taşımaz."
+
+#: mac_app/pages.py
+msgid "No machine is driven by this Mac, so edges and the shortcut do nothing."
+msgstr "Bu Mac hiçbir makineyi kontrol etmiyor, bu yüzden kenarlar ve kısayol bir şey yapmaz."
+
+#: mac_app/pages.py
+msgid "Not connected to any machine, so edges and the shortcut do nothing yet."
+msgstr "Hiçbir makineye bağlı değil, bu yüzden kenarlar ve kısayol henüz bir şey yapmaz."
+
+#: mac_app/pages.py win_app/pages_win.py
+msgid "Only the shortcut is switched on; there is nothing to pause."
+msgstr "Yalnızca kısayol açık; duraklatılacak bir şey yok."
+
+#: mac_app/pages.py win_app/pages_win.py
+msgid "Pauses pointer crossing through this screen, including another machine's pointer. Shortcuts and jump keys still work. Resets when Beamer restarts."
+msgstr "Başka bir makinenin imleci dahil, bu ekrandan imleç geçişini duraklatır. Kısayollar ve atlama tuşları yine çalışır. Beamer yeniden başlayınca sıfırlanır."
+
+#: mac_app/pages.py
+msgid "This Mac has no notch, so this only shows how it would look."
+msgstr "Bu Mac'te çentik yok, bu yüzden yalnızca nasıl görüneceğini gösterir."
+
+#: mac_app/pages.py
+#, python-brace-format
+msgid "{names} already cross from the {side} edge of this Mac. The thirds you pick go to {name}; the rest stay where they are."
+msgstr "{names} zaten bu Mac'in {side} kenarından geçiyor. Seçtiğiniz üçte birler {name} makinesine gider; geri kalanı olduğu yerde kalır."
+
+#: mac_app/pages.py
+msgid "At the notch, Glow and Beam do not draw: the notch style you choose here plays instead, and their tiles show it."
+msgstr "Çentikte Işıma ve Işın çizmez: burada seçtiğiniz çentik stili onun yerine oynar ve kutucukları bunu gösterir."
+
+#: mac_app/pages.py
+msgid "Plays Glow"
+msgstr "Işıma oynar"
+
+#: mac_app/pages.py
+msgid "Closes onto the pointer"
+msgstr "İmlecin üzerine kapanır"
+
+#: mac_app/pages.py
+#, python-brace-format
+msgid "{names} already crosses from the {side} edge of this Mac. The thirds you pick go to {name}; the rest stay with {holder}."
+msgstr "{names} zaten bu Mac'in {side} kenarından geçiyor. Seçtiğiniz üçte birler {name} makinesine gider; geri kalanı {holder} makinesinde kalır."
+
+#: mac_app/pages.py
+#, python-brace-format
+msgid "Not placed yet: {names}"
+msgstr "Henüz yerleştirilmedi: {names}"
+
+#: mac_app/pages.py
+#, python-brace-format
+msgid "Where {name} is"
+msgstr "{name} nerede"
+
+#: mac_app/pages.py
+#, python-brace-format
+msgid "{place} is not one of your ways in, so this only shows how it would look. Turn it on under Crossing. {name} draws its own form round the notch."
+msgstr "{place} giriş yollarınızdan biri değil, bu yüzden yalnızca nasıl görüneceğini gösterir. Geçiş altında açın. {name} çentiğin çevresinde kendi biçimini çizer."
+
+#: mac_app/pages.py
+#, python-brace-format
+msgid "{name} draws its own form round the notch."
+msgstr "{name} çentiğin çevresinde kendi biçimini çizer."
+
+#: mac_app/pages.py
+#, python-brace-format
+msgid "With only the notch or a corner on, input arrives by the notch's or corner's own side, so this choice does nothing on this Mac; {name}'s own push still follows it."
+msgstr "Yalnızca çentik ya da bir köşe açıkken giriş çentiğin ya da köşenin kendi tarafından varır, bu yüzden bu seçim bu Mac'te bir şey yapmaz; {name} makinesinin kendi itişi yine buna uyar."
+
+#: mac_app/pages.py
+#, python-brace-format
+msgid "{name} is {position} this Mac."
+msgstr "{name}, bu Mac'in {position}."
+
+#: mac_app/pages.py
+#, python-brace-format
+msgid "{name} is not placed yet."
+msgstr "{name} henüz yerleştirilmedi."
+
+#: mac_app/pages.py
+msgid "No way in is on."
+msgstr "Hiçbir giriş yolu açık değil."
+
+#: mac_app/pages.py
+msgid "Bring input back"
+msgstr "Girişi geri getir"
+
+#: mac_app/pages.py
+#, python-brace-format
+msgid "{place} is not one of your ways in, so this only shows how it would look. Turn it on under Crossing."
+msgstr "{place} giriş yollarınızdan biri değil, bu yüzden yalnızca nasıl görüneceğini gösterir. Geçiş altında açın."
+
+#: mac_app/pages.py
+#, python-brace-format
+msgid "{place} is not one of your ways in, so this only shows how it would look. Turn it on under Crossing. At the notch, Glow and Beam do not draw: the notch style you choose here plays instead, and their tiles show it."
+msgstr "{place} giriş yollarınızdan biri değil, bu yüzden yalnızca nasıl görüneceğini gösterir. Geçiş altında açın. Çentikte Işıma ve Işın çizmez: burada seçtiğiniz çentik stili onun yerine oynar ve kutucukları bunu gösterir."
+
+#: mac_app/pages.py
+#, python-brace-format
+msgid "{name} is unavailable"
+msgstr "{name} kullanılamıyor"
+
+#: mac_app/previews.py win_app/kvm_bridge_win.py
+msgid "Edge"
+msgstr "Kenar"
+
+#: mac_app/previews.py win_app/kvm_bridge_win.py
+msgid "Corner"
+msgstr "Köşe"
+
+#: mac_app/wake.py win_app/sender.py
+#, python-brace-format
+msgid "{name} did not wake"
+msgstr "{name} uyanmadı"
+
+#: mac_app/wake.py win_app/sender.py
+msgid "Could not send the wake-up packet"
+msgstr "Uyandırma paketi gönderilemedi"
+
+#: mac_app/wake.py win_app/sender.py
+#, python-brace-format
+msgid "{name} is awake — switch again to send input"
+msgstr "{name} uyandı — girişi göndermek için yeniden geçiş yapın"
+
+#: mac_app/widgets.py
+msgid "Press a key…"
+msgstr "Bir tuşa basın…"
+
+#: mac_app/widgets.py win_app/kvm_bridge_win.py
+msgid "Click, then press the key"
+msgstr "Tıklayın, sonra tuşa basın"
+
+#: mac_app/widgets.py win_app/widgets.py
+msgid "Click, then press a key combination"
+msgstr "Tıklayın, sonra bir tuş bileşimine basın"
+
+#: mac_app/widgets.py win_app/kvm_bridge_win.py
+msgid "Add a key or button"
+msgstr "Bir tuş veya düğme ekle"
+
+#: mac_app/widgets.py win_app/widgets.py
+msgid "Press a key or button…"
+msgstr "Bir tuşa veya düğmeye basın…"
+
+#: mac_app/widgets.py win_app/kvm_bridge_win.py win_app/widgets.py
+msgid "Click, then press it"
+msgstr "Tıklayın, sonra basın"
+
+#: mac_app/widgets.py win_app/widgets.py
+msgid "Choose a key combination"
+msgstr "Bir tuş bileşimi seçin"
+
+#: mac_app/widgets.py
+msgid "Add a key or button that stays on this Mac"
+msgstr "Bu Mac'te kalacak bir tuş veya düğme ekle"
+
+#. {key} is the key combination recorded by the person.
+#: mac_app/widgets.py
+#, python-brace-format
+msgid "Shortcut key, {key}"
+msgstr "Kısayol tuşu, {key}"
+
+#. {key} is the key combination recorded by the person.
+#. {key} is the key combination recorded for a machine.
+#: mac_app/widgets.py win_app/widgets.py
+#, python-brace-format
+msgid "Jump straight here key, {key}"
+msgstr "Doğrudan buraya atlama tuşu, {key}"
+
+#: mac_app/widgets.py win_app/crossing_ledger.py
+msgid "Set a key"
+msgstr "Tuş ayarla"
+
+#: mac_app/widgets.py
+#, python-brace-format
+msgid "Digit {n}"
+msgstr "Rakam {n}"
+
+#: mac_app/widgets.py
+#, python-brace-format
+msgid "{name}  ⌘{key}"
+msgstr "{name}  ⌘{key}"
+
+#. {name} is a settings page name.
+#: mac_app/widgets.py
+#, python-brace-format
+msgid "{name}, needs attention"
+msgstr "{name}, ilgi gerekiyor"
+
+#: win_app/crossing_ledger.py
+msgid "Return saves, Escape cancels · Only on this PC"
+msgstr "Return kaydeder, Escape iptal eder · Yalnızca bu PC'de"
+
+#: win_app/crossing_ledger.py
+msgid "Clear jump key"
+msgstr "Atlama tuşunu temizle"
+
+#: win_app/crossing_ledger.py
+msgid "Return here"
+msgstr "Buraya dön"
+
+#: win_app/crossing_ledger.py
+msgid "Leave this machine out of crossings"
+msgstr "Bu makineyi geçişlerin dışında bırak"
+
+#: win_app/crossing_ledger.py
+msgid "How each machine is reached"
+msgstr "Her makineye nasıl ulaşılır"
+
+#: win_app/crossing_ledger.py
+msgid "turn it off"
+msgstr "kapat"
+
+#: win_app/crossing_ledger.py
+msgid "turn it on"
+msgstr "aç"
+
+#: win_app/crossing_ledger.py
+msgid "PC"
+msgstr "PC"
+
+#: win_app/crossing_ledger.py
+#, python-brace-format
+msgid "{side} edge, {third} third, {state}"
+msgstr "{side} kenar, {third} üçte bir, {state}"
+
+#: win_app/crossing_ledger.py
+msgid "on"
+msgstr "açık"
+
+#: win_app/crossing_ledger.py
+msgid "off"
+msgstr "kapalı"
+
+#: win_app/crossing_ledger.py
+#, python-brace-format
+msgid "{third} third: click to {action}"
+msgstr "{third} üçte bir: {action} için tıklayın"
+
+#: win_app/crossing_ledger.py
+msgid "leave it out"
+msgstr "dışarıda bırak"
+
+#: win_app/crossing_ledger.py
+#, python-brace-format
+msgid "Choose a key combination to jump to {name} and back."
+msgstr "{name} makinesine atlayıp geri dönmek için bir tuş bileşimi seçin."
+
+#: win_app/crossing_ledger.py
+#, python-brace-format
+msgid "{side} edge, touches {name}, {state}"
+msgstr "{side} kenar, {name} makinesine değiyor, {state}"
+
+#: win_app/crossing_ledger.py
+#, python-brace-format
+msgid "{corner} corner, held by {name}"
+msgstr "{corner} köşe, {name} tarafından tutuluyor"
+
+#: win_app/crossing_ledger.py
+#, python-brace-format
+msgid "{side} edge: touches {name}; click to {action}"
+msgstr "{side} kenar: {name} makinesine değiyor; {action} için tıklayın"
+
+#: win_app/crossing_ledger.py
+#, python-brace-format
+msgid "{side} edge, wraps round, on"
+msgstr "{side} kenar, dolanır, açık"
+
+#: win_app/crossing_ledger.py
+#, python-brace-format
+msgid "{corner} corner, unavailable"
+msgstr "{corner} köşe, kullanılamıyor"
+
+#: win_app/crossing_ledger.py
+#, python-brace-format
+msgid "{side} edge wraps round to {name}; click to remove"
+msgstr "{side} kenar {name} makinesine dolanır; kaldırmak için tıklayın"
+
+#: win_app/crossing_ledger.py
+#, python-brace-format
+msgid "{side} edge, wraps round, kept"
+msgstr "{side} kenar, dolanır, korunuyor"
+
+#: win_app/crossing_ledger.py
+#, python-brace-format
+msgid "Place {name} beside this {platform} first"
+msgstr "Önce {name} makinesini bu {platform} cihazının yanına yerleştirin"
+
+#: win_app/crossing_ledger.py
+#, python-brace-format
+msgid "{corner} corner: click to turn it {state}"
+msgstr "{corner} köşe: {state} yapmak için tıklayın"
+
+#: win_app/crossing_ledger.py
+#, python-brace-format
+msgid "{side} edge wraps round to {name} once Edge is on; click to turn Edge on"
+msgstr "{side} kenar, Kenar açıldığında {name} makinesine dolanır; Kenar'ı açmak için tıklayın"
+
+#: win_app/crossing_ledger.py
+#, python-brace-format
+msgid "{side} edge: none of it is free just now; click to remove"
+msgstr "{side} kenar: şu anda hiçbir kısmı boş değil; kaldırmak için tıklayın"
+
+#: win_app/crossing_ledger.py
+#, python-brace-format
+msgid "{side} edge: {name}'s"
+msgstr "{side} kenar: {name} makinesinin"
+
+#: win_app/crossing_ledger.py
+#, python-brace-format
+msgid "{side} edge, held by {name}"
+msgstr "{side} kenar, {name} tarafından tutuluyor"
+
+#: win_app/crossing_ledger.py
+#, python-brace-format
+msgid "{side} edge, wraps round, off"
+msgstr "{side} kenar, dolanır, kapalı"
+
+#: win_app/crossing_ledger.py
+#, python-brace-format
+msgid "{side} edge: click to wrap round to {name}"
+msgstr "{side} kenar: {name} makinesine dolanması için tıklayın"
+
+#: win_app/diagram.py win_app/kvm_bridge_win.py
+msgid "This PC"
+msgstr "Bu PC"
+
+#: win_app/diagram.py
+msgid "Tile size can be changed by dragging a corner or pressing Alt+arrow."
+msgstr "Kutu boyutu bir köşeyi sürükleyerek ya da Alt+ok tuşlarıyla değiştirilebilir."
+
+#: win_app/diagram.py
+msgid "Arrangement"
+msgstr "Yerleşim"
+
+#: win_app/diagram.py
+msgid "Crossing layout"
+msgstr "Geçiş düzeni"
+
+#: win_app/diagram.py
+msgid "at a corner of This PC"
+msgstr "Bu PC'nin bir köşesinde"
+
+#: win_app/diagram.py
+msgid "Crosses."
+msgstr "Geçer."
+
+#: win_app/diagram.py
+msgid "THIS PC"
+msgstr "BU PC"
+
+#. {name} is a machine name; {position} is relative to this PC; {detail} optionally names the third crossed.
+#: win_app/diagram.py
+#, python-brace-format
+msgid "{name}, {position}{detail}. {result}"
+msgstr "{name}, {position}{detail}. {result}"
+
+#: win_app/diagram.py
+msgctxt "list"
+msgid "; "
+msgstr "; "
+
+#: win_app/diagram.py
+msgid "Rename this computer on Overview."
+msgstr "Bu bilgisayarı Genel Bakış'tan yeniden adlandırın."
+
+#: win_app/diagram.py
+#, python-brace-format
+msgid "{side} of This PC"
+msgstr "Bu PC'nin {side}"
+
+#: win_app/diagram.py
+#, python-brace-format
+msgid ", {part} third"
+msgstr ", {part} üçte bir"
+
+#: win_app/diagram.py
+#, python-brace-format
+msgid "Current pressure {pressure} of {threshold} pointer units at the {edge} edge."
+msgstr "{edge} kenarda mevcut basınç {threshold} imleç biriminden {pressure}."
+
+#: win_app/diagram.py
+#, python-brace-format
+msgid "No push. Current pressure is 0 of {threshold} pointer units."
+msgstr "İtiş yok. Mevcut basınç {threshold} imleç biriminden 0."
+
+#: win_app/firewall_win.py
+msgid "Windows treats this network as public; if you trust it, change its network profile to Private in Windows Settings."
+msgstr "Windows bu ağı herkese açık sayıyor; güveniyorsanız Windows Ayarları'ndan ağ profilini Özel olarak değiştirin."
+
+#: win_app/firewall_win.py
+msgid "Beamer's firewall rules need attention; run the Beamer installer again to repair them for private networks."
+msgstr "Beamer'ın güvenlik duvarı kuralları ilgi gerektiriyor; özel ağlar için onarmak üzere Beamer kurucusunu yeniden çalıştırın."
+
+#: win_app/firewall_win.py win_app/linux_stand_ins.py
+msgid "Check again"
+msgstr "Yeniden denetle"
+
+#: win_app/firewall_win.py
+msgid "Windows Firewall has a block rule affecting Beamer's input or pairing traffic; ask your administrator to review Beamer's inbound block rules in Windows Firewall."
+msgstr "Windows Güvenlik Duvarı'nda Beamer'ın giriş veya eşleştirme trafiğini etkileyen bir engelleme kuralı var; yöneticinizden Windows Güvenlik Duvarı'ndaki Beamer gelen trafik engelleme kurallarını gözden geçirmesini isteyin."
+
+#: win_app/firewall_win.py
+msgid "this private network"
+msgstr "bu özel ağ"
+
+#: win_app/firewall_win.py
+msgid "this network"
+msgstr "bu ağ"
+
+#: win_app/firewall_win.py
+#, python-brace-format
+msgid "Beamer could not read the Windows Firewall: {error}"
+msgstr "Beamer Windows Güvenlik Duvarı'nı okuyamadı: {error}"
+
+#: win_app/firewall_win.py
+#, python-brace-format
+msgid "Windows Firewall lets your other machines reach Beamer on port {port} on {where}, and lets a new machine discover this PC."
+msgstr "Windows Güvenlik Duvarı, {where} üzerinde diğer makinelerinizin {port} portundan Beamer'a ulaşmasına ve yeni bir makinenin bu PC'yi bulmasına izin veriyor."
+
+#: win_app/firewall_win.py
+#, python-brace-format
+msgid "This managed network needs Windows Firewall rules for Beamer; ask your administrator to allow its receiver on TCP {port} and pairing on UDP and TCP {pairing_port} for the Domain profile."
+msgstr "Bu yönetilen ağ Beamer için Windows Güvenlik Duvarı kuralları gerektiriyor; yöneticinizden Etki Alanı profili için alıcısına TCP {port} ve eşleştirmeye UDP ile TCP {pairing_port} üzerinden izin vermesini isteyin."
+
+#: win_app/firewall_win.py
+#, python-brace-format
+msgid "Beamer uses custom port {port}; ask your administrator to allow that port for Beamer on trusted networks."
+msgstr "Beamer özel {port} portunu kullanıyor; yöneticinizden güvenilen ağlarda bu porta Beamer için izin vermesini isteyin."
+
+#: win_app/global_shortcut_portal.py
+msgid "Send input to another machine"
+msgstr "Girişi başka bir makineye gönder"
+
+#: win_app/identify_overlay.py
+msgid "Beamer — Identify screens"
+msgstr "Beamer — Ekranları tanımla"
+
+#: win_app/input_injector.py
+msgid "Windows blocked Beamer's input; use administrator windows locally and click a normal window on this PC to continue."
+msgstr "Windows Beamer'ın girişini engelledi; yönetici pencerelerini yerelde kullanın ve devam etmek için bu PC'de normal bir pencereye tıklayın."
+
+#: win_app/kvm_bridge_win.py
+msgid "Beamer's website"
+msgstr "Beamer'ın web sitesi"
+
+#: win_app/kvm_bridge_win.py
+msgid "Receiver stopped"
+msgstr "Alıcı durdu"
+
+#: win_app/kvm_bridge_win.py
+msgid "Waiting for a machine"
+msgstr "Bir makine bekleniyor"
+
+#: win_app/kvm_bridge_win.py
+msgid "Machine connected"
+msgstr "Makine bağlandı"
+
+#: win_app/kvm_bridge_win.py
+msgid "Receiver needs attention"
+msgstr "Alıcı ilgi gerektiriyor"
+
+#: win_app/kvm_bridge_win.py
+msgid "Stopped"
+msgstr "Durdu"
+
+#: win_app/kvm_bridge_win.py
+msgid "Connected"
+msgstr "Bağlı"
+
+#: win_app/kvm_bridge_win.py
+msgid "Error"
+msgstr "Hata"
+
+#: win_app/kvm_bridge_win.py
+msgid "On a Mac, Ctrl arrives as Command and the Windows key as Control, so Ctrl+C copies there too. Between two PCs every key arrives as itself."
+msgstr "Bir Mac'te Ctrl, Command olarak, Windows tuşu da Control olarak varır; böylece Ctrl+C orada da kopyalar. İki PC arasında her tuş kendisi olarak varır."
+
+#: win_app/kvm_bridge_win.py
+msgid "On a Mac, each key arrives as the Mac key in the same place: Ctrl as Control, the Windows key as Command. Between two PCs every key arrives as itself."
+msgstr "Bir Mac'te her tuş aynı yerdeki Mac tuşu olarak varır: Ctrl, Control olarak; Windows tuşu, Command olarak. İki PC arasında her tuş kendisi olarak varır."
+
+#: win_app/kvm_bridge_win.py
+msgid "To a Mac: Alt becomes Command and Win becomes Option; Ctrl stays Control."
+msgstr "Bir Mac'e: Alt, Command olur; Win, Option olur; Ctrl, Control kalır."
+
+#: win_app/kvm_bridge_win.py
+msgid "These keep working on this PC while its input is on another machine: a mouse's back button for this PC's browser, say, or a volume key for its speakers."
+msgstr "Bu PC'nin girişi başka bir makinedeyken bunlar bu PC'de çalışmaya devam eder: örneğin bu PC'nin tarayıcısı için farenin geri düğmesi ya da hoparlörleri için ses tuşu."
+
+#: win_app/kvm_bridge_win.py
+msgid "Nothing yet. Every key and button goes to the machine that has input. Add one to keep it here: a mouse's back button for this PC's browser, say, or a volume key for its speakers."
+msgstr "Henüz yok. Her tuş ve düğme girişin bulunduğu makineye gider. Burada tutmak için bir tane ekleyin: örneğin bu PC'nin tarayıcısı için farenin geri düğmesi ya da hoparlörleri için ses tuşu."
+
+#: win_app/kvm_bridge_win.py
+msgid "Top-left"
+msgstr "Sol üst"
+
+#: win_app/kvm_bridge_win.py
+msgid "Top-right"
+msgstr "Sağ üst"
+
+#: win_app/kvm_bridge_win.py
+msgid "Bottom-left"
+msgstr "Sol alt"
+
+#: win_app/kvm_bridge_win.py
+msgid "Bottom-right"
+msgstr "Sağ alt"
+
+#: win_app/kvm_bridge_win.py
+msgid "Mac keyboard layout"
+msgstr "Mac klavye düzeni"
+
+#: win_app/kvm_bridge_win.py
+#, python-brace-format
+msgid "Sets the effect's playback time. Current value: {value}."
+msgstr "Efektin oynatma süresini ayarlar. Geçerli değer: {value}."
+
+#: win_app/kvm_bridge_win.py
+#, python-brace-format
+msgid "Sets effect depth relative to the shorter screen edge. Current value: {value}."
+msgstr "Efekt derinliğini kısa ekran kenarına göre ayarlar. Geçerli değer: {value}."
+
+#: win_app/kvm_bridge_win.py win_app/machines_win.py
+msgid "Only on this computer"
+msgstr "Yalnızca bu bilgisayarda"
+
+#: win_app/kvm_bridge_win.py win_app/machines_win.py
+msgid "Only on this PC"
+msgstr "Yalnızca bu PC'de"
+
+#: win_app/kvm_bridge_win.py
+msgid "Linux permissions"
+msgstr "Linux izinleri"
+
+#: win_app/kvm_bridge_win.py
+msgid "Send input — Input Capture"
+msgstr "Giriş gönder — Giriş Yakalama"
+
+#: win_app/kvm_bridge_win.py
+msgid "Receive input — Remote Desktop"
+msgstr "Giriş al — Uzak Masaüstü"
+
+#: win_app/kvm_bridge_win.py
+msgid "Tray"
+msgstr "Tepsi"
+
+#: win_app/kvm_bridge_win.py
+msgid "Show in tray"
+msgstr "Tepside göster"
+
+#: win_app/kvm_bridge_win.py
+msgid "Keyboard and mouse"
+msgstr "Klavye ve fare"
+
+#: win_app/kvm_bridge_win.py
+msgid "Send input across"
+msgstr "Girişi karşıya gönder"
+
+#: win_app/kvm_bridge_win.py
+msgid "Switch on This PC drives it for a machine above to send input from here."
+msgstr "Buradan giriş göndermek için yukarıdaki bir makinede Bu PC onu kontrol eder'i açın."
+
+#: win_app/kvm_bridge_win.py
+msgid "On Wayland the desktop lets input go to another machine only when the pointer pushes through an edge, so this button cannot send it."
+msgstr "Wayland'de masaüstü, girişin başka bir makineye yalnızca imleç bir kenardan itildiğinde gitmesine izin verir, bu yüzden bu düğme onu gönderemez."
+
+#: win_app/kvm_bridge_win.py
+msgid "Hold this PC's edges while an app on it is full screen"
+msgstr "Bu PC'de bir uygulama tam ekranken kenarlarını tut"
+
+#: win_app/kvm_bridge_win.py
+msgid "This PC's pointer hides while it drives another machine, and after another machine stops driving it, until its own mouse moves."
+msgstr "Bu PC'nin imleci başka bir makineyi kontrol ederken ve başka bir makine onu kontrol etmeyi bıraktıktan sonra, kendi faresi hareket edene kadar gizlenir."
+
+#: win_app/kvm_bridge_win.py
+msgid "On Wayland your desktop controls pointer hiding while this PC drives another machine. Beamer cannot hide the pointer after another machine stops driving this PC."
+msgstr "Wayland'de bu PC başka bir makineyi kontrol ederken imleci gizlemeyi masaüstünüz yönetir. Beamer, başka bir makine bu PC'yi kontrol etmeyi bıraktıktan sonra imleci gizleyemez."
+
+#: win_app/kvm_bridge_win.py
+msgid "On Wayland Beamer cannot see a full-screen app, or a mouse button held before the pointer reaches an edge, so the edges are never held for one and a drag can cross."
+msgstr "Wayland'de Beamer tam ekran bir uygulamayı ya da imleç kenara varmadan önce basılı tutulan bir fare düğmesini göremez, bu yüzden kenarlar bunlar için hiç tutulmaz ve bir sürükleme geçebilir."
+
+#: win_app/kvm_bridge_win.py
+msgid "At sign-in"
+msgstr "Oturum açılışında"
+
+#: win_app/kvm_bridge_win.py
+msgid "Start Beamer when you sign in"
+msgstr "Oturum açtığınızda Beamer'ı başlat"
+
+#: win_app/kvm_bridge_win.py
+msgid "Windows could not identify the signed-in account, so start at sign-in is unavailable."
+msgstr "Windows oturum açmış hesabı belirleyemedi, bu yüzden oturum açılışında başlatma kullanılamıyor."
+
+#: win_app/kvm_bridge_win.py
+msgid "In the tray, with no window."
+msgstr "Tepside, pencere olmadan."
+
+#: win_app/kvm_bridge_win.py
+msgid "Alt-click a display to split or group · drag to move · click a third of a lit edge to leave it out · drag a corner to resize"
+msgstr "Bölmek veya gruplamak için Alt ile bir ekrana tıklayın · taşımak için sürükleyin · dışarıda bırakmak için yanan kenarın bir üçte birine tıklayın · boyutlandırmak için bir köşeyi sürükleyin"
+
+#: win_app/kvm_bridge_win.py
+msgid "Back to This PC"
+msgstr "Bu PC'ye dön"
+
+#: win_app/kvm_bridge_win.py win_app/pages_win.py
+msgid "Earlier ways"
+msgstr "Önceki yollar"
+
+#: win_app/kvm_bridge_win.py win_app/pages_win.py
+#, python-brace-format
+msgid "hold {key}"
+msgstr "{key} basılı tut"
+
+#: win_app/kvm_bridge_win.py
+#, python-brace-format
+msgid "double-tap {key}"
+msgstr "{key} çift dokun"
+
+#: win_app/kvm_bridge_win.py
+msgid "Don't cross while dragging with this PC's pointer"
+msgstr "Bu PC'nin imleciyle sürüklerken geçme"
+
+#: win_app/kvm_bridge_win.py
+msgid "Switches the moment this PC's pointer touches the edge. Each screen supplies its own zones."
+msgstr "Bu PC'nin imleci kenara değdiği anda geçer. Her ekran kendi bölgelerini belirler."
+
+#: win_app/kvm_bridge_win.py
+msgid "Reverse scrolling from other machines"
+msgstr "Diğer makinelerden gelen kaydırmayı ters çevir"
+
+#: win_app/kvm_bridge_win.py
+msgid "Stays on this PC"
+msgstr "Bu PC'de kalır"
+
+#: win_app/kvm_bridge_win.py
+msgid "On Wayland the shortcut only brings input back: the desktop lets input go to another machine only when the pointer pushes through an edge, and keys on the Stays on this PC list cannot stay here while input is away."
+msgstr "Wayland'de kısayol girişi yalnızca geri getirir: masaüstü girişin başka bir makineye yalnızca imleç bir kenardan itildiğinde gitmesine izin verir ve Bu PC'de kalır listesindeki tuşlar giriş uzaktayken burada kalamaz."
+
+#: win_app/kvm_bridge_win.py
+msgid "Send input out with Super+Shift+B"
+msgstr "Girişi Super+Shift+B ile dışarı gönder"
+
+#: win_app/kvm_bridge_win.py
+msgid "From here, where the double-tap cannot be seen, the key combination pushes the pointer through the edge to the machine the shortcut goes to. The desktop asks once to allow it, and its keyboard settings can change the keys."
+msgstr "Çift dokunmanın görülemediği buradan, tuş bileşimi imleci kenardan kısayolun gittiği makineye iter. Masaüstü buna izin vermek için bir kez sorar ve klavye ayarlarından tuşlar değiştirilebilir."
+
+#: win_app/kvm_bridge_win.py
+msgid "None: this PC keeps its own Design."
+msgstr "Yok: bu PC kendi Tasarımını korur."
+
+#: win_app/kvm_bridge_win.py
+msgid "System follows your Linux desktop's light or dark setting."
+msgstr "Sistem, Linux masaüstünüzün açık veya koyu ayarını izler."
+
+#: win_app/kvm_bridge_win.py
+msgid "System follows Windows' light or dark setting."
+msgstr "Sistem, Windows'un açık veya koyu ayarını izler."
+
+#: win_app/kvm_bridge_win.py
+msgid "Animate crossings on this PC"
+msgstr "Bu PC'de geçişleri canlandır"
+
+#: win_app/kvm_bridge_win.py
+msgid "Jump arrivals use this screen's landing animation too."
+msgstr "Atlama ile varışlar da bu ekranın iniş animasyonunu kullanır."
+
+#: win_app/kvm_bridge_win.py
+msgid "For shortcut, menu and jump arrivals. Same as crossing uses this screen's crossing style."
+msgstr "Kısayol, menü ve atlama ile varışlar için. Geçişle aynı, bu ekranın geçiş stilini kullanır."
+
+#: win_app/kvm_bridge_win.py
+msgid "For the crossing and the shortcut alike"
+msgstr "Geçiş ve kısayol için aynı"
+
+#: win_app/kvm_bridge_win.py
+msgid "Addresses"
+msgstr "Adresler"
+
+#: win_app/kvm_bridge_win.py
+msgid "This PC's address"
+msgstr "Bu PC'nin adresi"
+
+#: win_app/kvm_bridge_win.py
+msgid "This PC's listening port"
+msgstr "Bu PC'nin dinleme portu"
+
+#: win_app/kvm_bridge_win.py
+msgid "Save and reconnect"
+msgstr "Kaydet ve yeniden bağlan"
+
+#: win_app/kvm_bridge_win.py
+msgid "Saved."
+msgstr "Kaydedildi."
+
+#: win_app/kvm_bridge_win.py
+msgid "Linux firewall"
+msgstr "Linux güvenlik duvarı"
+
+#: win_app/kvm_bridge_win.py win_app/linux_stand_ins.py
+msgid "Beamer's firewall check is not yet on Linux."
+msgstr "Beamer'ın güvenlik duvarı denetimi henüz Linux'ta yok."
+
+#: win_app/kvm_bridge_win.py
+msgid "Windows Firewall"
+msgstr "Windows Güvenlik Duvarı"
+
+#: win_app/kvm_bridge_win.py
+msgid "Checking Windows Firewall…"
+msgstr "Windows Güvenlik Duvarı denetleniyor…"
+
+#: win_app/kvm_bridge_win.py
+msgid "Checking…"
+msgstr "Denetleniyor…"
+
+#: win_app/kvm_bridge_win.py
+msgid "This PC drives machines"
+msgstr "Bu PC makineleri kontrol eder"
+
+#: win_app/kvm_bridge_win.py
+msgid "Machines drive this PC"
+msgstr "Makineler bu PC'yi kontrol eder"
+
+#: win_app/kvm_bridge_win.py
+msgid "On this PC"
+msgstr "Bu PC'de"
+
+#: win_app/kvm_bridge_win.py
+msgid "Protect Beamer Portable"
+msgstr "Beamer Portable'ı koru"
+
+#: win_app/kvm_bridge_win.py
+msgid "Unlock Beamer Portable"
+msgstr "Beamer Portable kilidini aç"
+
+#: win_app/kvm_bridge_win.py
+msgid "Choose a passphrase of at least 12 characters. You need it each time Beamer starts. It protects pairing keys if this folder is lost. A forgotten passphrase cannot be recovered."
+msgstr "En az 12 karakterlik bir parola seçin. Beamer her başladığında gerekir. Bu klasör kaybolursa eşleştirme anahtarlarını korur. Unutulan parola kurtarılamaz."
+
+#: win_app/kvm_bridge_win.py
+msgid "Enter the passphrase for this portable folder."
+msgstr "Bu taşınabilir klasörün parolasını girin."
+
+#: win_app/kvm_bridge_win.py
+msgid "Beamer requests keyboard and pointer access when each Wayland session starts."
+msgstr "Beamer her Wayland oturumu başladığında klavye ve imleç erişimi ister."
+
+#: win_app/kvm_bridge_win.py win_app/pages_win.py
+msgid "Not requested"
+msgstr "İstenmedi"
+
+#: win_app/kvm_bridge_win.py
+msgid "Ask again"
+msgstr "Yeniden sor"
+
+#: win_app/kvm_bridge_win.py
+msgid "Download portable zip"
+msgstr "Taşınabilir zip'i indir"
+
+#: win_app/kvm_bridge_win.py
+msgid "Input:"
+msgstr "Giriş:"
+
+#: win_app/kvm_bridge_win.py
+msgid "Delay:"
+msgstr "Gecikme:"
+
+#: win_app/kvm_bridge_win.py
+msgid "Start at sign-in needs Beamer to run as the signed-in account."
+msgstr "Oturum açılışında başlatma, Beamer'ın oturum açmış hesapla çalışmasını gerektirir."
+
+#: win_app/kvm_bridge_win.py
+msgid "Each chip is a side of this screen; click one to add or remove it. The side a machine touches crosses on its lit thirds; any other free side wraps round to it, arriving on its far side. A corner is a diagonal push, shown as a square on the map."
+msgstr "Her çip bu ekranın bir kenarıdır; eklemek veya kaldırmak için birine tıklayın. Bir makinenin değdiği kenar, yanan üçte birlerinde geçer; diğer boş kenarlar ona dolanır ve uzak kenarına varır. Köşe çapraz bir itiştir, haritada kare olarak gösterilir."
+
+#: win_app/kvm_bridge_win.py
+msgid "Push back the way you came: where an edge leads back to This PC"
+msgstr "Geldiğiniz yoldan geri itin: bir kenarın bu PC'ye döndüğü yerden"
+
+#: win_app/kvm_bridge_win.py
+msgid "This PC keeps its own ways"
+msgstr "Bu PC kendi yollarını korur"
+
+#: win_app/kvm_bridge_win.py
+msgid "Follows this PC's mouse or trackpad on every screen; each screen supplies its own zones."
+msgstr "Bu PC'nin faresini veya trackpad'ini her ekranda izler; her ekran kendi bölgelerini belirler."
+
+#: win_app/kvm_bridge_win.py
+msgid "For the trackpad or mouse of whichever machine drives this PC."
+msgstr "Bu PC'yi hangi makine kontrol ediyorsa onun trackpad'i veya faresi için."
+
+#: win_app/kvm_bridge_win.py
+msgid "That could not be saved, so the list is unchanged."
+msgstr "Bu kaydedilemedi, bu yüzden liste değişmedi."
+
+#: win_app/kvm_bridge_win.py
+msgid "Shortcut key"
+msgstr "Kısayol tuşu"
+
+#: win_app/kvm_bridge_win.py
+msgid "That key cannot be the shortcut. Choose a modifier such as Right Ctrl, a function key, or a key like Insert or Scroll Lock."
+msgstr "Bu tuş kısayol olamaz. Sağ Ctrl gibi bir değiştirici, bir işlev tuşu ya da Insert veya Scroll Lock gibi bir tuş seçin."
+
+#: win_app/kvm_bridge_win.py
+msgid "Sets depth relative to the shorter screen edge."
+msgstr "Derinliği kısa ekran kenarına göre ayarlar."
+
+#: win_app/kvm_bridge_win.py
+msgid "On Wayland the desktop does not let Beamer draw at the edges of the screen, so crossings show no effect on this machine. The other machines still show theirs."
+msgstr "Wayland'de masaüstü Beamer'ın ekran kenarlarında çizim yapmasına izin vermez, bu yüzden geçişler bu makinede efekt göstermez. Diğer makineler kendininkini yine gösterir."
+
+#: win_app/kvm_bridge_win.py
+#, python-brace-format
+msgid "Current chain: {names}"
+msgstr "Geçerli zincir: {names}"
+
+#: win_app/kvm_bridge_win.py
+msgid "Pairing is not available: this PC's settings could not be read."
+msgstr "Eşleştirme kullanılamıyor: bu PC'nin ayarları okunamadı."
+
+#: win_app/kvm_bridge_win.py
+msgid "The QR holds this PC's address, so it is not shown while Hide addresses is on."
+msgstr "QR bu PC'nin adresini içerir, bu yüzden Adresleri gizle açıkken gösterilmez."
+
+#: win_app/kvm_bridge_win.py
+msgid "Hides every IP and hardware address in this window and the tray."
+msgstr "Bu penceredeki ve tepsideki tüm IP ve donanım adreslerini gizler."
+
+#: win_app/kvm_bridge_win.py
+msgid "Not known yet"
+msgstr "Henüz bilinmiyor"
+
+#: win_app/kvm_bridge_win.py
+msgid "Portable mode leaves Windows Firewall unchanged. Your network must already allow Beamer."
+msgstr "Taşınabilir mod Windows Güvenlik Duvarı'nı değiştirmez. Ağınızın Beamer'a zaten izin veriyor olması gerekir."
+
+#: win_app/kvm_bridge_win.py
+msgid "Portable — settings and pairing keys stay in this folder, protected by your passphrase. Administrator apps cannot be controlled."
+msgstr "Taşınabilir — ayarlar ve eşleştirme anahtarları parolanızla korunarak bu klasörde kalır. Yönetici uygulamaları kontrol edilemez."
+
+#: win_app/kvm_bridge_win.py
+msgid "Enter the passphrase again."
+msgstr "Parolayı yeniden girin."
+
+#: win_app/kvm_bridge_win.py
+msgid "Beamer is not running, so nothing was sent. Start Beamer and try again."
+msgstr "Beamer çalışmıyor, bu yüzden hiçbir şey gönderilmedi. Beamer'ı başlatıp tekrar deneyin."
+
+#: win_app/kvm_bridge_win.py
+msgid "With it off, closing the window quits Beamer. Open Beamer again to bring the window back."
+msgstr "Kapalıyken pencereyi kapatmak Beamer'dan çıkar. Pencereyi geri getirmek için Beamer'ı yeniden açın."
+
+#: win_app/kvm_bridge_win.py
+msgid "This desktop has no system tray, so Beamer's window is all there is: closing it quits Beamer."
+msgstr "Bu masaüstünde sistem tepsisi yok, bu yüzden Beamer'ın tek arayüzü penceresidir: kapatmak Beamer'dan çıkar."
+
+#: win_app/kvm_bridge_win.py
+msgid "Update through your software store, or download the Flatpak from the release page and open it."
+msgstr "Yazılım mağazanızdan güncelleyin ya da sürüm sayfasından Flatpak'i indirip açın."
+
+#: win_app/kvm_bridge_win.py
+msgid "Beamer controls normal windows; use administrator windows and Windows permission prompts locally."
+msgstr "Beamer normal pencereleri kontrol eder; yönetici pencerelerini ve Windows izin istemlerini yerelde kullanın."
+
+#: win_app/kvm_bridge_win.py
+msgid "Starts in the tray when you sign in, without an administrator prompt."
+msgstr "Oturum açtığınızda yönetici istemi olmadan tepside başlar."
+
+#: win_app/kvm_bridge_win.py
+msgid "Seam crossings need X11 on Linux."
+msgstr "Ekran arası geçişler Linux'ta X11 gerektirir."
+
+#: win_app/kvm_bridge_win.py
+msgid "These ways could not be saved. Try again."
+msgstr "Bu yollar kaydedilemedi. Tekrar deneyin."
+
+#: win_app/kvm_bridge_win.py
+#, python-brace-format
+msgid "Shortcut: {shortcut} (set in {link})"
+msgstr "Kısayol: {shortcut} ({link} içinde ayarlanır)"
+
+#: win_app/kvm_bridge_win.py
+msgid "That position cannot connect this machine."
+msgstr "Bu konum bu makineyi bağlayamaz."
+
+#: win_app/kvm_bridge_win.py
+#, python-brace-format
+msgid "{value} px"
+msgstr "{value} px"
+
+#: win_app/kvm_bridge_win.py
+#, python-brace-format
+msgid "{value} ms"
+msgstr "{value} ms"
+
+#: win_app/kvm_bridge_win.py
+msgid "The effects stopped working and are off until Beamer restarts, so crossings show Glow in the same colours. The log says why."
+msgstr "Efektler çalışmayı bıraktı ve Beamer yeniden başlayana kadar kapalı; geçişler aynı renklerde Işıma gösterir. Nedeni günlükte yazar."
+
+#: win_app/kvm_bridge_win.py
+msgid "Beamer could not save the removal. Try again in a moment."
+msgstr "Beamer kaldırma işlemini kaydedemedi. Birazdan tekrar deneyin."
+
+#: win_app/kvm_bridge_win.py
+msgid "port must be an integer from 1 to 65535"
+msgstr "port 1 ile 65535 arasında bir tam sayı olmalı"
+
+#: win_app/kvm_bridge_win.py
+msgid "Save failed"
+msgstr "Kaydedilemedi"
+
+#: win_app/kvm_bridge_win.py
+msgid "Another Beamer copy controls input on this PC. Quit it to use input in this copy."
+msgstr "Bu PC'de girişi başka bir Beamer kopyası yönetiyor. Bu kopyada girişi kullanmak için ondan çıkın."
+
+#: win_app/kvm_bridge_win.py
+#, python-brace-format
+msgid "<b>Beamer {version}</b><br>One keyboard and mouse for all your Macs and PCs.<br><br><a href=\"{url}\" style=\"color: {colour};\">{link}</a>"
+msgstr "<b>Beamer {version}</b><br>Tüm Mac'leriniz ve PC'leriniz için tek klavye ve fare.<br><br><a href=\"{url}\" style=\"color: {colour};\">{link}</a>"
+
+#: win_app/kvm_bridge_win.py
+msgid "Use at least 12 characters for the passphrase."
+msgstr "Parola için en az 12 karakter kullanın."
+
+#: win_app/kvm_bridge_win.py
+msgid "The passphrases do not match. Try again."
+msgstr "Parolalar eşleşmiyor. Tekrar deneyin."
+
+#: win_app/kvm_bridge_win.py
+msgid "The portable settings could not be unlocked or saved. Check the passphrase and that the folder is writable. Existing pairing keys have been kept."
+msgstr "Taşınabilir ayarların kilidi açılamadı veya kaydedilemedi. Parolayı ve klasörün yazılabilir olduğunu kontrol edin. Mevcut eşleştirme anahtarları korundu."
+
+#: win_app/kvm_bridge_win.py
+#, python-brace-format
+msgid "Ready on TCP port {port}"
+msgstr "TCP {port} portunda hazır"
+
+#: win_app/kvm_bridge_win.py
+#, python-brace-format
+msgid ""
+"Beamer {version}\n"
+"{link}"
+msgstr ""
+"Beamer {version}\n"
+"{link}"
+
+#: win_app/kvm_bridge_win.py
+msgid "No portable download is available for this release. See What's new."
+msgstr "Bu sürüm için taşınabilir indirme yok. Yenilikler'e bakın."
+
+#: win_app/kvm_bridge_win.py
+msgid "When enabled, Beamer starts in the tray with your normal permissions."
+msgstr "Etkinleştirildiğinde Beamer normal izinlerinizle tepside başlar."
+
+#: win_app/kvm_bridge_win.py
+msgid "Only the installed app can start at sign-in."
+msgstr "Oturum açılışında yalnızca kurulu uygulama başlayabilir."
+
+#: win_app/kvm_bridge_win.py
+msgid "These ways could not be changed."
+msgstr "Bu yollar değiştirilemedi."
+
+#: win_app/kvm_bridge_win.py
+msgid "This desk is full. Remove an unused profile before adding more ways."
+msgstr "Bu masa dolu. Daha fazla yol eklemeden önce kullanılmayan bir profili kaldırın."
+
+#: win_app/kvm_bridge_win.py
+#, python-brace-format
+msgid "{version} · only sees which side"
+msgstr "{version} · yalnızca hangi kenar olduğunu görür"
+
+#. {side} is the direction of this screen's edge.
+#: win_app/kvm_bridge_win.py
+#, python-brace-format
+msgid "Follows this PC's mouse or trackpad on every screen; each screen supplies its own zones. This screen's {side} edge lights to show the resistance."
+msgstr "Bu PC'nin faresini veya trackpad'ini her ekranda izler; her ekran kendi bölgelerini belirler. Direnci göstermek için bu ekranın {side} kenarı yanar."
+
+#: win_app/kvm_bridge_win.py
+#, python-brace-format
+msgid "Remove {key}"
+msgstr "{key} kaldır"
+
+#: win_app/kvm_bridge_win.py
+#, python-brace-format
+msgid "Pairing is not available: {error}"
+msgstr "Eşleştirme kullanılamıyor: {error}"
+
+#: win_app/kvm_bridge_win.py
+#, python-brace-format
+msgid "This PC's address: {address} · port {port}"
+msgstr "Bu PC'nin adresi: {address} · port {port}"
+
+#: win_app/kvm_bridge_win.py
+#, python-brace-format
+msgid "Beamer — {status}: {detail}"
+msgstr "Beamer — {status}: {detail}"
+
+#: win_app/kvm_bridge_win.py
+#, python-brace-format
+msgid "Could not save this PC's name: {error}"
+msgstr "Bu PC'nin adı kaydedilemedi: {error}"
+
+#: win_app/kvm_bridge_win.py
+#, python-brace-format
+msgid "Windows refused: {error}"
+msgstr "Windows reddetti: {error}"
+
+#: win_app/kvm_bridge_win.py
+#, python-brace-format
+msgid "Nearby pairing could not continue: {error}"
+msgstr "Yakın eşleştirme devam edemedi: {error}"
+
+#: win_app/kvm_bridge_win.py
+#, python-brace-format
+msgid "Could not reload the configuration: {error}"
+msgstr "Yapılandırma yeniden yüklenemedi: {error}"
+
+#: win_app/kvm_bridge_win.py
+msgid "Give the profile a name of 1 to 32 characters."
+msgstr "Profile 1 ile 32 karakter arasında bir ad verin."
+
+#: win_app/kvm_bridge_win.py
+#, python-brace-format
+msgid "{blurb} It plays around the pointer when the shortcut or a menu brings input to this PC."
+msgstr "{blurb} Kısayol ya da bir menü girişi bu PC'ye getirdiğinde imlecin çevresinde oynar."
+
+#: win_app/kvm_bridge_win.py
+#, python-brace-format
+msgid "the change failed: {error}"
+msgstr "değişiklik başarısız oldu: {error}"
+
+#: win_app/launch_win.py win_app/send_win.py win_app/transfer_feature.py
+msgid "the other PC"
+msgstr "diğer PC"
+
+#: win_app/launch_win.py
+#, python-brace-format
+msgid "Started for {name}"
+msgstr "{name} için başlatıldı"
+
+#: win_app/launch_win.py
+#, python-brace-format
+msgid "{items} (saved and shown, not opened)"
+msgstr "{items} (kaydedildi ve gösterildi, açılmadı)"
+
+#: win_app/launch_win.py
+#, python-brace-format
+msgid "{items}: no app for it here, so it opened on the other PC"
+msgstr "{items}: burada açacak uygulama yok, bu yüzden diğer PC'de açıldı"
+
+#: win_app/machines_win.py
+msgid "Pairing code"
+msgstr "Eşleştirme kodu"
+
+#: win_app/machines_win.py
+msgid "Off on this PC: no input or settings link to this machine. Pairing, directions, ways and jump key are kept. Turn it back on here to reconnect."
+msgstr "Bu PC'de kapalı: bu makineyle giriş veya ayar bağlantısı yok. Eşleştirme, yönler, yollar ve atlama tuşu korunur. Yeniden bağlanmak için burada tekrar açın."
+
+#: win_app/machines_win.py
+msgid "This PC drives it"
+msgstr "Bu PC onu kontrol eder"
+
+#: win_app/machines_win.py
+msgid "Input moves only when this PC enables this switch and the other machine enables It drives this PC."
+msgstr "Giriş yalnızca bu PC bu anahtarı, diğer makine de O bu PC'yi kontrol eder'i açtığında taşınır."
+
+#: win_app/machines_win.py
+msgid "It drives this PC"
+msgstr "O bu PC'yi kontrol eder"
+
+#: win_app/machines_win.py
+msgid "Input moves only when the other machine enables This machine drives it and this PC enables this switch."
+msgstr "Giriş yalnızca diğer makine Bu makine onu kontrol eder'i, bu PC de bu anahtarı açtığında taşınır."
+
+#: win_app/machines_win.py
+msgid "QR code for the pairing code"
+msgstr "Eşleştirme kodunun QR kodu"
+
+#: win_app/machines_win.py
+msgid "Time left"
+msgstr "Kalan süre"
+
+#: win_app/machines_win.py
+msgid "Nearby pairing status"
+msgstr "Yakın eşleştirme durumu"
+
+#: win_app/machines_win.py
+msgid "Nearby pairing time left"
+msgstr "Yakın eşleştirme kalan süre"
+
+#: win_app/machines_win.py
+msgid "No other machine is showing a code yet."
+msgstr "Henüz başka hiçbir makine kod göstermiyor."
+
+#: win_app/machines_win.py
+msgid "Address of the other machine"
+msgstr "Diğer makinenin adresi"
+
+#: win_app/machines_win.py
+msgid "Code"
+msgstr "Kod"
+
+#: win_app/machines_win.py
+msgid "Show a code on this PC"
+msgstr "Bu PC'de bir kod göster"
+
+#: win_app/machines_win.py
+msgid "Pairing digits"
+msgstr "Eşleştirme rakamları"
+
+#: win_app/machines_win.py
+msgid "Pairing…"
+msgstr "Eşleştiriliyor…"
+
+#: win_app/machines_win.py
+#, python-brace-format
+msgid "Pin address for {name}"
+msgstr "{name} için adresi sabitle"
+
+#: win_app/machines_win.py
+#, python-brace-format
+msgid "{name}: {status}"
+msgstr "{name}: {status}"
+
+#: win_app/machines_win.py
+#, python-brace-format
+msgid "Off on this PC: no input or settings link to {name}. Pairing, directions, ways and jump key are kept. Turn it back on here to reconnect."
+msgstr "Bu PC'de kapalı: {name} ile giriş veya ayar bağlantısı yok. Eşleştirme, yönler, yollar ve atlama tuşu korunur. Yeniden bağlanmak için burada tekrar açın."
+
+#: win_app/machines_win.py
+#, python-brace-format
+msgid "Input moves only when this PC enables this switch and {name} enables It drives this PC."
+msgstr "Giriş yalnızca bu PC bu anahtarı, {name} de O bu PC'yi kontrol eder'i açtığında taşınır."
+
+#: win_app/machines_win.py
+#, python-brace-format
+msgid "Input moves only when {name} enables This PC drives it and this PC enables this switch."
+msgstr "Giriş yalnızca {name}, Bu PC onu kontrol eder'i, bu PC de bu anahtarı açtığında taşınır."
+
+#: win_app/machines_win.py
+#, python-brace-format
+msgid "Selected: {name} · {platform}"
+msgstr "Seçili: {name} · {platform}"
+
+#: win_app/machines_win.py
+#, python-brace-format
+msgid "Remove {name}? {note}"
+msgstr "{name} kaldırılsın mı? {note}"
+
+#: win_app/machines_win.py
+#, python-brace-format
+msgid "Off on this PC: {name} cannot connect or drive it. Turn it back on here to reconnect."
+msgstr "Bu PC'de kapalı: {name} bağlanamaz veya onu kontrol edemez. Yeniden bağlanmak için burada tekrar açın."
+
+#: win_app/machines_win.py
+#, python-brace-format
+msgid "Pairing digits {digits}"
+msgstr "Eşleştirme rakamları {digits}"
+
+#: win_app/machines_win.py
+#, python-brace-format
+msgid "Pairing code {digits}"
+msgstr "Eşleştirme kodu {digits}"
+
+#: win_app/pages_win.py
+msgid "This PC only."
+msgstr "Yalnızca bu PC."
+
+#: win_app/pages_win.py
+msgid "Closing this window keeps Beamer running in the tray."
+msgstr "Bu pencereyi kapatmak Beamer'ı tepside çalışır halde bırakır."
+
+#: win_app/pages_win.py
+msgid "Changes apply as you make them. Closing this window keeps Beamer running in the tray."
+msgstr "Değişiklikler siz yaptıkça uygulanır. Bu pencereyi kapatmak Beamer'ı tepside çalışır halde bırakır."
+
+#: win_app/pages_win.py
+msgid "The shortcut switches home or to the last available machine; if it is unavailable, another available machine can take input."
+msgstr "Kısayol eve ya da son kullanılabilir makineye geçer; o kullanılamıyorsa başka bir kullanılabilir makine girişi alabilir."
+
+#: win_app/pages_win.py
+msgid "Ways below lead to the selected machine. Its side is shared with that machine. Resistance, drag protection and Shortcut apply to this PC's input for every destination."
+msgstr "Aşağıdaki yollar seçili makineye gider. Kenarı o makineyle paylaşılır. Direnç, sürükleme koruması ve Kısayol her hedef için bu PC'nin girişine uygulanır."
+
+#: win_app/pages_win.py
+msgid "Used on this screen. Shared animation settings may follow another machine; Animate and window appearance stay on this PC."
+msgstr "Bu ekranda kullanılır. Paylaşılan animasyon ayarları başka bir makineyi izleyebilir; Canlandır ve pencere görünümü bu PC'de kalır."
+
+#: win_app/pages_win.py
+msgid "Modifier keys and Stays here belong to this PC's input. Pointer speed and scrolling belong to this screen when another machine drives it. Every machine keeps its own."
+msgstr "Değiştirici tuşlar ve Burada kalanlar bu PC'nin girişine aittir. İmleç hızı ve kaydırma, başka bir makine onu kontrol ederken bu ekrana aittir. Her makine kendininkini korur."
+
+#: win_app/pages_win.py
+msgid "Ready"
+msgstr "Hazır"
+
+#: win_app/pages_win.py
+msgid "Unavailable"
+msgstr "Kullanılamıyor"
+
+#: win_app/pages_win.py
+msgid "top-left"
+msgstr "sol üst"
+
+#: win_app/pages_win.py
+msgid "top-right"
+msgstr "sağ üst"
+
+#: win_app/pages_win.py
+msgid "bottom-left"
+msgstr "sol alt"
+
+#: win_app/pages_win.py
+msgid "bottom-right"
+msgstr "sağ alt"
+
+#: win_app/pages_win.py
+msgid "This PC is always in the shortcut's cycle."
+msgstr "Bu PC her zaman kısayol döngüsündedir."
+
+#: win_app/pages_win.py
+msgid "to the right of this PC"
+msgstr "bu PC'nin sağında"
+
+#: win_app/pages_win.py
+msgid "to the left of this PC"
+msgstr "bu PC'nin solunda"
+
+#: win_app/pages_win.py
+msgid "above this PC"
+msgstr "bu PC'nin üstünde"
+
+#: win_app/pages_win.py
+msgid "below this PC"
+msgstr "bu PC'nin altında"
+
+#: win_app/pages_win.py
+msgid "The machines paired with this PC, where input is right now, and the controls you reach for every day. Pair a machine here first."
+msgstr "Bu PC ile eşleşmiş makineler, girişin şu an nerede olduğu ve her gün kullandığınız denetimler. Önce burada bir makine eşleştirin."
+
+#: win_app/pages_win.py
+msgid "Choose how the pointer or a key moves input to each machine, and how hard the edge pushes back first."
+msgstr "İmlecin ya da bir tuşun girişi her makineye nasıl taşıyacağını ve kenarın önce ne kadar direneceğini seçin."
+
+#: win_app/pages_win.py
+msgid "How this PC's Ctrl and Windows keys arrive on another machine, the keys and buttons that stay here, and how fast another machine's pointer moves here."
+msgstr "Bu PC'nin Ctrl ve Windows tuşlarının başka bir makineye nasıl vardığı, burada kalan tuş ve düğmeler ve başka bir makinenin imlecinin burada ne kadar hızlı hareket ettiği."
+
+#: win_app/pages_win.py
+msgid "How crossing looks on this PC: the light as you push toward another machine, and where the pointer lands."
+msgstr "Geçişin bu PC'de nasıl göründüğü: başka bir makineye doğru iterken çıkan ışık ve imlecin nereye indiği."
+
+#: win_app/pages_win.py
+msgid "This PC's network access, address and listening port; hide addresses in this window and tray."
+msgstr "Bu PC'nin ağ erişimi, adresi ve dinleme portu; adresleri bu pencerede ve tepside gizleyin."
+
+#: win_app/pages_win.py
+msgid "Not paired yet, so no edge or shortcut moves input until you pair a machine above."
+msgstr "Henüz eşleştirilmedi; yukarıda bir makine eşleştirene kadar hiçbir kenar ya da kısayol girişi taşımaz."
+
+#: win_app/pages_win.py
+msgid "Above"
+msgstr "Üstte"
+
+#: win_app/pages_win.py
+msgid "Below"
+msgstr "Altta"
+
+#: win_app/pages_win.py
+#, python-brace-format
+msgid "{place} is not one of this PC's ways in, so this only shows how it would look. Turn it on under Crossing."
+msgstr "{place} bu PC'nin giriş yollarından biri değil, bu yüzden yalnızca nasıl görüneceğini gösterir. Geçiş altında açın."
+
+#. {side} is the direction of the screen edge.
+#: win_app/pages_win.py
+#, python-brace-format
+msgid "{names} already cross from the {side} edge of this PC. The thirds you pick go to {name}; the rest stay where they are."
+msgstr "{names} zaten bu PC'nin {side} kenarından geçiyor. Seçtiğiniz üçte birler {name} makinesine gider; geri kalanı olduğu yerde kalır."
+
+#: win_app/pages_win.py
+#, python-brace-format
+msgid "Not learned yet: choose a side here or on {name}."
+msgstr "Henüz öğrenilmedi: burada ya da {name} üzerinde bir kenar seçin."
+
+#: win_app/pages_win.py
+#, python-brace-format
+msgid "{key}, twice"
+msgstr "{key}, iki kez"
+
+#. Several ways to move input, offered as alternatives.
+#: win_app/pages_win.py
+#, python-brace-format
+msgctxt "ways list"
+msgid "{head} or {last}"
+msgstr "{head} veya {last}"
+
+#: win_app/pages_win.py
+#, python-brace-format
+msgid "Input moves to {name} when you {ways}."
+msgstr "{ways} yaptığınızda giriş {name} makinesine geçer."
+
+#: win_app/pages_win.py
+msgid "The order follows the tiles from top to bottom, then left to right. This PC is always in the cycle."
+msgstr "Sıra, kutuları yukarıdan aşağıya, sonra soldan sağa izler. Bu PC her zaman döngüdedir."
+
+#: win_app/pages_win.py
+msgid "Choose which machines join the cycle with the tick boxes on their tiles."
+msgstr "Döngüye hangi makinelerin katılacağını kutucuklarındaki onay kutularıyla seçin."
+
+#: win_app/pages_win.py
+#, python-brace-format
+msgid "{first} {second} {third}"
+msgstr "{first} {second} {third}"
+
+#. {side} is the direction of the screen edge.
+#: win_app/pages_win.py
+#, python-brace-format
+msgid "{names} already crosses from the {side} edge of this PC. The thirds you pick go to {name}; the rest stay with {holder}."
+msgstr "{names} zaten bu PC'nin {side} kenarından geçiyor. Seçtiğiniz üçte birler {name} makinesine gider; geri kalanı {holder} makinesinde kalır."
+
+#: win_app/pages_win.py
+#, python-brace-format
+msgid "Waiting to hear from {name}. This PC cannot push into it until it has connected once."
+msgstr "{name} makinesinden haber bekleniyor. Bu PC, o bir kez bağlanana kadar ona doğru itemez."
+
+#: win_app/pages_win.py
+#, python-brace-format
+msgid "This PC does not drive {name}, so edges and the shortcut do nothing."
+msgstr "Bu PC {name} makinesini kontrol etmiyor, bu yüzden kenarlar ve kısayol bir şey yapmaz."
+
+#: win_app/pages_win.py
+#, python-brace-format
+msgid "Not connected to {name}, so edges and the shortcut do nothing yet. Check that it is switched on and lets this PC drive it."
+msgstr "{name} ile bağlı değil, bu yüzden kenarlar ve kısayol henüz bir şey yapmaz. Açık olduğundan ve bu PC'nin onu kontrol etmesine izin verdiğinden emin olun."
+
+#: win_app/pages_win.py
+#, python-brace-format
+msgid "{key}, held"
+msgstr "{key}, basılı"
+
+#. Two ways to move input, offered as alternatives.
+#: win_app/pages_win.py
+#, python-brace-format
+msgctxt "ways list"
+msgid "{first} or {last}"
+msgstr "{first} veya {last}"
+
+#: win_app/pages_win.py
+#, python-brace-format
+msgid "Nothing moves input to {name} until this PC knows which side it is on."
+msgstr "Bu PC onun hangi tarafta olduğunu bilene kadar hiçbir şey girişi {name} makinesine taşımaz."
+
+#: win_app/pages_win.py
+#, python-brace-format
+msgid "Nothing moves input to {name}: choose at least one way below."
+msgstr "Hiçbir şey girişi {name} makinesine taşımaz: aşağıdan en az bir yol seçin."
+
+#: win_app/pages_win.py
+#, python-brace-format
+msgid "Input moves to {name} when you {ways}. The shortcut switches home or to the last available machine; if it is unavailable, another available machine can take input."
+msgstr "{ways} yaptığınızda giriş {name} makinesine geçer. Kısayol eve ya da son kullanılabilir makineye geçer; o kullanılamıyorsa başka bir kullanılabilir makine girişi alabilir."
+
+#: win_app/pages_win.py
+#, python-brace-format
+msgid "push through {ways}"
+msgstr "{ways} üzerinden itin"
+
+#: win_app/pages_win.py
+#, python-brace-format
+msgid "{action}."
+msgstr "{action}."
+
+#: win_app/pages_win.py
+#, python-brace-format
+msgid "{shortcut}."
+msgstr "{shortcut}."
+
+#: win_app/pages_win.py
+#, python-brace-format
+msgid "Not placed yet: {machines}"
+msgstr "Henüz yerleştirilmedi: {machines}"
+
+#: win_app/pages_win.py
+#, python-brace-format
+msgid "{name} is {position}"
+msgstr "{name} {position}"
+
+#: win_app/pages_win.py
+#, python-brace-format
+msgid "{first} {second}"
+msgstr "{first} {second}"
+
+#: win_app/pages_win.py
+#, python-brace-format
+msgid "Input moves to {name} when you press {key} twice. Its edges and corner wait until this PC knows which side {name} is on."
+msgstr "{key} tuşuna iki kez bastığınızda giriş {name} makinesine geçer. Kenarları ve köşesi, bu PC {name} makinesinin hangi tarafta olduğunu öğrenene kadar bekler."
+
+#: win_app/pages_win.py
+#, python-brace-format
+msgid "push through the whole {edge} edge"
+msgstr "tüm {edge} kenardan itin"
+
+#: win_app/pages_win.py
+#, python-brace-format
+msgid "push through {parts}"
+msgstr "{parts} üzerinden itin"
+
+#: win_app/pages_win.py
+#, python-brace-format
+msgid "push diagonally into the {corner} corner"
+msgstr "{corner} köşeye çapraz itin"
+
+#: win_app/pages_win.py
+#, python-brace-format
+msgid "No edge or corner leads to {name} yet: choose one below. The shortcut switches home or to the last available machine; if it is unavailable, another available machine can take input."
+msgstr "Henüz {name} makinesine giden kenar veya köşe yok: aşağıdan birini seçin. Kısayol eve ya da son kullanılabilir makineye geçer; o kullanılamıyorsa başka bir kullanılabilir makine girişi alabilir."
+
+#: win_app/pages_win.py
+#, python-brace-format
+msgid "No edge or corner leads to {name} yet: choose one below."
+msgstr "Henüz {name} makinesine giden kenar veya köşe yok: aşağıdan birini seçin."
+
+#: win_app/pages_win.py
+#, python-brace-format
+msgid "push through {ways} to reach {name}"
+msgstr "{name} makinesine ulaşmak için {ways} üzerinden itin"
+
+#: win_app/pages_win.py
+#, python-brace-format
+msgid "{shortcut}, or {action}."
+msgstr "{shortcut} ya da {action}."
+
+#: win_app/pages_win.py
+#, python-brace-format
+msgid "{machines}."
+msgstr "{machines}."
+
+#: win_app/pages_win.py
+#, python-brace-format
+msgid "{line}."
+msgstr "{line}."
+
+#: win_app/pages_win.py
+#, python-brace-format
+msgid "Input moves to {name} when you hold {key}. Its edges and corner wait until this PC knows which side {name} is on."
+msgstr "{key} tuşunu basılı tuttuğunuzda giriş {name} makinesine geçer. Kenarları ve köşesi, bu PC {name} makinesinin hangi tarafta olduğunu öğrenene kadar bekler."
+
+#: win_app/pages_win.py
+#, python-brace-format
+msgid "press {key} twice"
+msgstr "{key} tuşuna iki kez basın"
+
+#: win_app/peers_view.py
+msgid "Driving this PC"
+msgstr "Bu PC'yi kontrol ediyor"
+
+#: win_app/peers_view.py
+#, python-brace-format
+msgid "{name} is not in use on this PC."
+msgstr "{name} bu PC'de kullanımda değil."
+
+#: win_app/peers_view.py
+#, python-brace-format
+msgid "{name}'s keyboard and pointer are on this PC. Push the pointer back through the edge it arrived by to send them home."
+msgstr "{name} makinesinin klavyesi ve imleci bu PC'de. Geri göndermek için imleci geldiği kenardan geri itin."
+
+#: win_app/peers_view.py
+#, python-brace-format
+msgid "This PC's keyboard and pointer are on {name}. Do the same again to bring them home."
+msgstr "Bu PC'nin klavyesi ve imleci {name} üzerinde. Eve getirmek için aynısını yeniden yapın."
+
+#: win_app/portable_entry.py
+msgid "Beamer Portable needs its Beamer.portable marker and a writable folder beside the app. Move the whole folder to writable storage and try again."
+msgstr "Beamer Portable, uygulamanın yanında Beamer.portable işaretine ve yazılabilir bir klasöre ihtiyaç duyar. Klasörün tamamını yazılabilir bir depolamaya taşıyıp tekrar deneyin."
+
+#: win_app/portable_entry.py
+msgid "Beamer Portable"
+msgstr "Beamer Portable"
+
+#: win_app/send_win.py
+#, python-brace-format
+msgid "Could not send to {name}: {error}"
+msgstr "{name} makinesine gönderilemedi: {error}"
+
+#: win_app/send_win.py
+msgid "No other PC to send to: pair one first, or choose one in transfer.json"
+msgstr "Gönderilecek başka PC yok: önce birini eşleştirin ya da transfer.json'da birini seçin"
+
+#: win_app/send_win.py
+#, python-brace-format
+msgid "{name} does not let this PC drive it, so it takes nothing from it either"
+msgstr "{name} bu PC'nin onu kontrol etmesine izin vermiyor, bu yüzden ondan bir şey de almıyor"
+
+#: win_app/send_win.py
+#, python-brace-format
+msgid "{app} is not installed on {name}, or not in its allowed apps"
+msgstr "{app}, {name} üzerinde kurulu değil ya da izinli uygulamalarında yok"
+
+#: win_app/send_win.py
+#, python-brace-format
+msgid "Too large for {name}'s limit (transfer.json, max_bytes)"
+msgstr "{name} makinesinin sınırı için çok büyük (transfer.json, max_bytes)"
+
+#: win_app/send_win.py
+#, python-brace-format
+msgid "{name} does not have room for it"
+msgstr "{name} üzerinde bunun için yer yok"
+
+#: win_app/send_win.py
+#, python-brace-format
+msgid "{name} is not taking transfers"
+msgstr "{name} aktarım kabul etmiyor"
+
+#: win_app/send_win.py
+msgid "Sending failed; see the log"
+msgstr "Gönderim başarısız oldu; günlüğe bakın"
+
+#: win_app/send_win.py
+#, python-brace-format
+msgid "Starting {app} on {name}…"
+msgstr "{app}, {name} üzerinde başlatılıyor…"
+
+#: win_app/send_win.py
+#, python-brace-format
+msgid "Preparing {count} item(s) for {name}…"
+msgstr "{count} öğe {name} için hazırlanıyor…"
+
+#: win_app/send_win.py
+#, python-brace-format
+msgid "Opened on {name}"
+msgstr "{name} üzerinde açıldı"
+
+#: win_app/send_win.py
+#, python-brace-format
+msgid "Sending to {name}: {sent} of {total}"
+msgstr "{name} makinesine gönderiliyor: {total} içinden {sent}"
+
+#: win_app/send_win.py
+#, python-brace-format
+msgid "{name} could not start {app}"
+msgstr "{name}, {app} uygulamasını başlatamadı"
+
+#: win_app/send_win.py
+#, python-brace-format
+msgid "{name} could not open what was sent"
+msgstr "{name} gönderileni açamadı"
+
+#: win_app/send_win.py
+#, python-brace-format
+msgid "{app} is not on {name}, so it opened on this PC"
+msgstr "{app}, {name} üzerinde yok, bu yüzden bu PC'de açıldı"
+
+#: win_app/send_win.py
+#, python-brace-format
+msgid "Could not open {app}: {error}"
+msgstr "{app} açılamadı: {error}"
+
+#: win_app/sender.py
+msgid "Not connected"
+msgstr "Bağlı değil"
+
+#: win_app/sender.py
+#, python-brace-format
+msgid "{name} does not accept input from this one"
+msgstr "{name} bundan giriş kabul etmiyor"
+
+#: win_app/sender.py
+#, python-brace-format
+msgid "{name} sent the input back"
+msgstr "{name} girişi geri gönderdi"
+
+#: win_app/sender.py
+#, python-brace-format
+msgid "{name} would not take the input"
+msgstr "{name} girişi almadı"
+
+#: win_app/sender.py
+msgid "Cannot switch — on this desktop input goes to another machine only by pushing the pointer through an edge"
+msgstr "Geçilemiyor — bu masaüstünde giriş başka bir makineye yalnızca imleç bir kenardan itilerek gider"
+
+#: win_app/sender.py
+#, python-brace-format
+msgid "Cannot switch — {name} could not be reached"
+msgstr "Geçilemiyor — {name} makinesine ulaşılamadı"
+
+#: win_app/sender.py
+#, python-brace-format
+msgid "Cannot switch — {name} could not be reached while this PC is being driven"
+msgstr "Geçilemiyor — bu PC kontrol edilirken {name} makinesine ulaşılamadı"
+
+#: win_app/sender.py
+#, python-brace-format
+msgid "Cannot switch — {reason}"
+msgstr "Geçilemiyor — {reason}"
+
+#: win_app/sender.py
+#, python-brace-format
+msgid "{other} took over {name}"
+msgstr "{other}, {name} makinesini devraldı"
+
+#: win_app/sender.py
+#, python-brace-format
+msgid "{name} returned the input"
+msgstr "{name} girişi geri verdi"
+
+#: win_app/sender.py
+#, python-brace-format
+msgid "Cannot switch — the desktop did not let Beamer send input to {name}"
+msgstr "Geçilemiyor — masaüstü Beamer'ın {name} makinesine giriş göndermesine izin vermedi"
+
+#: win_app/transfer_feature.py
+msgid "Send files to the other PC…"
+msgstr "Diğer PC'ye dosya gönder…"
+
+#: win_app/transfer_feature.py
+msgid "Send a folder to the other PC…"
+msgstr "Diğer PC'ye klasör gönder…"
+
+#: win_app/transfer_feature.py
+msgid "Open received files"
+msgstr "Gelen dosyaları aç"
+
+#: win_app/transfer_feature.py
+#, python-brace-format
+msgid "To {name}"
+msgstr "{name} makinesine"
+
+#: win_app/transfer_feature.py
+#, python-brace-format
+msgid "Drop to open on {name}"
+msgstr "{name} üzerinde açmak için bırakın"
+
+#: win_app/transfer_feature.py
+#, python-brace-format
+msgid "Open on {name}"
+msgstr "{name} üzerinde aç"
+
+#: win_app/transfer_feature.py
+#, python-brace-format
+msgid "Send to {name}"
+msgstr "{name} makinesine gönder"
+
+#: win_app/transfer_feature.py
+#, python-brace-format
+msgid "{items}: no app for it on {name}, so it opened here"
+msgstr "{items}: {name} üzerinde açacak uygulama yok, bu yüzden burada açıldı"
+
+#: win_app/transfer_feature.py
+#, python-brace-format
+msgid "Another program is using port {port}: files cannot be sent to this PC"
+msgstr "{port} portunu başka bir program kullanıyor: bu PC'ye dosya gönderilemez"
+
+#: win_app/widgets.py
+msgid "Response time: no fresh measurement"
+msgstr "Yanıt süresi: yeni ölçüm yok"
+
+#: win_app/widgets.py
+msgid "Response time: disconnected"
+msgstr "Yanıt süresi: bağlantı kesildi"
+
+#: win_app/widgets.py
+#, python-brace-format
+msgid "{name}, {key}"
+msgstr "{name}, {key}"
+
+#: win_app/widgets.py
+#, python-brace-format
+msgid "{name}, {choice}"
+msgstr "{name}, {choice}"
+
+#: win_app/widgets.py
+#, python-brace-format
+msgid "{name}, selected"
+msgstr "{name}, seçili"
