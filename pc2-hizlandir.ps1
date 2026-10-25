@@ -18,16 +18,38 @@
     $ErrorActionPreference = 'Stop'
     $Url = 'https://raw.githubusercontent.com/ErdemWilkinson/beamer-pc2/main/pc2-hizlandir.ps1'
     $Choice = [string]$env:BEAMER_YONETICI
-    $principal = [Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()
-    if (-not $principal.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) {
-        Write-Host '==> Yonetici izni isteniyor...' -ForegroundColor Cyan
-        # An elevated process does not inherit this window's variables: the choice goes along explicitly.
-        $carry = if ($Choice -in @('0', '1')) { "`$env:BEAMER_YONETICI='$Choice'; " } else { '' }
-        Start-Process powershell.exe -Verb RunAs -ArgumentList "-NoProfile -ExecutionPolicy Bypass -Command `"$carry irm $Url | iex`""
+    function Say([string]$text) { Write-Host "==> $text" -ForegroundColor Cyan }
+
+    # The Wi-Fi setting needs no administrator rights, so it is done first and on its own: an
+    # account that cannot elevate (or a refused prompt) still gets it.
+    Say 'Wi-Fi guc tasarrufu kapatiliyor (prizde ve pilde)'
+    $wifi = '19cbb8fa-5279-450e-9fac-8a3d5fedd0c1'
+    $saving = '12bbebe6-58d6-4636-95bb-3217ef867c1a'
+    powercfg /setacvalueindex SCHEME_CURRENT $wifi $saving 0
+    powercfg /setdcvalueindex SCHEME_CURRENT $wifi $saving 0
+    powercfg /setactive SCHEME_CURRENT
+    if ($LASTEXITCODE -ne 0) { Write-Host 'Wi-Fi ayari yazilamadi (powercfg basarisiz).' -ForegroundColor Red }
+
+    if ($Choice -notin @('0', '1')) {
+        Write-Host ''
+        Write-Host 'Tamam: Wi-Fi artik uyuklamiyor.' -ForegroundColor Green
+        Write-Host 'Gorev Yoneticisi gibi yonetici pencerelerinde de mouse icin (UAC korumasini zayiflatir, bkz. docs\PC2-AKTARIM.md):'
+        Write-Host "  `$env:BEAMER_YONETICI='1'; irm $Url | iex"
         return
     }
 
-    function Say([string]$text) { Write-Host "==> $text" -ForegroundColor Cyan }
+    $principal = [Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()
+    if (-not $principal.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) {
+        Say 'Yonetici izni isteniyor...'
+        try {
+            # An elevated process does not inherit this window's variables: the choice goes along explicitly.
+            Start-Process powershell.exe -Verb RunAs -ArgumentList "-NoProfile -ExecutionPolicy Bypass -Command `"`$env:BEAMER_YONETICI='$Choice'; irm $Url | iex`""
+        } catch {
+            Write-Host 'Yonetici izni alinamadi. Bu hesap yonetici degil ya da Windows/antivirus izin vermedi.' -ForegroundColor Yellow
+            Write-Host 'Wi-Fi ayari yine de yapildi. Yonetici kisminin bir yonetici hesabinda calismasi gerekir.' -ForegroundColor Yellow
+        }
+        return
+    }
 
     try {
         $Dir = Join-Path $env:USERPROFILE 'beamer-pc2'
@@ -35,26 +57,12 @@
         $Script = Join-Path $Dir 'win_app\kvm_bridge_win.py'
         if (-not (Test-Path $Pythonw)) { throw "Once kurulum komutunu (kur.ps1) calistirin: $Pythonw yok." }
 
-        Say 'Wi-Fi guc tasarrufu kapatiliyor (prizde ve pilde)'
-        $wifi = '19cbb8fa-5279-450e-9fac-8a3d5fedd0c1'
-        $saving = '12bbebe6-58d6-4636-95bb-3217ef867c1a'
-        powercfg /setacvalueindex SCHEME_CURRENT $wifi $saving 0
-        powercfg /setdcvalueindex SCHEME_CURRENT $wifi $saving 0
-        powercfg /setactive SCHEME_CURRENT
-
         if ($Choice -eq '0') {
             Say 'Yonetici gorevleri kaldiriliyor'
             foreach ($task in @('Beamer PC2', 'Beamer PC2 (Ac)')) {
                 Unregister-ScheduledTask -TaskName $task -Confirm:$false -ErrorAction SilentlyContinue
             }
             Write-Host 'Tamam. Normal kisayollar icin kurulum komutunu (kur.ps1) bir kez calistirin.' -ForegroundColor Green
-            return
-        }
-        if ($Choice -ne '1') {
-            Write-Host ''
-            Write-Host 'Tamam: Wi-Fi artik uyuklamiyor.' -ForegroundColor Green
-            Write-Host 'Gorev Yoneticisi gibi yonetici pencerelerinde de mouse icin (UAC korumasini zayiflatir, bkz. docs\PC2-AKTARIM.md):'
-            Write-Host "  `$env:BEAMER_YONETICI='1'; irm $Url | iex"
             return
         }
 
