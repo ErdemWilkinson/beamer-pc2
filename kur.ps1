@@ -45,8 +45,11 @@
             ForEach-Object { Stop-Process -Id $_.ProcessId -Force -ErrorAction SilentlyContinue }
 
         if (Test-Path (Join-Path $Dir '.git')) {
+            # This folder is an install, not a place to edit: it always matches GitHub, even when
+            # the history there was rewritten (a plain pull would refuse to fast-forward).
             Say "Guncelleniyor: $Dir"
-            git -C $Dir pull --ff-only
+            git -C $Dir fetch origin
+            if ($LASTEXITCODE -eq 0) { git -C $Dir reset --hard origin/main }
         } else {
             Say "Indiriliyor: $Dir"
             git clone $RepoUrl $Dir
