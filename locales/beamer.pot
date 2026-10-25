@@ -4544,6 +4544,10 @@ msgid "Download portable zip"
 msgstr ""
 
 #: win_app/kvm_bridge_win.py
+msgid "Update and restart"
+msgstr ""
+
+#: win_app/kvm_bridge_win.py
 msgid "Input:"
 msgstr ""
 
@@ -4638,6 +4642,10 @@ msgstr ""
 
 #: win_app/kvm_bridge_win.py
 msgid "This desktop has no system tray, so Beamer's window is all there is: closing it quits Beamer."
+msgstr ""
+
+#: win_app/kvm_bridge_win.py
+msgid "Checks GitHub for a newer Beamer PC2 at startup and once a day. Updating installs it and restarts Beamer."
 msgstr ""
 
 #: win_app/kvm_bridge_win.py
@@ -4806,6 +4814,11 @@ msgstr ""
 #: win_app/kvm_bridge_win.py
 #, python-brace-format
 msgid "{blurb} It plays around the pointer when the shortcut or a menu brings input to this PC."
+msgstr ""
+
+#: win_app/kvm_bridge_win.py
+#, python-brace-format
+msgid "The update could not start: {error}"
 msgstr ""
 
 #: win_app/kvm_bridge_win.py

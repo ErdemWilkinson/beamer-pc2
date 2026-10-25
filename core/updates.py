@@ -157,10 +157,22 @@ class Checker:
             except Exception:
                 self.logger.exception("manual update callback failed")
 
+    def _known(self):
+        """Whether this install can be compared with anything; a "dev" build cannot."""
+        return parse_version(self.current) is not None
+
+    def _look(self):
+        """(Release or None, portable download URL or None); raises when there is no answer."""
+        payload = json.loads(self.fetcher().decode("utf-8"))
+        if not isinstance(payload, dict) or _parse(payload.get("tag_name")) is None:
+            raise ValueError("release response has no recognised version")
+        latest = newer_release(self.current, payload)
+        return latest, (_portable_download(latest[0], payload) if self.portable and latest else None)
+
     def check_once(self, manual=False):
         if self._stop.is_set():
             return
-        if parse_version(self.current) is None:
+        if not self._known():
             if manual:
                 self._checked("failed")
             return
@@ -169,9 +181,7 @@ class Checker:
         if manual:
             self._checked("checking")
         try:
-            payload = json.loads(self.fetcher().decode("utf-8"))
-            if not isinstance(payload, dict) or _parse(payload.get("tag_name")) is None:
-                raise ValueError("release response has no recognised version")
+            latest, download_url = self._look()
         except Exception as exc:
             if not self._failed:
                 self.logger.info("could not check for a newer Beamer: %s", exc)
@@ -182,9 +192,7 @@ class Checker:
         self._failed = False
         if (not manual and not self.enabled()) or self._stop.is_set():
             return
-        self.latest = newer_release(self.current, payload)
-        self.download_url = (_portable_download(self.latest[0], payload)
-                             if self.portable and self.latest else None)
+        self.latest, self.download_url = latest, download_url
         if self.latest:
             self.logger.info("Beamer %s is available", self.latest[0])
         if manual:

@@ -4610,6 +4610,10 @@ msgid "Download portable zip"
 msgstr "Scarica lo zip portatile"
 
 #: win_app/kvm_bridge_win.py
+msgid "Update and restart"
+msgstr "Aggiorna e riavvia"
+
+#: win_app/kvm_bridge_win.py
 msgid "Input:"
 msgstr "Input:"
 
@@ -4707,6 +4711,10 @@ msgstr "Se disattivato, chiudere la finestra chiude Beamer. Apri di nuovo Beamer
 #: win_app/kvm_bridge_win.py
 msgid "This desktop has no system tray, so Beamer's window is all there is: closing it quits Beamer."
 msgstr "Questo desktop non ha un'area di notifica, quindi la finestra di Beamer è tutto ciò che c'è: chiuderla chiude Beamer."
+
+#: win_app/kvm_bridge_win.py
+msgid "Checks GitHub for a newer Beamer PC2 at startup and once a day. Updating installs it and restarts Beamer."
+msgstr "Controlla su GitHub se c'è un Beamer PC2 più recente all'avvio e una volta al giorno. L'aggiornamento lo installa e riavvia Beamer."
 
 #: win_app/kvm_bridge_win.py
 msgid "Update through your software store, or download the Flatpak from the release page and open it."
@@ -4882,6 +4890,11 @@ msgstr "Dai al profilo un nome da 1 a 32 caratteri."
 #, python-brace-format
 msgid "{blurb} It plays around the pointer when the shortcut or a menu brings input to this PC."
 msgstr "{blurb} Appare attorno al puntatore quando la scorciatoia o un menu porta l'input su questo PC."
+
+#: win_app/kvm_bridge_win.py
+#, python-brace-format
+msgid "The update could not start: {error}"
+msgstr "Impossibile avviare l'aggiornamento: {error}"
 
 #: win_app/kvm_bridge_win.py
 #, python-brace-format

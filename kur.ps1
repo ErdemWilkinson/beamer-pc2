@@ -6,10 +6,18 @@
 # %USERPROFILE%\beamer-pc2, installs the dependencies, writes the firewall rules (asks for admin
 # once), adds Desktop / Start menu / sign-in shortcuts and starts Beamer. Safe to run again: it
 # updates instead of reinstalling. ASCII only, so it runs the same through iex or as a file.
+#
+# Beamer's own Update button runs this file with BEAMER_PC2_UPDATE=1 and BEAMER_PC2_DIR set to
+# the install it runs from: shortcuts are left alone and admin is asked for only when a firewall
+# rule is missing. Any other folder is never reset: it may hold work that is not on GitHub.
 & {
     $ErrorActionPreference = 'Stop'
     $RepoUrl = 'https://github.com/ErdemWilkinson/beamer-pc2.git'
-    $Dir = Join-Path $env:USERPROFILE 'beamer-pc2'
+    $Home2 = Join-Path $env:USERPROFILE 'beamer-pc2'
+    $Dir = if ($env:BEAMER_PC2_DIR) { $env:BEAMER_PC2_DIR } else { $Home2 }
+    $Updating = $env:BEAMER_PC2_UPDATE -eq '1'
+    Remove-Item Env:BEAMER_PC2_UPDATE, Env:BEAMER_PC2_DIR -ErrorAction SilentlyContinue
+    $Rules = @('Beamer Receiver (TCP-In)', 'Beamer Pairing (UDP-In)', 'Beamer Pairing (TCP-In)', 'Beamer Transfer (TCP-In)')
 
     function Say([string]$text) { Write-Host "==> $text" -ForegroundColor Cyan }
 
@@ -39,6 +47,11 @@
         if (-not (Get-Command git -ErrorAction SilentlyContinue)) { Install-Package 'Git.Git' }
         if (-not (Get-Command git -ErrorAction SilentlyContinue)) { throw 'Git kurulamadi. PowerShell penceresini kapatip acin ve tekrar calistirin.' }
 
+        if ((Test-Path (Join-Path $Dir '.git')) -and
+                ([IO.Path]::GetFullPath($Dir).TrimEnd('\') -ne [IO.Path]::GetFullPath($Home2).TrimEnd('\'))) {
+            throw "$Dir kurulum klasoru degil ($Home2); icindeki calismayi silmemek icin guncellenmedi."
+        }
+
         # Stop a Beamer started from this folder, so its files can be updated.
         Get-CimInstance Win32_Process -Filter "Name='pythonw.exe'" |
             Where-Object { $_.CommandLine -like "*$Dir*kvm_bridge_win.py*" } |
@@ -67,17 +80,28 @@
 
         # The venv's pythonw.exe only starts the base interpreter, which is what listens on the ports.
         $BaseExe = (& (Join-Path $Venv 'Scripts\python.exe') -c "import os,sys;print(os.path.join(sys.base_exec_prefix,'pythonw.exe'))").Trim()
-        Say "Guvenlik duvari ayarlaniyor (yonetici izni istenecek): $BaseExe"
-        try {
-            $arguments = "-NoProfile -ExecutionPolicy Bypass -File `"$(Join-Path $Dir 'win_app\Kur-Firewall.ps1')`" -Exe `"$BaseExe`""
-            Start-Process powershell.exe -Verb RunAs -Wait -ArgumentList $arguments
-        } catch {
-            Write-Host 'Yonetici izni verilmedi; guvenlik duvari kurallari yazilmadi. Bu komutu tekrar calistirip izin verebilirsiniz.' -ForegroundColor Yellow
+        $missing = @($Rules | Where-Object { -not (Get-NetFirewallRule -DisplayName $_ -ErrorAction SilentlyContinue) })
+        if (-not $Updating -or $missing.Count -gt 0) {
+            Say "Guvenlik duvari ayarlaniyor (yonetici izni istenecek): $BaseExe"
+            try {
+                $arguments = "-NoProfile -ExecutionPolicy Bypass -File `"$(Join-Path $Dir 'win_app\Kur-Firewall.ps1')`" -Exe `"$BaseExe`""
+                Start-Process powershell.exe -Verb RunAs -Wait -ArgumentList $arguments
+            } catch {
+                Write-Host 'Yonetici izni verilmedi; guvenlik duvari kurallari yazilmadi. Bu komutu tekrar calistirip izin verebilirsiniz.' -ForegroundColor Yellow
+            }
+        }
+
+        $Pythonw = Join-Path $Venv 'Scripts\pythonw.exe'
+        $Script = Join-Path $Dir 'win_app\kvm_bridge_win.py'
+        if ($Updating) {
+            Say 'Beamer yeniden baslatiliyor'
+            Start-Process $Pythonw -ArgumentList "`"$Script`"" -WorkingDirectory $Dir
+            Write-Host 'Guncelleme tamam. Bu pencere kendiliginden kapanacak.' -ForegroundColor Green
+            Start-Sleep -Seconds 4
+            return
         }
 
         Say 'Kisayollar olusturuluyor (Masaustu, Baslat menusu, oturum acilisi)'
-        $Pythonw = Join-Path $Venv 'Scripts\pythonw.exe'
-        $Script = Join-Path $Dir 'win_app\kvm_bridge_win.py'
         $Shell = New-Object -ComObject WScript.Shell
         $places = @(
             @{ Folder = [Environment]::GetFolderPath('Desktop'); Args = "`"$Script`"" },
@@ -103,5 +127,6 @@
         Write-Host 'Crossing sayfasinda PC''lerin yerlesimini ayarlayin. Ayrintilar: docs\PC2-AKTARIM.md'
     } catch {
         Write-Host "Kurulum durdu: $_" -ForegroundColor Red
+        if ($Updating) { Read-Host 'Kapatmak icin Enter' | Out-Null }
     }
 }

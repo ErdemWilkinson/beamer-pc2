@@ -105,6 +105,7 @@ from core import ways, crossing_state, profiles
 from core.identify_screens import display_numbers
 from sender import OWN_PLATFORM, LinkSender
 from shake_stroke import shake_stroke
+import fork_update_win
 import theme
 import transfer_feature
 import tray_glyph
@@ -122,6 +123,9 @@ try:
     VERSION = (Path(getattr(sys, "_MEIPASS", None) or Path(__file__).resolve().parent.parent) / "VERSION").read_text().strip()
 except OSError:
     VERSION = "dev"
+# A Beamer PC2 install (kur.ps1) is a git checkout: it updates from the fork, not upstream's releases.
+SOURCE_ROOT = Path(__file__).resolve().parent.parent
+FORK_UPDATES = getattr(sys, "_MEIPASS", None) is None and fork_update_win.available(SOURCE_ROOT)
 
 HOME_PAGE = "https://kalkmancode.co.uk/beamer"
 HOME_PAGE_TEXT = N_("Beamer's website")
@@ -754,11 +758,17 @@ class WindowsApplication(QWidget):
             self.permission_state.bind_requester("remote", platform_parts.injector.request_again)
         self._trigger = capture_win.Trigger()
         self._sending_detail = "Not connected"
-        self.update_checker = updates.Checker(
-            VERSION, lambda: self._config is None or self._config.check_updates, self.bridge.update.emit,
-            logger=LOGGER, portable=portable_runtime.enabled(),
-            on_check=self.bridge.update_check.emit,
-        )
+        if FORK_UPDATES:
+            self.update_checker = fork_update_win.GitChecker(
+                VERSION, lambda: self._config is None or self._config.check_updates, self.bridge.update.emit,
+                SOURCE_ROOT, logger=LOGGER, on_check=self.bridge.update_check.emit,
+            )
+        else:
+            self.update_checker = updates.Checker(
+                VERSION, lambda: self._config is None or self._config.check_updates, self.bridge.update.emit,
+                logger=LOGGER, portable=portable_runtime.enabled(),
+                on_check=self.bridge.update_check.emit,
+            )
         self._paired = False
         try:
             # With nothing paired the window still has this PC's own settings to show and keep.
@@ -998,7 +1008,8 @@ class WindowsApplication(QWidget):
         self.sign_in_module = self._sign_in_module()
         layout.addWidget(self.sign_in_module)
         layout.addWidget(self._tray_module(current))
-        layout.addWidget(self._updates_module(current))
+        self.updates_module = self._updates_module(current)
+        layout.addWidget(self.updates_module)
         self._refresh_peers()
 
     def _name_module(self, current: Config) -> QWidget:
@@ -1154,6 +1165,8 @@ class WindowsApplication(QWidget):
         self.updates_switch.toggled.connect(self._set_check_updates)
         module.body.addWidget(self.updates_switch)
         module.body.addWidget(widgets.label(
+            tr("Checks GitHub for a newer Beamer PC2 at startup and once a day. Updating installs it and restarts Beamer.")
+            if FORK_UPDATES else
             tr("Checks GitHub at startup and once a day. Updates are downloaded and installed by you."),
             "note",
             wrap=True,
@@ -1188,6 +1201,18 @@ class WindowsApplication(QWidget):
         self._on_update_check("checking", None)
         self.update_checker.check_now(manual=True)
 
+    def show_update_check(self) -> None:
+        """From the tray: the window, scrolled to Updates, with a check under way."""
+        self.show_window()
+        self._select_page("overview")
+        module = getattr(self, "updates_module", None)
+        parent = module.parentWidget() if module is not None else None
+        while parent is not None and not isinstance(parent, QScrollArea):
+            parent = parent.parentWidget()
+        if parent is not None:
+            QTimer.singleShot(0, lambda: parent.ensureWidgetVisible(module))
+        self.check_for_updates()
+
     def _on_update_check(self, state, found) -> None:
         self.check_updates_button.setEnabled(state != "checking")
         text = {"checking": tr("Checking for updates…"),
@@ -1217,6 +1242,8 @@ class WindowsApplication(QWidget):
         self.update_button.setText(tr("Download Beamer {version}").format(version=found[0]) if found else tr("Download"))
         if portable_runtime.enabled() and found:
             self.update_button.setText(tr("Download portable zip"))
+        if FORK_UPDATES and found:
+            self.update_button.setText(tr("Update and restart"))
         can_download = found is not None and not portal.sandboxed() and (
             not portable_runtime.enabled() or bool(self.update_checker.download_url))
         motion.set_shown(self.update_button, can_download)
@@ -1266,6 +1293,17 @@ class WindowsApplication(QWidget):
 
     def download_update(self) -> None:
         if portal.sandboxed():
+            return
+        if FORK_UPDATES:
+            if self._update:
+                try:
+                    fork_update_win.start_update(SOURCE_ROOT)
+                except OSError as exc:
+                    LOGGER.exception("Update could not start")
+                    self.update_status.setText(tr("The update could not start: {error}").format(error=exc))
+                    return
+                # kur.ps1 also stops whatever is left of this Beamer before it touches the files.
+                QTimer.singleShot(0, self.quit)
             return
         if portable_runtime.enabled():
             if self._update and self.update_checker.download_url:
@@ -4994,7 +5032,7 @@ class WindowsApplication(QWidget):
         # The version line; it becomes the way to a newer release when there is one.
         self.header_action = menu.addAction(tr("Beamer {version}").format(version=VERSION))
         self.header_action.setEnabled(False)
-        self.header_action.triggered.connect(self.open_update)
+        self.header_action.triggered.connect(self.download_update if FORK_UPDATES else self.open_update)
         menu.addSeparator()
         self.redirect_action = menu.addAction(tr("Send input across"))
         self.redirect_action.triggered.connect(self.toggle_redirect)
@@ -5019,6 +5057,7 @@ class WindowsApplication(QWidget):
         menu.addAction(tr("Reload configuration")).triggered.connect(self.reload_config)
         menu.addAction(tr("Open log folder")).triggered.connect(self.open_log_folder)
         menu.addSeparator()
+        menu.addAction(tr("Check for updates")).triggered.connect(self.show_update_check)
         menu.addAction(tr("About Beamer")).triggered.connect(self.show_about)
         menu.addAction(tr("Quit Beamer")).triggered.connect(self.quit)
         self.tray.setContextMenu(menu)

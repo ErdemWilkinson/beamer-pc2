@@ -4548,6 +4548,10 @@ msgid "Download portable zip"
 msgstr "Taşınabilir zip'i indir"
 
 #: win_app/kvm_bridge_win.py
+msgid "Update and restart"
+msgstr "Güncelle ve yeniden başlat"
+
+#: win_app/kvm_bridge_win.py
 msgid "Input:"
 msgstr "Giriş:"
 
@@ -4643,6 +4647,10 @@ msgstr "Kapalıyken pencereyi kapatmak Beamer'dan çıkar. Pencereyi geri getirm
 #: win_app/kvm_bridge_win.py
 msgid "This desktop has no system tray, so Beamer's window is all there is: closing it quits Beamer."
 msgstr "Bu masaüstünde sistem tepsisi yok, bu yüzden Beamer'ın tek arayüzü penceresidir: kapatmak Beamer'dan çıkar."
+
+#: win_app/kvm_bridge_win.py
+msgid "Checks GitHub for a newer Beamer PC2 at startup and once a day. Updating installs it and restarts Beamer."
+msgstr "Açılışta ve günde bir kez GitHub'da daha yeni bir Beamer PC2 olup olmadığına bakar. Güncelle dediğinde kurar ve Beamer'ı yeniden başlatır."
 
 #: win_app/kvm_bridge_win.py
 msgid "Update through your software store, or download the Flatpak from the release page and open it."
@@ -4813,6 +4821,11 @@ msgstr "Profile 1 ile 32 karakter arasında bir ad verin."
 #, python-brace-format
 msgid "{blurb} It plays around the pointer when the shortcut or a menu brings input to this PC."
 msgstr "{blurb} Kısayol ya da bir menü girişi bu PC'ye getirdiğinde imlecin çevresinde oynar."
+
+#: win_app/kvm_bridge_win.py
+#, python-brace-format
+msgid "The update could not start: {error}"
+msgstr "Güncelleme başlatılamadı: {error}"
 
 #: win_app/kvm_bridge_win.py
 #, python-brace-format
