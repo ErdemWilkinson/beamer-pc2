@@ -163,6 +163,42 @@ class CarryTests(unittest.TestCase):
         self.feature._let_go("J1")
         self.assertEqual(len(self.injector.calls), 2)
 
+    def test_a_release_lets_go_from_the_serving_thread_while_the_gui_is_held_in_the_drag(self):
+        # Windows holds the GUI thread in its drag loop until the button is up, so the release
+        # must not wait for a queued signal: no processEvents here.
+        with mock.patch.object(transfer_feature.QTimer, "singleShot"), mock.patch.object(transfer_feature.threading, "Timer"):
+            self.feature._on_carry_arrived({"id": PEER_ID}, self.folder, self.offer())
+        ok, _ = self.feature._notice_from_server({"id": PEER_ID}, {"kind": transfer.KIND_RELEASE, "ref": "J1"})
+        self.assertTrue(ok)
+        self.assertEqual(self.injector.calls, [("button", "left", True), ("button", "left", False)])
+        APP.processEvents()
+        self.assertEqual(len(self.injector.calls), 2)
+        self.assertNotIn("J1", self.feature._released)
+
+    def test_a_release_before_the_drag_began_is_remembered(self):
+        self.feature._notice_from_server({"id": PEER_ID}, {"kind": transfer.KIND_RELEASE, "ref": "J1"})
+        APP.processEvents()
+        self.assertIn("J1", self.feature._released)
+        self.assertEqual(self.injector.calls, [])
+
+    def test_the_timeout_lets_go_off_the_gui_thread(self):
+        with mock.patch.object(transfer_feature.QTimer, "singleShot"), mock.patch.object(transfer_feature.threading, "Timer") as timer:
+            self.feature._on_carry_arrived({"id": PEER_ID}, self.folder, self.offer())
+        seconds, function = timer.call_args[0][:2]
+        self.assertEqual(seconds, transfer_feature.CARRY_TIMEOUT_MS / 1000)
+        timer.return_value.start.assert_called_once()
+        function(*timer.call_args[0][2])
+        self.assertEqual(self.injector.calls[-1], ("button", "left", False))
+
+    def test_the_crossing_effects_are_put_away_before_the_drag_holds_the_gui(self):
+        order = []
+        self.app._hide_crossing = lambda: order.append("hide")
+        self.feature._dragging = "J1"
+        with mock.patch.object(transfer_feature, "QDrag") as drag:
+            drag.return_value.exec.side_effect = lambda *_: order.append("exec") or transfer_feature.Qt.DropAction.CopyAction
+            self.feature._run_drag({"id": PEER_ID}, self.folder, self.offer(), [self.project])
+        self.assertEqual(order, ["hide", "exec"])
+
     def test_open_back_opens_only_what_this_pc_sent_to_that_pc(self):
         pc2 = {"name": "PC2", "id": PEER_ID}
         self.assertFalse(self.feature._notice_from_server(pc2, {"kind": transfer.KIND_OPEN_BACK, "ref": "nope"})[0])

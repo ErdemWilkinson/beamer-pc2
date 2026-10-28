@@ -15,6 +15,7 @@ add_to_tray() and send(), so the fork stays easy to bring up to date with Beamer
 import logging
 import os
 import sys
+import threading
 import time
 from pathlib import Path
 
@@ -330,8 +331,10 @@ class TransferFeature(QObject):
         self._outgoing = None
         self._release_started = 0.0
         # Receiving side: the job being dragged here, and jobs whose button was let go first.
+        # _dragging is let go from the serving and timer threads too, so it is changed under a lock.
         self._dragging = None
         self._released = set()
+        self._drag_lock = threading.Lock()
 
     def settings(self):
         """transfer.json as it is now, read again only when the file changes: this is asked on
@@ -545,7 +548,12 @@ class TransferFeature(QObject):
     def _notice_from_server(self, entry, offer):
         """On the serving thread: a release for a drag here, or an open_back for a job sent from here."""
         if offer["kind"] == transfer.KIND_RELEASE:
-            self.carry_released.emit(offer["ref"])
+            # Let go from this thread: while the drag runs, Windows holds the GUI thread in its
+            # drag loop until the button is up, so a queued signal would wait for itself.
+            if self._let_go(offer["ref"]):
+                LOGGER.info("The other PC let go of the carried drag")
+            else:
+                self.carry_released.emit(offer["ref"])
             return True, ""
         # Only a job this PC sent to that very machine, and only once.
         files = self.outbox.take_sent_files(offer["ref"], entry.get("id"))
@@ -573,7 +581,6 @@ class TransferFeature(QObject):
     def _open_fallback(self, entry, folder, offer):
         """Open a carried job as a plain one would be (it was let go before it arrived, or dropped
         where nothing took it), off the GUI thread since it may ask the other PC to open it."""
-        import threading
         threading.Thread(target=self.receiver.open_received, args=(entry, folder, offer),
                          name="Beamer-carry-open", daemon=True).start()
 
@@ -587,15 +594,20 @@ class TransferFeature(QObject):
             self._open_fallback(entry, folder, offer)
             return
         paths = [os.path.join(folder, root) for root in offer["roots"]]
-        self._dragging = job
+        with self._drag_lock:
+            self._dragging = job
         try:
             self._injector.inject_mouse_button("left", True)
         except Exception:
             LOGGER.exception("Could not press the button for a carried drag")
-            self._dragging = None
+            with self._drag_lock:
+                self._dragging = None
             self._open_fallback(entry, folder, offer)
             return
-        QTimer.singleShot(CARRY_TIMEOUT_MS, lambda job=job: self._let_go(job))
+        # A thread, not a QTimer: a QTimer does not fire while the drag holds the GUI thread.
+        timeout = threading.Timer(CARRY_TIMEOUT_MS / 1000, self._let_go, (job,))
+        timeout.daemon = True
+        timeout.start()
         QTimer.singleShot(CARRY_PRESS_MS, lambda: self._run_drag(entry, folder, offer, paths))
 
     def _run_drag(self, entry, folder, offer, paths):
@@ -609,6 +621,12 @@ class TransferFeature(QObject):
         drag.setMimeData(mime)
         drag.setPixmap(_drag_pixmap(", ".join(offer["roots"])))
         LOGGER.info("Carried drag goes on here with %d item(s)", len(paths))
+        # The drag holds the GUI thread, so an arrival effect left running would freeze mid-frame
+        # on the screen until it ends: put it away first.
+        try:
+            self._app._hide_crossing()
+        except Exception:
+            LOGGER.exception("Could not put the crossing effects away before a carried drag")
         try:
             # Runs until the button is let go: by the release from the other PC, or the timeout.
             action = drag.exec(Qt.DropAction.CopyAction | Qt.DropAction.LinkAction, Qt.DropAction.CopyAction)
@@ -627,13 +645,16 @@ class TransferFeature(QObject):
             self._released.add(job)
 
     def _let_go(self, job):
-        if self._dragging != job:
-            return
-        self._dragging = None
+        """Let go of the button pressed for `job`, from any thread: True when it was still held."""
+        with self._drag_lock:
+            if self._dragging != job:
+                return False
+            self._dragging = None
         try:
             self._injector.inject_mouse_button("left", False)
         except Exception:
             LOGGER.exception("Could not let go of the button of a carried drag")
+        return True
 
     def _on_report(self, kind, text, peer_id):
         if kind == "progress":
