@@ -9,9 +9,23 @@
 </p>
 <p align="center">Made by Toby George Read Kalkman, <a href="https://kalkmancode.co.uk">Kalkman Code</a>.</p>
 
-> **This is a fork.** It adds sending files, folders and app launches to the other PC, opened
-> there on its own hardware: drag onto the crossing edge, or right-click → "Open on …".
-> See [docs/PC2-AKTARIM.md](docs/PC2-AKTARIM.md) (Turkish). Everything else is upstream Beamer.
+> **This is a fork.** What it adds to upstream Beamer (Windows):
+>
+> - **Open on the other PC.** Files, folders and app launches are sent to the other PC and opened
+>   there on its own hardware: drag onto the crossing edge, or right-click → "Open on …".
+> - **Carry a drag across.** A drag that reaches the edge goes on in your hand on the other PC and
+>   drops where you let go. What is too large to carry is sent in the background.
+> - **Smooth pointer over Wi-Fi.** The driven PC plays a peer's pointer motion out at the hand's
+>   speed instead of jumping with each network burst. `"smooth": false` in `transfer.json` turns it off.
+> - **Updates from this fork.** An install made by `kur.ps1` checks this repository and updates in
+>   one click ("Update and restart", or "Check for updates" in the tray).
+> - **Turkish translation**, and a completed Italian catalogue.
+> - **`pc2-hizlandir.ps1`**, run once on the driven PC: turns Wi-Fi power saving off. Starting Beamer
+>   with administrator rights is opt-in (`$env:BEAMER_YONETICI='1'`), and nothing a peer starts
+>   inherits those rights.
+>
+> Details are in [docs/PC2-AKTARIM.md](docs/PC2-AKTARIM.md) (Turkish). A planned Extend mode on a
+> virtual display is described in [docs/UZAT-MODU.md](docs/UZAT-MODU.md). Everything else is upstream Beamer.
 >
 > **Tek satırda kurulum / one-line setup** (Windows PowerShell, on each PC):
 >
@@ -189,7 +203,8 @@ when Same on all machines is on.
 - **The Windows secure desktop cannot be driven.** UAC prompts, Ctrl+Alt+Del and the lock screen
   refuse input from any app by design, and Ctrl+Alt+Del cannot be sent at all. Use the PC's own
   keyboard there.
-- **Files do not cross**, only text and images, up to 256KB of text and an 8MB image.
+- **The clipboard carries only text and images**, up to 256KB of text and an 8MB image. In this
+  fork, files and folders go across by dragging them over the edge or with "Open on …" (Windows).
 - **AltGr is out of reach from the Mac.**
 - **Linux on Wayland has fewer controls.** Its limits are listed under [Linux](#linux).
 - **Linux gestures are not supported.**
